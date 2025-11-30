@@ -27,11 +27,18 @@
             font-weight: 600;
         }
 
-        /* 轮播图（无黑边 + 高度极短） */
+        /* ★★★ 核心：轮播图与正文宽度一致（1100px） ★★★ */
+        .carousel-container {
+            max-width: 1100px;
+            margin: 20px auto;
+        }
+
+        /* 图片高度正常、不变形 */
         .carousel-item img {
             width: 100%;
-            height: 120px;     /* ★ 高度进一步缩小 */
-            object-fit: cover; /* ★ 无黑边，填满容器 */
+            height: 260px;     /* ★ 你要的正常高度，可调整 */
+            object-fit: cover; /* 保证无黑边，铺满区域 */
+            border-radius: 6px;
         }
 
         .container-section {
@@ -65,29 +72,32 @@
     <a class="navbar-brand" href="#">安徽融思企业管理咨询有限公司</a>
 </nav>
 
-<!-- 轮播图 -->
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
+<!-- ★★★ 居中轮播图（宽度与内容一致） -->
+<div class="carousel-container">
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
 
-        <div class="carousel-item active">
-            <img src="https://github.com/OAHC1688/oahctrip/blob/main/10a2c7bb3a509b14e091685eb3cdf6d3.jpg?raw=true" class="d-block w-100">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://github.com/OAHC1688/oahctrip/blob/main/10a2c7bb3a509b14e091685eb3cdf6d3.jpg?raw=true">
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://github.com/OAHC1688/oahctrip/blob/main/f691d081908c6fd443acfc58cade8250.jpg?raw=true">
+            </div>
         </div>
 
-        <div class="carousel-item">
-            <img src="https://github.com/OAHC1688/oahctrip/blob/main/f691d081908c6fd443acfc58cade8250.jpg?raw=true" class="d-block w-100">
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
 
     </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
 </div>
 
-<!-- 内容 -->
+
+<!-- 内容正文 -->
 <div class="container-section">
 
     <h2 class="section-title">公司介绍</h2>
