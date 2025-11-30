@@ -2,185 +2,198 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>安徽融思企业管理咨询有限公司</title>
 
-<!-- 动画库 AOS -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-<!-- 顶部加载进度条 NProgress -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css">
-
+<!-- 加载进度条 -->
 <style>
-    body {
-        font-family: "Helvetica Neue","Noto Sans CJK SC",sans-serif;
-        margin: 0;
-        background: #ffffff;
-        color: #222;
-    }
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #0a5fa8;
+    width: 0%;
+    z-index: 9999;
+    transition: width .4s ease;
+}
+</style>
 
-    /* 顶部导航（紫色主题） */
-    .nav {
-        width: 100%;
-        padding: 15px 40px;
-        background: #6A5ACD;  
-        color: #fff;
-        font-size: 20px;
-        font-weight: bold;
-    }
+<!-- 主体样式 -->
+<style>
+body {
+    margin: 0;
+    font-family: "Microsoft YaHei", sans-serif;
+    background: #fafafa;
+}
 
-    /* 主内容区 */
-    .container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 0 20px;
-    }
+/* 顶部导航栏 */
+header {
+    background: #0a4f78;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    overflow: hidden;
+}
 
-    /* 标题 */
-    .section-title {
-        font-size: 26px;
-        color: #4B3FA3;
-        font-weight: bold;
-        border-left: 5px solid #6A5ACD;
-        padding-left: 12px;
-        margin-bottom: 20px;
-    }
+/* 🏃‍♂️ 顶部马里奥奔跑动画 */
+.mario-run {
+    position: absolute;
+    top: 12px;
+    left: -80px;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://raw.githubusercontent.com/OAHC1688/oahctrip/main/mario-run.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
 
-    /* 卡片 */
-    .card {
-        border: 1px solid #ddd;
-        padding: 25px;
-        border-radius: 10px;
-        background: #fff;
-        transition: all .3s;
-        box-shadow: 0 2px 8px rgba(100, 80, 180, .08);
-    }
+    animation: runAcross 6s linear infinite;
+}
 
-    .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 20px rgba(100, 80, 180, .25);
-    }
+@keyframes runAcross {
+    0%   { left: -80px; }
+    50%  { left: calc(100% - 30px); transform: scaleX(1); }
+    51%  { transform: scaleX(-1); }
+    100% { left: -80px; transform: scaleX(-1); }
+}
 
-    /* 网格布局 */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(4,1fr);
-        gap: 20px;
-    }
+/* 页面内容 */
+.container {
+    max-width: 1200px;
+    margin: 120px auto 60px;
+    padding: 0 20px;
+}
 
-    /* 微信弹窗 */
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,.5);
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn .3s;
-    }
-    .modal-content {
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        animation: scaleIn .35s;
-    }
+h2 {
+    color: #0a4f78;
+    border-left: 6px solid #0a4f78;
+    padding-left: 10px;
+}
 
-    @keyframes fadeIn {
-        from {opacity: 0;} to {opacity: 1;}
-    }
+.card-box {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
 
-    @keyframes scaleIn {
-        from {transform: scale(.5);} 
-        to {transform: scale(1);}
-    }
+.card {
+    flex: 1;
+    min-width: 240px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    transition: .3s;
+}
 
-    footer {
-        text-align: center;
-        padding: 30px;
-        color: #666;
-        font-size: 13px;
-        margin-top: 60px;
-        border-top: 1px solid #eee;
-    }
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* 微信弹窗 */
+#wechatModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+#wechatModal img {
+    width: 260px;
+    border-radius: 10px;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    margin-top: 60px;
+    font-size: 14px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- 顶部导航（改成动态动画区域） -->
-<div class="nav" id="nav">
-    欢迎访问 oahctrip · 企业咨询服务
-</div>
+<div id="progress-bar"></div>
+
+<!-- 顶部动画 header -->
+<header>
+    <div class="mario-run"></div>
+</header>
 
 <div class="container">
 
-    <!-- 公司名 -->
-    <h2 class="section-title" data-aos="fade-right">安徽融思企业管理咨询有限公司</h2>
-    <p data-aos="fade-up">
-        安徽融思企业管理咨询有限公司是一家专注于管理咨询、商业策划、社会经济调查、企业培训与数据服务的专业机构。
-        团队成员具备产业研究、写作策划、数据分析等专业背景，为企事业单位与个人提供定制化解决方案。
+    <h2>安徽融思企业管理咨询有限公司</h2>
+    <p>
+        安徽融思企业管理咨询有限公司是一家专注于管理咨询、商业策划、
+        社会经济调查、企业培训与数据服务的专业机构。团队成员来自产业研究、
+        写作策划、数据分析等专业背景，致力于为企业、机构及个人提供系统化解决方案。
     </p>
 
-    <!-- 核心业务 -->
-    <h2 class="section-title" data-aos="fade-right">核心业务</h2>
+    <h2>核心业务</h2>
 
-    <div class="grid">
-        <div class="card" data-aos="zoom-in">
-            <h4>商业咨询服务</h4>
-            <p>管理诊断、战略规划、流程优化、组织设计、经营分析等。</p>
+    <div class="card-box">
+        <div class="card">
+            <h3>商业咨询服务</h3>
+            管理诊断、战略规划、流程优化、组织设计、经营分析等。
         </div>
 
-        <div class="card" data-aos="zoom-in" data-aos-delay="100">
-            <h4>写作与策划</h4>
-            <p>商业计划、项目报告、论文指导、方案策划、宣传文案定制。</p>
+        <div class="card">
+            <h3>写作与策划</h3>
+            商业计划书、项目报告、论文指导、方案策划、宣传内容定制等。
         </div>
 
-        <div class="card" data-aos="zoom-in" data-aos-delay="200">
-            <h4>社会经济调查</h4>
-            <p>调研、访谈、问卷、数据分析与专题研究。</p>
+        <div class="card">
+            <h3>社会经济调查</h3>
+            市场调研、问卷设计、深度访谈、数据分析与专题研究。
         </div>
 
-        <div class="card" data-aos="zoom-in" data-aos-delay="300">
-            <h4>项目申报</h4>
-            <p>项目梳理、材料撰写、申报辅导与合规咨询。</p>
+        <div class="card">
+            <h3>项目申报</h3>
+            企业与机构项目梳理、材料撰写、申报辅导及合规咨询。
         </div>
     </div>
 
-    <!-- 联系方式 -->
-    <h2 class="section-title" data-aos="fade-right" style="margin-top:50px;">联系方式</h2>
-    <p data-aos="fade-up">品牌名称：oahctrip</p>
-    <p data-aos="fade-up">
-        微信：<a href="javascript:void(0)" onclick="showWx()">OAHCEDU（点击查看名片）</a>
-    </p>
+    <h2>联系方式</h2>
+    <p>公司名称：安徽融思企业管理咨询有限公司</p>
+    <p>品牌名称：oahctrip</p>
+    <p>微信：<a href="#" id="openWechat">OAHCEDU（点击查看名片）</a></p>
 
 </div>
 
 <!-- 微信弹窗 -->
-<div class="modal" id="wxModal" onclick="hideWx()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <img src="https://github.com/OAHC1688/oahctrip/blob/main/%E5%BE%AE%E4%BF%A1.png?raw=true" width="260">
-    </div>
+<div id="wechatModal">
+    <img src="https://github.com/OAHC1688/oahctrip/blob/main/%E5%BE%AE%E4%BF%A1.png?raw=true">
 </div>
 
 <footer>
-    © 2024 安徽融思企业管理咨询有限公司 · oahctrip  
+    © 2024 安徽融思企业管理咨询有限公司 | 隐私协议
 </footer>
 
-<!-- JS 动画库 -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
-
-<!-- NProgress 加载条 -->
-<script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
 <script>
-    NProgress.start();
-    window.onload = () => NProgress.done();
-</script>
+// 页面加载进度条
+document.addEventListener("DOMContentLoaded", function() {
+    let bar = document.getElementById("progress-bar");
+    bar.style.width = "80%";
+    setTimeout(() => bar.style.width = "100%", 300);
+    setTimeout(() => bar.style.opacity = "0", 900);
+});
 
-<script>
-    function showWx(){ document.getElementById('wxModal').style.display='flex'; }
-    function hideWx(){ document.getElementById('wxModal').style.display='none'; }
+// 微信弹窗控制
+document.getElementById("openWechat").onclick = () => {
+    document.getElementById("wechatModal").style.display = "flex";
+};
+document.getElementById("wechatModal").onclick = () => {
+    document.getElementById("wechatModal").style.display = "none";
+};
 </script>
 
 </body>
