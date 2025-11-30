@@ -27,12 +27,11 @@
             font-weight: 600;
         }
 
-        /* 缩小后的轮播图 */
-        .carousel-img {
+        /* 轮播图（无黑边 + 高度极短） */
+        .carousel-item img {
             width: 100%;
-            height: 140px;          /* 高度改成原来的三分之一 */
-            object-fit: contain;    /* 完整显示图片，不裁切 */
-            background-color: #000; /* 多余区域黑底（可改白色） */
+            height: 120px;     /* ★ 高度进一步缩小 */
+            object-fit: cover; /* ★ 无黑边，填满容器 */
         }
 
         .container-section {
@@ -71,13 +70,11 @@
     <div class="carousel-inner">
 
         <div class="carousel-item active">
-            <img src="https://github.com/OAHC1688/oahctrip/blob/main/10a2c7bb3a509b14e091685eb3cdf6d3.jpg?raw=true"
-                 class="carousel-img">
+            <img src="https://github.com/OAHC1688/oahctrip/blob/main/10a2c7bb3a509b14e091685eb3cdf6d3.jpg?raw=true" class="d-block w-100">
         </div>
 
         <div class="carousel-item">
-            <img src="https://github.com/OAHC1688/oahctrip/blob/main/f691d081908c6fd443acfc58cade8250.jpg?raw=true"
-                 class="carousel-img">
+            <img src="https://github.com/OAHC1688/oahctrip/blob/main/f691d081908c6fd443acfc58cade8250.jpg?raw=true" class="d-block w-100">
         </div>
 
     </div>
@@ -90,7 +87,7 @@
     </button>
 </div>
 
-<!-- 内容区 -->
+<!-- 内容 -->
 <div class="container-section">
 
     <h2 class="section-title">公司介绍</h2>
