@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>安徽融思企业管理咨询有限公司</title>
 
-<!-- 页面加载进度条 -->
+<!-- 加载进度条 -->
 <style>
 #progress-bar {
     position: fixed;
@@ -15,7 +15,7 @@
     background: #0a5fa8;
     width: 0%;
     z-index: 9999;
-    transition: width .3s ease;
+    transition: width .4s ease;
 }
 </style>
 
@@ -24,25 +24,42 @@
 body {
     margin: 0;
     font-family: "Microsoft YaHei", sans-serif;
+    background: #fafafa;
 }
 
+/* 顶部导航栏 */
 header {
     background: #0a4f78;
-    padding: 20px 40px;
-    color: white;
+    height: 60px;
     position: fixed;
     width: 100%;
     top: 0;
-    transition: all .3s ease;
     z-index: 1000;
+    overflow: hidden;
 }
 
-header.scrolled {
-    background: white;
-    color: #0a4f78;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+/* 🏃‍♂️ 顶部马里奥奔跑动画 */
+.mario-run {
+    position: absolute;
+    top: 12px;
+    left: -80px;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://raw.githubusercontent.com/OAHC1688/oahctrip/main/mario-run.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    animation: runAcross 6s linear infinite;
 }
 
+@keyframes runAcross {
+    0%   { left: -80px; }
+    50%  { left: calc(100% - 30px); transform: scaleX(1); }
+    51%  { transform: scaleX(-1); }
+    100% { left: -80px; transform: scaleX(-1); }
+}
+
+/* 页面内容 */
 .container {
     max-width: 1200px;
     margin: 120px auto 60px;
@@ -58,19 +75,18 @@ h2 {
 .card-box {
     display: flex;
     gap: 20px;
-    margin: 20px 0;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .card {
     flex: 1;
-    min-width: 250px;
+    min-width: 240px;
     padding: 20px;
     border-radius: 10px;
     background: white;
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-    transition: all .3s ease;
     border: 1px solid #ddd;
+    transition: .3s;
 }
 
 .card:hover {
@@ -91,38 +107,39 @@ h2 {
 #wechatModal img {
     width: 260px;
     border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
 
 /* 页脚 */
 footer {
     text-align: center;
     padding: 40px;
-    margin-top: 80px;
     color: #666;
+    margin-top: 60px;
     font-size: 14px;
 }
-footer a { color: #0a4f78; text-decoration: none; }
 </style>
 </head>
+
 <body>
 
 <div id="progress-bar"></div>
 
-<header id="topHeader">
-    安徽融思企业管理咨询有限公司
+<!-- 顶部动画 header -->
+<header>
+    <div class="mario-run"></div>
 </header>
 
 <div class="container">
-    <h2>安徽融思企业管理咨询有限公司</h2>
 
+    <h2>安徽融思企业管理咨询有限公司</h2>
     <p>
-        安徽融思企业管理咨询有限公司是一家专注于管理咨询、商业策划、社会经济调查、
-        企业培训与数据服务的专业机构。团队成员具备产业研究、写作策划、数据分析等专业背景，
-        致力于为企业、机构及个人提供系统化解决方案。
+        安徽融思企业管理咨询有限公司是一家专注于管理咨询、商业策划、
+        社会经济调查、企业培训与数据服务的专业机构。团队成员来自产业研究、
+        写作策划、数据分析等专业背景，致力于为企业、机构及个人提供系统化解决方案。
     </p>
 
     <h2>核心业务</h2>
+
     <div class="card-box">
         <div class="card">
             <h3>商业咨询服务</h3>
@@ -149,6 +166,7 @@ footer a { color: #0a4f78; text-decoration: none; }
     <p>公司名称：安徽融思企业管理咨询有限公司</p>
     <p>品牌名称：oahctrip</p>
     <p>微信：<a href="#" id="openWechat">OAHCEDU（点击查看名片）</a></p>
+
 </div>
 
 <!-- 微信弹窗 -->
@@ -157,27 +175,19 @@ footer a { color: #0a4f78; text-decoration: none; }
 </div>
 
 <footer>
-    © 2024 安徽融思企业管理咨询有限公司 | <a href="#">皖ICP备XXXXXX号</a> | 
-    <a href="#">隐私协议</a>
+    © 2024 安徽融思企业管理咨询有限公司 | 隐私协议
 </footer>
 
 <script>
-// 页面进度条
+// 页面加载进度条
 document.addEventListener("DOMContentLoaded", function() {
     let bar = document.getElementById("progress-bar");
     bar.style.width = "80%";
-    setTimeout(() => bar.style.width = "100%", 400);
+    setTimeout(() => bar.style.width = "100%", 300);
     setTimeout(() => bar.style.opacity = "0", 900);
 });
 
-// 滚动变色
-window.addEventListener("scroll", function() {
-    let header = document.getElementById("topHeader");
-    if (window.scrollY > 30) header.classList.add("scrolled");
-    else header.classList.remove("scrolled");
-});
-
-// 微信弹窗
+// 微信弹窗控制
 document.getElementById("openWechat").onclick = () => {
     document.getElementById("wechatModal").style.display = "flex";
 };
