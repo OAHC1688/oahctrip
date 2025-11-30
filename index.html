@@ -1,790 +1,902 @@
-当然可以。以下是包含顶部像素小人跳跃动画在内的完整HTML代码。请注意，为了确保一切正常工作，请将以下代码复制并替换你现有的HTML文件内容。
-
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>安徽融思企业管理咨询有限公司 · oahctrip</title>
-
-<!-- AOS 动画库 -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
-<!-- NProgress 加载条 -->
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css"
-/>
-
-<style>
-:root {
---bg-dark: #05030b;
---bg-panel: #151226;
---bg-panel-soft: #1e1834;
---accent: #b38cff;
---accent-soft: #8f6dff;
---text-main: #f4f2ff;
---text-sub: #c3beda;
-}
-
-{
-box-sizing: border-box;
-}
-
-body {
-margin: 0;
-font-family: "Helvetica Neue", "Noto Sans CJK SC", system-ui, -apple-system,
-BlinkMacSystemFont, "Segoe UI", sans-serif;
-background: radial-gradient(circle at top, #1a1038 0, #05030b 55%, #020109 100%);
-color: var(--text-main);
-overflow-x: hidden;
-}
-
-a {
-color: var(--accent);
-text-decoration: none;
-}
-
-a:hover {
-text-decoration: underline;
-}
-
-/ 粒子背景画布 /
-#particles {
-position: fixed;
-inset: 0;
-z-index: -2;
-background: transparent;
-}
-
-/ 顶部像素小人跑马灯条 /
-.runner-strip {
-position: relative;
-height: 64px;
-background: linear-gradient(90deg, #281055, #1a0c3a);
-border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-overflow: hidden;
-}
-
-.runner-strip::before {
-/ 地面砖块效果 /
-content: "";
-position: absolute;
-bottom: 0;
-left: 0;
-width: 200%;
-height: 14px;
-background-image: linear-gradient(
-90deg,
-#7b4cff 0,
-#7b4cff 16px,
-#4e2bbf 16px,
-#4e2bbf 32px
-);
-background-size: 32px 14px;
-animation: groundMove 4s linear infinite;
-opacity: 0.85;
-}
-
-@keyframes groundMove {
-from {
-transform: translateX(0);
-}
-to {
-transform: translateX(-32px);
-}
-}
-
-@keyframes runnerJump {
-0%, 100% {
-transform: translateY(0);
-}
-50% {
-transform: translateY(-6px);
-}
-}
-
-.runner {
-position: absolute;
-bottom: 14px;
-width: 28px;
-height: 28px;
-background: linear-gradient(#ffd96a, #ff8b2f);
-border-radius: 4px;
-box-shadow: 0 0 10px rgba(255, 209, 120, 0.9);
-animation:
-runnerMove 20s linear infinite,
-runnerJump 0.36s ease-in-out infinite;
-}
-
-.runner::before {
-/ 像素帽子 /
-content: "";
-position: absolute;
-top: -8px;
-left: 2px;
-width: 24px;
-height: 10px;
-background: linear-gradient(#ff3c5a, #b81f39);
-border-radius: 2px 2px 0 0;
-}
-
-.runner::after {
-/ 小人腿部抖动 /
-content: "";
-position: absolute;
-bottom: -4px;
-left: 2px;
-width: 24px;
-height: 6px;
-background: linear-gradient(90deg, #402010 0, #402010 50%, #271109 50%);
-animation: runnerLegs 0.18s steps(2) infinite;
-}
-
-@keyframes runnerMove {
-0% {
-left: -40px;
-}
-100% {
-left: calc(100% + 40px);
-}
-}
-
-@keyframes runnerLegs {
-from {
-transform: translateY(0);
-}
-to {
-transform: translateY(1px);
-}
-}
-
-/ 导航栏 /
-.nav {
-position: sticky;
-top: 0;
-z-index: 10;
-backdrop-filter: blur(14px);
-background: linear-gradient(
-90deg,
-rgba(10, 6, 30, 0.96),
-rgba(15, 8, 40, 0.96)
-);
-border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.nav-inner {
-max-width: 1120px;
-margin: 0 auto;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 10px 18px;
-}
-
-.nav-logo {
-font-weight: 700;
-font-size: 18px;
-letter-spacing: 1px;
-}
-
-.nav-links {
-display: flex;
-gap: 18px;
-font-size: 14px;
-}
-
-.nav-link {
-cursor: pointer;
-padding: 6px 10px;
-border-radius: 999px;
-color: var(--text-sub);
-transition: all 0.2s;
-}
-
-.nav-link:hover,
-.nav-link.active {
-color: #fff;
-background: rgba(179, 140, 255, 0.18);
-box-shadow: 0 0 12px rgba(179, 140, 255, 0.5);
-}
-
-/ 页面主容器 /
-.page {
-max-width: 1120px;
-margin: 30px auto 60px;
-padding: 0 18px;
-}
-
-/ Hero + 波浪 /
-.hero {
-position: relative;
-padding: 32px 24px 48px;
-border-radius: 18px;
-background: radial-gradient(circle at top left, #38206f, #170e2c 55%, #120b24);
-box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
-overflow: hidden;
-}
-
-.hero::after {
-content: "";
-position: absolute;
-left: 0;
-bottom: -1px;
-width: 200%;
-height: 80px;
-background: url("data:image/svg+xml,%3Csvg width='1440' height='80' viewBox='0 0 1440 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23200f4a' d='M0,32L80,42.7C160,53,320,75,480,74.7C640,75,800,53,960,42.7C1120,32,1280,32,1360,32L1440,32L1440,80L1360,80C1280,80,1120,80,960,80C800,80,640,80,480,80C320,80,160,80,80,80L0,80Z'%3E%3C/path%3E%3C/svg%3E")
-repeat-x;
-background-size: cover;
-animation: waveMove 14s linear infinite;
-opacity: 0.85;
-}
-
-@keyframes waveMove {
-from {
-transform: translateX(0);
-}
-to {
-transform: translateX(-50%);
-}
-}
-
-.hero-title {
-font-size: 26px;
-margin-bottom: 10px;
-display: flex;
-align-items: center;
-gap: 10px;
-}
-
-.hero-pill {
-font-size: 12px;
-padding: 2px 10px;
-border-radius: 999px;
-border: 1px solid rgba(255, 255, 255, 0.28);
-color: #f7e9ff;
-background: rgba(32, 15, 74, 0.6);
-}
-
-.hero-desc {
-max-width: 620px;
-font-size: 14px;
-color: var(--text-sub);
-}
-
-.hero-badges {
-margin-top: 16px;
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-font-size: 12px;
-}
-
-.hero-badge {
-padding: 6px 10px;
-border-radius: 999px;
-background: rgba(17, 11, 36, 0.85);
-border: 1px solid rgba(211, 191, 255, 0.4);
-color: #f5f0ff;
-}
-
-/ 通用标题 /
-.section-title {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-margin: 36px 0 22px;
-font-size: 20px;
-font-weight: 600;
-color: #f2e9ff;
-}
-
-.section-title::before {
-content: "";
-width: 4px;
-height: 18px;
-border-radius: 999px;
-background: linear-gradient(#ffb86c, #ff79c6);
-}
-
-/ 卡片网格 /
-.grid {
-display: grid;
-grid-template-columns: repeat(4, minmax(0, 1fr));
-gap: 18px;
-}
-
-.card {
-border-radius: 16px;
-padding: 18px 18px 20px;
-background: radial-gradient(circle at top left, #241538, #130e23);
-box-shadow: 0 12px 26px rgba(0, 0, 0, 0.5);
-border: 1px solid rgba(255, 255, 255, 0.04);
-transition: all 0.25s ease-out;
-position: relative;
-overflow: hidden;
-}
-
-.card::before {
-content: "";
-position: absolute;
-inset: -30%;
-background: conic-gradient(
-from 180deg,
-transparent,
-rgba(179, 140, 255, 0.6),
-transparent
-);
-opacity: 0;
-transition: opacity 0.3s;
-}
-
-.card::after {
-content: "";
-position: absolute;
-inset: 1px;
-border-radius: 14px;
-background: radial-gradient(circle at top left, #241538, #130e23);
-z-index: 0;
-}
-
-.card:hover {
-transform: translateY(-6px);
-box-shadow: 0 18px 38px rgba(0, 0, 0, 0.75);
-}
-
-.card:hover::before {
-opacity: 1;
-}
-
-.card-content {
-position: relative;
-z-index: 1;
-}
-
-.card-title {
-font-size: 16px;
-margin-bottom: 6px;
-}
-
-.card-tag {
-display: inline-block;
-margin-bottom: 8px;
-font-size: 11px;
-padding: 2px 8px;
-border-radius: 999px;
-background: rgba(179, 140, 255, 0.12);
-color: var(--accent);
-}
-
-.card-text {
-font-size: 13px;
-color: var(--text-sub);
-}
-
-/ 服务页内容 /
-.two-col {
-display: grid;
-grid-template-columns: 1.2fr 1fr;
-gap: 24px;
-margin-bottom: 40px;
-}
-
-.list-title {
-font-size: 15px;
-margin-bottom: 10px;
-font-weight: 600;
-}
-
-.step-list {
-list-style: none;
-padding: 0;
-margin: 0;
-font-size: 13px;
-color: var(--text-sub);
-}
-
-.step-list li {
-margin-bottom: 8px;
-padding-left: 18px;
-position: relative;
-}
-
-.step-list li::before {
-content: "•";
-position: absolute;
-left: 4px;
-top: 0;
-color: var(--accent-soft);
-}
-
-.adv-grid {
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-gap: 16px;
-}
-
-.adv-item {
-padding: 14px 14px 16px;
-border-radius: 14px;
-background: linear-gradient(135deg, #19132d, #120c21);
-border: 1px solid rgba(255, 255, 255, 0.04);
-font-size: 13px;
-color: var(--text-sub);
-}
-
-.adv-item strong {
-display: block;
-margin-bottom: 4px;
-color: #f5ecff;
-}
-
-/ 关于&联系 /
-.about-grid {
-display: grid;
-grid-template-columns: 1.1fr 0.9fr;
-gap: 24px;
-}
-
-.tag-pill {
-display: inline-block;
-font-size: 11px;
-padding: 2px 8px;
-border-radius: 999px;
-border: 1px solid rgba(255, 255, 255, 0.16);
-color: var(--text-sub);
-margin-bottom: 8px;
-}
-
-.contact-block {
-padding: 16px;
-border-radius: 16px;
-background: linear-gradient(135deg, #191229, #140e23);
-border: 1px solid rgba(255, 255, 255, 0.06);
-font-size: 13px;
-color: var(--text-sub);
-}
-
-.contact-row {
-margin-bottom: 6px;
-}
-
-.btn-ghost {
-display: inline-flex;
-align-items: center;
-gap: 6px;
-padding: 6px 12px;
-border-radius: 999px;
-border: 1px solid var(--accent-soft);
-color: var(--accent);
-background: rgba(179, 140, 255, 0.08);
-font-size: 12px;
-cursor: pointer;
-margin-top: 6px;
-transition: all 0.2s;
-}
-
-.btn-ghost:hover {
-background: rgba(179, 140, 255, 0.2);
-box-shadow: 0 0 14px rgba(179, 140, 255, 0.7);
-}
-
-/ 微信弹窗 */
-.modal-mask {
-position: fixed;
-inset: 0;
-background: rgba(0, 0, 0, 0.6);
-display: none;
-align-items: center;
-justify-content: center;
-z-index: 99;
-}
-
-.modal {
-background: #181223;
-border-radius: 18px;
-padding: 18px;
-max-width: 320px;
-box-shadow: 0 14px 32px rgba(0, 0, 0, 0.8);
-border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.modal img {
-max-width: 100%;
-border-radius: 10px;
-display: block;
-}
-
-.modal-title {
-font-size: 14px;
-margin-bottom: 8px;
-}
-
-.modal-close {
-margin-top: 10px;
-font-size: 12px;
-color: var(--text-sub);
-cursor: pointer;
-text-align: right;
-}
-
-footer {
-text-align: center;
-padding: 26px 0 34px;
-font-size: 12px;
-color: var(--text-sub);
-border-top: 1px solid rgba(255, 255, 255, 0.04);
-background: radial-gradient(circle at top, #1b122f, #05030b 60%);
-}
-
-footer a {
-color: var(--accent-soft);
-}
-
-@media (max-width: 900px) {
-.grid {
-grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.two-col,
-.about-grid {
-grid-template-columns: 1fr;
-}
-.adv-grid {
-grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.nav-inner {
-flex-direction: column;
-align-items: flex-start;
-gap: 6px;
-}
-}
-
-@media (max-width: 640px) {
-.grid {
-grid-template-columns: 1fr;
-}
-.adv-grid {
-grid-template-columns: 1fr;
-}
-.hero {
-padding: 24px 18px 40px;
-}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>安徽融思企业管理咨询有限公司 · oahctrip</title>
+
+  <!-- AOS 动画库 -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- NProgress 加载条 -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css"
+  />
+
+  <style>
+    :root {
+      --bg-dark: #05030b;
+      --bg-panel: #151226;
+      --bg-panel-soft: #1e1834;
+      --accent: #b38cff;
+      --accent-soft: #8f6dff;
+      --text-main: #f4f2ff;
+      --text-sub: #c3beda;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", "Noto Sans CJK SC", system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1a1038 0, #05030b 55%, #020109 100%);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 粒子背景画布 */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: transparent;
+    }
+
+    /* 顶部像素小人跑马灯条 */
+    .runner-strip {
+      position: relative;
+      height: 64px;
+      background: linear-gradient(90deg, #281055, #1a0c3a);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .runner-strip::before {
+      /* 地面砖块效果 */
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 14px;
+      background-image: linear-gradient(
+        90deg,
+        #7b4cff 0,
+        #7b4cff 16px,
+        #4e2bbf 16px,
+        #4e2bbf 32px
+      );
+      background-size: 32px 14px;
+      animation: groundMove 4s linear infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes groundMove {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-32px);
+      }
+    }
+
+    @keyframes runnerJump {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .runner {
+      position: absolute;
+      bottom: 14px;
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(#ffd96a, #ff8b2f);
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(255, 209, 120, 0.9);
+      animation: 
+        runnerMove 20s linear infinite,
+        runnerJump 0.36s ease-in-out infinite;
+    }
+
+    .runner::before {
+      /* 像素帽子 */
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: 2px;
+      width: 24px;
+      height: 10px;
+      background: linear-gradient(#ff3c5a, #b81f39);
+      border-radius: 2px 2px 0 0;
+    }
+
+    .runner::after {
+      /* 小人腿部抖动 */
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 2px;
+      width: 24px;
+      height: 6px;
+      background: linear-gradient(90deg, #402010 0, #402010 50%, #271109 50%);
+      animation: runnerLegs 0.18s steps(2) infinite;
+    }
+
+    @keyframes runnerMove {
+      0% {
+        left: -40px;
+      }
+      100% {
+        left: calc(100% + 40px);
+      }
+    }
+
+    @keyframes runnerLegs {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(1px);
+      }
+    }
+
+    /* 导航栏 */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        90deg,
+        rgba(10, 6, 30, 0.96),
+        rgba(15, 8, 40, 0.96)
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav-link {
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--text-sub);
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      background: rgba(179, 140, 255, 0.18);
+      box-shadow: 0 0 12px rgba(179, 140, 255, 0.5);
+    }
+
+    /* 页面主容器 */
+    .page {
+      max-width: 1120px;
+      margin: 30px auto 60px;
+      padding: 0 18px;
+    }
+
+    /* Hero + 波浪 */
+    .hero {
+      position: relative;
+      padding: 32px 24px 48px;
+      border-radius: 18px;
+      background: radial-gradient(circle at top left, #38206f, #170e2c 55%, #120b24);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 200%;
+      height: 80px;
+      background: url("data:image/svg+xml,%3Csvg width='1440' height='80' viewBox='0 0 1440 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23200f4a' d='M0,32L80,42.7C160,53,320,75,480,74.7C640,75,800,53,960,42.7C1120,32,1280,32,1360,32L1440,32L1440,80L1360,80C1280,80,1120,80,960,80C800,80,640,80,480,80C320,80,160,80,80,80L0,80Z'%3E%3C/path%3E%3C/svg%3E")
+        repeat-x;
+      background-size: cover;
+      animation: waveMove 14s linear infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes waveMove {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .hero-title {
+      font-size: 26px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-pill {
+      font-size: 12px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #f7e9ff;
+      background: rgba(32, 15, 74, 0.6);
+    }
+
+    .hero-desc {
+      max-width: 620px;
+      font-size: 14px;
+      color: var(--text-sub);
+    }
+
+    .hero-badges {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .hero-badge {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(17, 11, 36, 0.85);
+      border: 1px solid rgba(211, 191, 255, 0.4);
+      color: #f5f0ff;
+    }
+
+    /* 通用标题 */
+    .section-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 36px 0 22px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #f2e9ff;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(#ffb86c, #ff79c6);
+    }
+
+    /* 卡片网格 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: 16px;
+      padding: 18px 18px 20px;
+      background: radial-gradient(circle at top left, #241538, #130e23);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: all 0.25s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: conic-gradient(
+        from 180deg,
+        transparent,
+        rgba(179, 140, 255, 0.6),
+        transparent
+      );
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 14px;
+      background: radial-gradient(circle at top left, #241538, #130e23);
+      z-index: 0;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.75);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-title {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(179, 140, 255, 0.12);
+      color: var(--accent);
+    }
+
+    .card-text {
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    /* 服务页内容 */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .list-title {
+      font-size: 15px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    .step-list li {
+      margin-bottom: 8px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .step-list li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: var(--accent-soft);
+    }
+
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .adv-item {
+      padding: 14px 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #19132d, #120c21);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    .adv-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #f5ecff;
+    }
+
+    /* 关于&联系 */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .contact-block {
+      padding: 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #191229, #140e23);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    .contact-row {
+      margin-bottom: 6px;
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      color: var(--accent);
+      background: rgba(179, 140, 255, 0.08);
+      font-size: 12px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(179, 140, 255, 0.2);
+      box-shadow: 0 0 14px rgba(179, 140, 255, 0.7);
+    }
+
+    /* 微信弹窗 */
+    .modal-mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99;
+    }
+
+    .modal {
+      background: #181223;
+      border-radius: 18px;
+      padding: 18px;
+      max-width: 320px;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .modal img {
+      max-width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .modal-title {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .modal-close {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-sub);
+      cursor: pointer;
+      text-align: right;
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px 0 34px;
+      font-size: 12px;
+      color: var(--text-sub);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      background: radial-gradient(circle at top, #1b122f, #05030b 60%);
+    }
+
+    footer a {
+      color: var(--accent-soft);
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .two-col,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .adv-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .adv-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding: 24px 18px 40px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<!-- 粒子背景 -->
-<canvas id="particles"></canvas>
+  <!-- 粒子背景 -->
+  <canvas id="particles"></canvas>
 
-<!-- 顶部像素小人跑道 -->
-<div class="runner-strip">
-<div class="runner"></div>
-</div>
+  <!-- 顶部像素小人跑道 -->
+  <div class="runner-strip">
+    <div class="runner"></div>
+  </div>
 
-<!-- 导航栏 -->
-<header class="nav">
-<div class="nav-inner">
-<div class="nav-logo">OAHC· 咨询-写作-调研</div>
-<nav class="nav-links">
-<div class="nav-link active" data-target="home">首页</div>
-<div class="nav-link" data-target="service">服务</div>
-<div class="nav-link" data-target="about">关于我们</div>
-</nav>
-</div>
-</header>
+  <!-- 导航栏 -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">OAHC· 咨询-写作-调研</div>
+      <nav class="nav-links">
+        <div class="nav-link active" data-target="home">首页</div>
+        <div class="nav-link" data-target="service">服务</div>
+        <div class="nav-link" data-target="about">关于我们</div>
+      </nav>
+    </div>
+  </header>
 
-<main class="page">
-<!-- 首页 -->
-<section id="home">
-<section class="hero" data-aos="fade-up">
-<div class="hero-pill">安徽融思企业管理咨询有限公司</div>
-<h1 class="hero-title">
-面向企业与机构的
-<span style="color: var(--accent)">系统化咨询与写作伙伴</span>
-</h1>
-<p class="hero-desc">
-专注于管理咨询、商业策划、社会经济调查、项目申报辅导与专业写作支持。
-以严谨的研究方法、可落地的方案与可靠的交付节奏，为企业、园区、社区与公共部门提供一体化服务。
-</p>
-<div class="hero-badges">
-<span class="hero-badge">管理诊断 &amp; 战略规划</span>
-<span class="hero-badge">调研设计 &amp; 数据分析</span>
-<span class="hero-badge">项目材料撰写与打磨</span>
-<span class="hero-badge">高校背景 · 实务经验团队</span>
-</div>
-</section>
+  <main class="page">
+    <!-- 首页 -->
+    <section id="home">
+      <section class="hero" data-aos="fade-up">
+        <div class="hero-pill">安徽融思企业管理咨询有限公司</div>
+        <h1 class="hero-title">
+          面向企业与机构的
+          <span style="color: var(--accent)">系统化咨询与写作伙伴</span>
+        </h1>
+        <p class="hero-desc">
+          专注于管理咨询、商业策划、社会经济调查、项目申报辅导与专业写作支持。
+          以严谨的研究方法、可落地的方案与可靠的交付节奏，为企业、园区、社区与公共部门提供一体化服务。
+        </p>
+        <div class="hero-badges">
+          <span class="hero-badge">管理诊断 &amp; 战略规划</span>
+          <span class="hero-badge">调研设计 &amp; 数据分析</span>
+          <span class="hero-badge">项目材料撰写与打磨</span>
+          <span class="hero-badge">高校背景 · 实务经验团队</span>
+        </div>
+      </section>
 
-<h2 class="section-title" data-aos="fade-right">核心业务</h2>
+      <h2 class="section-title" data-aos="fade-right">核心业务</h2>
 
-<div class="grid">
-<article class="card" data-aos="zoom-in">
-<div class="card-content">
-<div class="card-tag">企业管理咨询</div>
-<h3 class="card-title">商业咨询服务</h3>
-<p class="card-text">
-围绕企业战略、组织设计、流程优化与经营分析开展系统诊断，输出可操作的调整方案与实施路径。
-</p>
-</div>
-</article>
+      <div class="grid">
+        <article class="card" data-aos="zoom-in">
+          <div class="card-content">
+            <div class="card-tag">企业管理咨询</div>
+            <h3 class="card-title">商业咨询服务</h3>
+            <p class="card-text">
+              围绕企业战略、组织设计、流程优化与经营分析开展系统诊断，输出可操作的调整方案与实施路径。
+            </p>
+          </div>
+        </article>
 
-<article class="card" data-aos="zoom-in" data-aos-delay="80">
-<div class="card-content">
-<div class="card-tag">写作 &amp; 方案策划</div>
-<h3 class="card-title">写作与策划</h3>
-<p class="card-text">
-承接商业计划书、可研报告、项目申报书、品牌故事、总结汇报等文稿，兼顾结构逻辑与表达风格。
-</p>
-</div>
-</article>
+        <article class="card" data-aos="zoom-in" data-aos-delay="80">
+          <div class="card-content">
+            <div class="card-tag">写作 &amp; 方案策划</div>
+            <h3 class="card-title">写作与策划</h3>
+            <p class="card-text">
+              承接商业计划书、可研报告、项目申报书、品牌故事、总结汇报等文稿，兼顾结构逻辑与表达风格。
+            </p>
+          </div>
+        </article>
 
-<article class="card" data-aos="zoom-in" data-aos-delay="160">
-<div class="card-content">
-<div class="card-tag">社会经济调查</div>
-<h3 class="card-title">社会经济调查</h3>
-<p class="card-text">
-针对区域经济、营商环境、社区治理等议题，提供问卷设计、深度访谈、数据分析与研究报告撰写。
-</p>
-</div>
-</article>
+        <article class="card" data-aos="zoom-in" data-aos-delay="160">
+          <div class="card-content">
+            <div class="card-tag">社会经济调查</div>
+            <h3 class="card-title">社会经济调查</h3>
+            <p class="card-text">
+              针对区域经济、营商环境、社区治理等议题，提供问卷设计、深度访谈、数据分析与研究报告撰写。
+            </p>
+          </div>
+        </article>
 
-<article class="card" data-aos="zoom-in" data-aos-delay="240">
-<div class="card-content">
-<div class="card-tag">项目梳理与申报</div>
-<h3 class="card-title">项目申报</h3>
-<p class="card-text">
-为企业与机构梳理项目思路，协同准备材料，辅导申报过程，提升文本质量与合规性。
-</p>
-</div>
-</article>
-</div>
-</section>
+        <article class="card" data-aos="zoom-in" data-aos-delay="240">
+          <div class="card-content">
+            <div class="card-tag">项目梳理与申报</div>
+            <h3 class="card-title">项目申报</h3>
+            <p class="card-text">
+              为企业与机构梳理项目思路，协同准备材料，辅导申报过程，提升文本质量与合规性。
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-<!-- 服务页 -->
-<section id="service" style="display: none">
-<h2 class="section-title" data-aos="fade-right">服务流程</h2>
+    <!-- 服务页 -->
+    <section id="service" style="display: none">
+      <h2 class="section-title" data-aos="fade-right">服务流程</h2>
 
-<div class="two-col">
-<div data-aos="fade-up">
-<div class="list-title">标准合作流程（可按项目灵活调整）</div>
-<ul class="step-list">
-<li>前期沟通：了解需求背景、目标与时间节奏，初步判断工作量与交付边界。</li>
-<li>方案设计：给出服务方案与排期，明确研究框架、写作结构及协同方式。</li>
-<li>资料梳理：协助整理既有材料、数据与访谈信息，搭建统一资料库。</li>
-<li>研究与撰写：按模块推进调研、分析与写作，阶段性与甲方对齐方向。</li>
-<li>反馈修改：根据意见进行多轮细化与润色，保证逻辑严谨与表述统一。</li>
-<li>交付总结：提交定稿与可编辑版本，配合后续答辩、汇报或申报节点。</li>
-</ul>
-</div>
+      <div class="two-col">
+        <div data-aos="fade-up">
+          <div class="list-title">标准合作流程（可按项目灵活调整）</div>
+          <ul class="step-list">
+            <li>前期沟通：了解需求背景、目标与时间节奏，初步判断工作量与交付边界。</li>
+            <li>方案设计：给出服务方案与排期，明确研究框架、写作结构及协同方式。</li>
+            <li>资料梳理：协助整理既有材料、数据与访谈信息，搭建统一资料库。</li>
+            <li>研究与撰写：按模块推进调研、分析与写作，阶段性与甲方对齐方向。</li>
+            <li>反馈修改：根据意见进行多轮细化与润色，保证逻辑严谨与表述统一。</li>
+            <li>交付总结：提交定稿与可编辑版本，配合后续答辩、汇报或申报节点。</li>
+          </ul>
+        </div>
 
-<div data-aos="fade-up" data-aos-delay="120">
-<div class="list-title">适用场景示例</div>
-<ul class="step-list">
-<li>企业内部管理提升项目、制度流程梳理。</li>
-<li>园区与社区治理类课题研究、总结报告。</li>
-<li>省市级项目申报、评审材料与案例撰写。</li>
-<li>高校与科研单位实践报告、调研报告、阶段性成果文本等。</li>
-</ul>
-</div>
-</div>
+        <div data-aos="fade-up" data-aos-delay="120">
+          <div class="list-title">适用场景示例</div>
+          <ul class="step-list">
+            <li>企业内部管理提升项目、制度流程梳理。</li>
+            <li>园区与社区治理类课题研究、总结报告。</li>
+            <li>省市级项目申报、评审材料与案例撰写。</li>
+            <li>高校与科研单位实践报告、调研报告、阶段性成果文本等。</li>
+          </ul>
+        </div>
+      </div>
 
-<h2 class="section-title" data-aos="fade-right">合作优势</h2>
+      <h2 class="section-title" data-aos="fade-right">合作优势</h2>
 
-<div class="adv-grid">
-<div class="adv-item" data-aos="fade-up">
-<strong>1. 研究方法与实务经验结合</strong>
-团队兼具高校研究背景与项目一线经验，既能搭建严谨框架，又能理解落地约束。
-</div>
-<div class="adv-item" data-aos="fade-up" data-aos-delay="80">
-<strong>2. 写作风格可定制</strong>
-能根据申报指南、汇报对象或查重要求，对语言风格与结构布局作针对性调整。
-</div>
-<div class="adv-item" data-aos="fade-up" data-aos-delay="160">
-<strong>3. 全流程伴随式服务</strong>
-从需求澄清、材料梳理到定稿前最后一轮润色，提供连续的沟通与反馈机制。
-</div>
-<div class="adv-item" data-aos="fade-up" data-aos-delay="240">
-<strong>4. 数据与隐私安全</strong>
-严格控制资料流转范围，仅在项目组内部使用，不对外泄露第三方数据与信息。
-</div>
-<div class="adv-item" data-aos="fade-up" data-aos-delay="320">
-<strong>5. 时间节奏可协同排期</strong>
-可根据申报节点或答辩安排倒排工期，合理分配重点章节的打磨时间。
-</div>
-<div class="adv-item" data-aos="fade-up" data-aos-delay="400">
-<strong>6. 支持后续迭代优化</strong>
-在合理范围内，为同一项目提供后续版本调整与内容更新支持。
-</div>
-</div>
-</section>
+      <div class="adv-grid">
+        <div class="adv-item" data-aos="fade-up">
+          <strong>1. 研究方法与实务经验结合</strong>
+          团队兼具高校研究背景与项目一线经验，既能搭建严谨框架，又能理解落地约束。
+        </div>
+        <div class="adv-item" data-aos="fade-up" data-aos-delay="80">
+          <strong>2. 写作风格可定制</strong>
+          能根据申报指南、汇报对象或查重要求，对语言风格与结构布局作针对性调整。
+        </div>
+        <div class="adv-item" data-aos="fade-up" data-aos-delay="160">
+          <strong>3. 全流程伴随式服务</strong>
+          从需求澄清、材料梳理到定稿前最后一轮润色，提供连续的沟通与反馈机制。
+        </div>
+        <div class="adv-item" data-aos="fade-up" data-aos-delay="240">
+          <strong>4. 数据与隐私安全</strong>
+          严格控制资料流转范围，仅在项目组内部使用，不对外泄露第三方数据与信息。
+        </div>
+        <div class="adv-item" data-aos="fade-up" data-aos-delay="320">
+          <strong>5. 时间节奏可协同排期</strong>
+          可根据申报节点或答辩安排倒排工期，合理分配重点章节的打磨时间。
+        </div>
+        <div class="adv-item" data-aos="fade-up" data-aos-delay="400">
+          <strong>6. 支持后续迭代优化</strong>
+          在合理范围内，为同一项目提供后续版本调整与内容更新支持。
+        </div>
+      </div>
+    </section>
 
-<!-- 关于我们页 -->
-<section id="about" style="display: none">
-<h2 class="section-title" data-aos="fade-right">关于融思 · oahctrip</h2>
+    <!-- 关于我们页 -->
+    <section id="about" style="display: none">
+      <h2 class="section-title" data-aos="fade-right">关于融思 · oahctrip</h2>
 
-<div class="about-grid">
-<div data-aos="fade-up">
-<div class="tag-pill">定位</div>
-<p style="font-size: 13px; color: var(--text-sub); line-height: 1.8">
-安徽融思企业管理咨询有限公司定位于“轻量而专业”的咨询与写作伙伴：
-一方面保持结构化的研究与分析能力，另一方面保持小而灵活的项目团队配置，
-以便在企业管理、社会治理、项目申报与学术实践等不同场景中，为合作方提供稳定、
-值得托付的内容与方案支持。
-</p>
+      <div class="about-grid">
+        <div data-aos="fade-up">
+          <div class="tag-pill">定位</div>
+          <p style="font-size: 13px; color: var(--text-sub); line-height: 1.8">
+            安徽融思企业管理咨询有限公司定位于“轻量而专业”的咨询与写作伙伴：
+            一方面保持结构化的研究与分析能力，另一方面保持小而灵活的项目团队配置，
+            以便在企业管理、社会治理、项目申报与学术实践等不同场景中，为合作方提供稳定、
+            值得托付的内容与方案支持。
+          </p>
 
-<div class="tag-pill">你可以把我们当作</div>
-<p style="font-size: 13px; color: var(--text-sub); line-height: 1.8">
-· 需要系统梳理思路时的“结构整理者”<br />
-· 需要调研与材料时的“内容合伙人”<br />
-· 需要文本打磨时的“写作编辑室”
-</p>
-</div>
+          <div class="tag-pill">你可以把我们当作</div>
+          <p style="font-size: 13px; color: var(--text-sub); line-height: 1.8">
+            · 需要系统梳理思路时的“结构整理者”<br />
+            · 需要调研与材料时的“内容合伙人”<br />
+            · 需要文本打磨时的“写作编辑室”
+          </p>
+        </div>
 
-<div data-aos="fade-up" data-aos-delay="120">
-<div class="contact-block">
-<div style="font-size: 14px; margin-bottom: 8px; color: #f6edff">
-联系方式
-</div>
-<div class="contact-row">公司名称：安徽融思企业管理咨询有限公司</div>
-<div class="contact-row">品牌名称：oahctrip</div>
-<div class="contact-row">微信：OAHCEDU</div>
-<button class="btn-ghost" onclick="showWx()">
-查看微信名片
-<span style="font-size: 10px">QR</span>
-</button>
+        <div data-aos="fade-up" data-aos-delay="120">
+          <div class="contact-block">
+            <div style="font-size: 14px; margin-bottom: 8px; color: #f6edff">
+              联系方式
+            </div>
+            <div class="contact-row">公司名称：安徽融思企业管理咨询有限公司</div>
+            <div class="contact-row">品牌名称：oahctrip</div>
+            <div class="contact-row">微信：OAHCEDU</div>
+            <button class="btn-ghost" onclick="showWx()">
+              查看微信名片
+              <span style="font-size: 10px">QR</span>
+            </button>
 
-<div style="margin-top: 14px; font-size: 12px; color: var(--text-sub)">
-合作时可根据实际情况签署保密协议（NDA），并在合同中约定成果权属与使用范围。
-</div>
-</div>
-</div>
-</div>
+            <div style="margin-top: 14px; font-size: 12px; color: var(--text-sub)">
+              合作时可根据实际情况签署保密协议（NDA），并在合同中约定成果权属与使用范围。
+            </div>
+          </div>
+        </div>
+      </div>
 
-<h2 class="section-title" data-aos="fade-right">隐私与合规说明（示意）</h2>
-<p data-aos="fade-up" style="font-size: 12px; color: var(--text-sub); line-height: 1.9">
-当前网站仅作为业务展示页面，不涉及在线收集个人信息，不设置注册、登录、支付等功能。
-</p>
-</section>
-</main>
+      <h2 class="section-title" data-aos="fade-right">隐私与合规说明（示意）</h2>
+      <p data-aos="fade-up" style="font-size: 12px; color: var(--text-sub); line-height: 1.9">
+        当前网站仅作为业务展示页面，不涉及在线收集个人信息，不设置注册、登录、支付等功能。
+      </p>
+    </section>
+  </main>
 
-<!-- 微信弹窗 -->
-<div class="modal-mask" id="wxMask" onclick="hideWx()">
-<div class="modal" onclick="event.stopPropagation()">
-<div class="modal-title">微信：OAHCEDU</div>
-<img
-src="https://github.com/OAHC1688/oahctrip/blob/main/%E5%BE%AE%E4%BF%A1.png?raw=true"
-alt="微信名片"
-/>
-<div class="modal-close" onclick="hideWx()">点击空白区域或此处关闭</div>
-</div>
-</div>
+  <!-- 微信弹窗 -->
+  <div class="modal-mask" id="wxMask" onclick="hideWx()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-title">微信：OAHCEDU</div>
+      <img
+        src="https://github.com/OAHC1688/oahctrip/blob/main/%E5%BE%AE%E4%BF%A1.png?raw=true"
+        alt="微信名片"
+      />
+      <div class="modal-close" onclick="hideWx()">点击空白区域或此处关闭</div>
+    </div>
+  </div>
 
-<footer>
-© 2024 安徽融思企业管理咨询有限公司 · oahctrip
-｜ 本页仅作业务展示
-｜ <a href="#about" onclick="switchPage('about')">隐私说明</a>
-</footer>
+  <footer>
+    © 2024 安徽融思企业管理咨询有限公司 · oahctrip  
+    ｜ 本页仅作业务展示
+    ｜ <a href="#about" onclick="switchPage('about')">隐私说明</a>
+  </footer>
 
-<!-- AOS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- NProgress -->
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+
+  <!-- 粒子背景 JS -->
+  <script>
+    // 粒子背景
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationFrameId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = `rgba(179, 140, 255, ${Math.random() * 0.4 + 0.1})`;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const particleCount = Math.floor((canvas.width * canvas.height) / 10000);
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initParticles();
+    });
+
+    resizeCanvas();
+    initParticles();
+    animate();
+  </script>
+
+  <!-- 页面切换逻辑 -->
+  <script>
+    function switchPage(targetId) {
+      // 隐藏所有 section
+      document.querySelectorAll('main > section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+      // 显示目标 section
+      document.getElementById(targetId).style.display = 'block';
+
+      // 更新导航高亮
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.dataset.target === targetId);
+      });
+
+      // 重新初始化 AOS 动画
+      AOS.refresh();
+    }
+
+    // 绑定导航点击事件
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        switchPage(link.dataset.target);
+      });
+    });
+
+    // 初始化 AOS
+    AOS.init({
+      duration: 600,
+      once: true,
+      offset: 100
+    });
+  </script>
+
+  <!-- 微信弹窗控制 -->
+  <script>
+    function showWx() {
+      document.getElementById('wxMask').style.display = 'flex';
+    }
+
+    function hideWx() {
+      document.getElementById('wxMask').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
