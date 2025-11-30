@@ -93,52 +93,56 @@
       }
     }
 
-    /* 像素小人 - 红色身体 + 白色帽子 + 上下跳 + 左右跑 */
     .runner {
       position: absolute;
       bottom: 14px;
-      left: 0; /* 从左侧开始 */
       width: 28px;
-      height: 32px;
-      background: #e52521; /* 红色身体 */
-      border-radius: 4px 4px 0 0;
-      animation: runAndJump 3s linear infinite; /* 3秒完成一个完整周期 */
-      z-index: 2;
+      height: 28px;
+      background: linear-gradient(#ffd96a, #ff8b2f);
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(255, 209, 120, 0.9);
+      animation: runnerMove 6s linear infinite;
     }
 
     .runner::before {
-      /* 白色帽子 */
+      /* 像素帽子 */
       content: "";
       position: absolute;
-      top: -10px;
-      left: 0;
-      width: 28px;
-      height: 12px;
-      background: white;
-      border-radius: 6px 6px 0 0;
+      top: -8px;
+      left: 2px;
+      width: 24px;
+      height: 10px;
+      background: linear-gradient(#ff3c5a, #b81f39);
+      border-radius: 2px 2px 0 0;
     }
 
-    /* 跳跃动画：上下弹跳 + 左右移动 */
-    @keyframes runAndJump {
+    .runner::after {
+      /* 小人腿部抖动 */
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 2px;
+      width: 24px;
+      height: 6px;
+      background: linear-gradient(90deg, #402010 0, #402010 50%, #271109 50%);
+      animation: runnerLegs 0.18s steps(2) infinite;
+    }
+
+    @keyframes runnerMove {
       0% {
-        transform: translateX(0) translateY(0);
-        bottom: 14px;
-      }
-      25% {
-        transform: translateX(100px) translateY(-20px);
-        bottom: 34px;
-      }
-      50% {
-        transform: translateX(200px) translateY(0);
-        bottom: 14px;
-      }
-      75% {
-        transform: translateX(300px) translateY(-20px);
-        bottom: 34px;
+        left: -40px;
       }
       100% {
-        transform: translateX(400px) translateY(0);
-        bottom: 14px;
+        left: calc(100% + 40px);
+      }
+    }
+
+    @keyframes runnerLegs {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(1px);
       }
     }
 
