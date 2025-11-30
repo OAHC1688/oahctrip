@@ -4,100 +4,173 @@
     <meta charset="UTF-8">
     <title>安徽融思企业管理咨询有限公司 | oahctrip</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            "Helvetica Neue", Arial, "Noto Sans CJK SC", sans-serif;
-            margin: 0; padding: 0; background: #f5f5f5;
+            margin: 0;
+            font-family: "Helvetica Neue", Arial, "Noto Sans CJK SC", sans-serif;
+            background: #ffffff;
+            color: #111;
+            line-height: 1.7;
         }
-        header {
-            background: #1f3c88; color: #fff; padding: 32px 20px; text-align: center;
-        }
-        header h1 { margin: 0; font-size: 28px; }
-        header p { margin-top: 8px; font-size: 15px; opacity: 0.92; }
 
-        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
-        .card {
-            background: #fff; border-radius: 8px; padding: 24px; margin-bottom: 18px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        /* 顶部全屏大图 */
+        .hero {
+            height: 92vh;
+            background: url("https://images.unsplash.com/photo-1557682260-96773eb01377?auto=format&fit=crop&w=1920&q=80") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
         }
-        h2 {
-            font-size: 20px; margin-top: 0;
-            border-left: 4px solid #1f3c88; padding-left: 10px;
+        .hero h1 {
+            font-size: 46px;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
-        ul { padding-left: 20px; }
+        .hero p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        /* 内容容器 */
+        .container { max-width: 1050px; margin: 0 auto; padding: 40px 20px; }
+
+        /* 两列介绍区 */
+        .row { display: flex; gap: 50px; }
+        .col { flex: 1; }
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-left: 5px solid #000;
+            padding-left: 12px;
+            font-weight: 700;
+        }
+        p { font-size: 16px; color: #333; }
+
+        /* 业务模块 */
+        .services { margin-top: 60px; }
+        .service-card { margin-bottom: 35px; }
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* 社会经济调查 */
+        .survey {
+            margin-top: 60px;
+            padding: 40px 20px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        /* 联系方式 */
+        .contact {
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+        .contact p { margin: 4px 0; font-size: 15px; }
+
         footer {
-            text-align: center; font-size: 12px; color: #888;
-            padding: 25px 10px 30px;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 12px;
+            color: #666;
         }
-        .brand { font-weight: bold; color: #1f3c88; }
-        .contact p { margin: 5px 0; }
+
+        /* 手机端适配 */
+        @media (max-width:768px) {
+            .row { flex-direction: column; }
+            .hero h1 { font-size: 32px; }
+        }
     </style>
 </head>
+
 <body>
-<header>
-    <h1>安徽融思企业管理咨询有限公司</h1>
-    <p class="brand">oahctrip · 企业管理咨询与社会经济调查品牌</p>
-    <p>管理咨询 · 组织优化 · 社会经济调查 · 数字化应用</p>
-</header>
+
+<!-- 顶部全屏大图 -->
+<div class="hero">
+    <div>
+        <h1>安徽融思企业管理咨询有限公司</h1>
+        <p>oahctrip · 管理咨询 · 社会经济调查 · 写作与方案策划</p>
+    </div>
+</div>
 
 <div class="container">
 
-    <div class="card">
-        <h2>公司简介</h2>
-        <p>
-            安徽融思企业管理咨询有限公司是一家以管理咨询、组织流程优化、
-            社会经济调查以及数字化工具开发为核心的综合型咨询机构。
-            公司坚持“以研究为基础、以落地为导向”的服务理念，
-            为政府部门、企业及社会组织提供专业、系统、可执行的解决方案。
-        </p>
+    <!-- 两列介绍 -->
+    <div class="row">
+        <div class="col">
+            <h2 class="section-title">关于融思</h2>
+            <p>
+                安徽融思企业管理咨询有限公司专注于管理咨询、组织流程优化、社会经济调查与研究写作服务。
+                团队兼具高校研究背景与企业项目经验，服务涵盖战略、组织、人力资源、运营与公共管理等领域。
+            </p>
+        </div>
+
+        <div class="col">
+            <h2 class="section-title">品牌 oahctrip</h2>
+            <p>
+                oahctrip 是融思咨询旗下的专业品牌，聚焦数字化管理工具、调研体系、
+                写作服务与咨询辅助工具的构建，为客户提供更高效、可信赖的咨询与研究支持。
+            </p>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>品牌介绍 · <span class="brand">oahctrip</span></h2>
-        <p>
-            <span class="brand">oahctrip</span> 为公司注册商标，定位为融思咨询旗下的
-            “数字化管理工具 + 在线服务”品牌。
-            我们将围绕该品牌推出企业管理工具、社会经济调查系统、
-            咨询服务在线化模块等数字产品，以提升咨询效率与数据能力。
-        </p>
+    <!-- 业务方向 -->
+    <div class="services">
+        <h2 class="section-title">核心业务方向</h2>
+
+        <div class="service-card">
+            <h3>企业管理咨询</h3>
+            <p>战略规划、组织诊断、绩效体系建设、流程管理、制度体系设计等管理提升服务。</p>
+        </div>
+
+        <div class="service-card">
+            <h3>社会经济调查与研究</h3>
+            <p>区域经济、公共管理、社区发展、营商环境、企业调研等数据采集与研究报告编制。</p>
+        </div>
+
+        <div class="service-card">
+            <h3>写作与策划服务</h3>
+            <p>
+                承接专业写作：项目建议书、方案策划书、企业规划、课题研究、可研报告、
+                调研报告、总结材料、品牌故事、内容策划等。
+            </p>
+        </div>
+
+        <div class="service-card">
+            <h3>数字化解决方案（oahctrip）</h3>
+            <p>轻量级管理工具、调研平台与可视化工具的定制与构建。</p>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>核心业务领域</h2>
+    <!-- 社会经济调查 -->
+    <div class="survey">
+        <h2 class="section-title">社会经济调查能力</h2>
+        <p>
+            公司提供从问卷设计、数据采集、统计分析、深度访谈到研究报告撰写的全链路服务，
+            可支撑政府部门、园区机构、企业集团的研究类项目。
+        </p>
         <ul>
-            <li>企业战略与组织管理咨询</li>
-            <li>人力资源体系构建与绩效管理设计</li>
-            <li>运营流程梳理与效率提升方案</li>
-            <li>企业培训体系与课程项目设计</li>
-            <li>数字化管理工具开发（基于 oahctrip）</li>
-            <li>社会经济调查（问卷设计、数据采集、调研报告）</li>
-            <li>政府项目研究、行业研究与区域经济分析</li>
+            <li>区域经济与产业结构研究</li>
+            <li>营商环境与公共服务调查</li>
+            <li>社区发展与民生满意度调查</li>
+            <li>企业运营与市场研究调研</li>
         </ul>
     </div>
 
-    <div class="card">
-        <h2>社会经济调查服务</h2>
-        <p>
-            公司长期开展社会经济类调查研究，可为政府部门、产业园区、企业集团等提供
-            数据采集、统计分析、问卷设计、深度访谈、抽样调查、监测评估等一体化调查服务。
-        </p>
-        <ul>
-            <li>区域经济发展调查</li>
-            <li>社会治理与社区发展调研</li>
-            <li>产业结构与营商环境研究</li>
-            <li>市民满意度、公共服务调查</li>
-            <li>企业运营与市场调研类项目</li>
-        </ul>
-    </div>
-
-    <div class="card contact">
-        <h2>联系方式</h2>
+    <!-- 联系方式 -->
+    <div class="contact">
+        <h2 class="section-title" style="text-align:center;">联系方式</h2>
         <p>公司名称：安徽融思企业管理咨询有限公司</p>
         <p>品牌名称：oahctrip</p>
         <p>微信：OAHCEDU</p>
-        <p>邮箱（可补充）</p>
-        <p>地址（可补充）</p>
     </div>
 
 </div>
