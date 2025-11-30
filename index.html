@@ -93,49 +93,52 @@
       }
     }
 
-    /* 马里奥角色 - 上下跳跃 */
-    .runner.mario {
+    /* 像素小人 - 红色身体 + 白色帽子 + 上下跳 + 左右跑 */
+    .runner {
       position: absolute;
       bottom: 14px;
-      left: 10%; /* 固定位置，不左右移动 */
+      left: 0; /* 从左侧开始 */
       width: 28px;
       height: 32px;
-      background: #e52521; /* 马里奥红衣服 */
+      background: #e52521; /* 红色身体 */
       border-radius: 4px 4px 0 0;
-      animation: marioJump 1.5s ease-in-out infinite; /* 每1.5秒跳一次 */
+      animation: runAndJump 3s linear infinite; /* 3秒完成一个完整周期 */
       z-index: 2;
     }
 
-    .runner.mario::before {
-      /* 帽子和头 */
+    .runner::before {
+      /* 白色帽子 */
       content: "";
       position: absolute;
       top: -10px;
       left: 0;
       width: 28px;
       height: 12px;
-      background: #e52521; /* 红帽子 */
+      background: white;
       border-radius: 6px 6px 0 0;
     }
 
-    .runner.mario::after {
-      /* 脸部（浅肤色） */
-      content: "";
-      position: absolute;
-      top: -4px;
-      left: 4px;
-      width: 20px;
-      height: 8px;
-      background: #f9d5bd; /* 马里奥肤色 */
-      border-radius: 3px;
-    }
-
-    @keyframes marioJump {
-      0%, 100% {
-        transform: translateY(0);
+    /* 跳跃动画：上下弹跳 + 左右移动 */
+    @keyframes runAndJump {
+      0% {
+        transform: translateX(0) translateY(0);
+        bottom: 14px;
+      }
+      25% {
+        transform: translateX(100px) translateY(-20px);
+        bottom: 34px;
       }
       50% {
-        transform: translateY(-20px);
+        transform: translateX(200px) translateY(0);
+        bottom: 14px;
+      }
+      75% {
+        transform: translateX(300px) translateY(-20px);
+        bottom: 34px;
+      }
+      100% {
+        transform: translateX(400px) translateY(0);
+        bottom: 14px;
       }
     }
 
@@ -559,7 +562,7 @@
 
   <!-- 顶部像素小人跑道 -->
   <div class="runner-strip">
-    <div class="runner mario"></div>
+    <div class="runner"></div>
   </div>
 
   <!-- 导航栏 -->
