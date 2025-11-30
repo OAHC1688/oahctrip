@@ -1,98 +1,203 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>安徽融思企业管理咨询有限公司 | oahctrip</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>安徽融思企业管理咨询有限公司</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Helvetica, Arial;
+            background: #f7f9fc;
+            color: #333;
+        }
 
-<style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        font-family: "Helvetica Neue", Arial, sans-serif;
-        background: #000;
-    }
+        /* 顶部导航 */
+        header {
+            background: #0a3d62;
+            padding: 14px 40px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    /* 轮播容器 */
-    .carousel {
-        position: relative;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-    }
+        /* ---- 轮播图部分 ---- */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 350px; /* 轮播图高度（已缩小） */
+            overflow: hidden;
+        }
 
-    /* 图片 */
-    .carousel img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
-        transition: opacity 1.5s ease-in-out;
-    }
+        .carousel img {
+            width: 100%;
+            height: 350px; /* 同步高度 */
+            object-fit: cover;
+        }
 
-    .carousel img.active {
-        opacity: 1;
-    }
+        .carousel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            border: 0;
+            color: white;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .carousel .prev { left: 20px; }
+        .carousel .next { right: 20px; }
 
-    /* 左右切换按钮 */
-    .arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 50px;
-        color: white;
-        cursor: pointer;
-        z-index: 10;
-        padding: 15px;
-        opacity: 0.7;
-        transition: 0.3s;
-    }
+        /* ---- 内容公共布局 ---- */
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
 
-    .arrow:hover {
-        opacity: 1;
-    }
+        h2 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            color: #0a3d62;
+        }
 
-    .left-arrow { left: 20px; }
-    .right-arrow { right: 20px; }
+        p {
+            line-height: 1.7;
+            font-size: 16px;
+        }
 
-</style>
+        /* ---- 服务项目 ---- */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .service-item {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e0e4e8;
+            transition: 0.25s;
+        }
+
+        .service-item:hover {
+            box-shadow: 0 4px 14px rgba(0,0,0,0.09);
+            transform: translateY(-3px);
+        }
+
+        /* ---- 联系方式 ---- */
+        .contact-box {
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 8px;
+            border: 1px solid #e0e4e8;
+            margin-bottom: 60px;
+        }
+
+        footer {
+            background: #0a3d62;
+            color: #fff;
+            padding: 16px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
 
+<header>安徽融思企业管理咨询有限公司</header>
+
+<!-- 小轮播图 -->
 <div class="carousel">
-    <img src="https://github.com/OAHC1688/oahctrip/blob/main/10a2c7bb3a509b14e091685eb3cdf6d3.jpg?raw=true" class="active">
-    <img src="https://github.com/OAHC1688/oahctrip/blob/main/f691d081908c6fd443acfc58cade8250.jpg?raw=true">
-    
-    <div class="arrow left-arrow" onclick="prevImage()">&#10094;</div>
-    <div class="arrow right-arrow" onclick="nextImage()">&#10095;</div>
+    <img id="carouselImg" src="https://github.com/OAHC1688/oahctrip/blob/main/10a2c7bb3a509b14e091685eb3cdf6d3.jpg?raw=true" />
+
+    <button class="prev" onclick="prev()">‹</button>
+    <button class="next" onclick="next()">›</button>
 </div>
 
 <script>
+    const imgs = [
+        "https://github.com/OAHC1688/oahctrip/blob/main/10a2c7bb3a509b14e091685eb3cdf6d3.jpg?raw=true",
+        "https://github.com/OAHC1688/oahctrip/blob/main/f691d081908c6fd443acfc58cade8250.jpg?raw=true"
+    ];
     let index = 0;
-    const images = document.querySelectorAll('.carousel img');
 
-    function showImage(i) {
-        images.forEach(img => img.classList.remove('active'));
-        images[i].classList.add('active');
+    function show() {
+        document.getElementById("carouselImg").src = imgs[index];
     }
 
-    function nextImage() {
-        index = (index + 1) % images.length;
-        showImage(index);
+    function prev() {
+        index = (index - 1 + imgs.length) % imgs.length;
+        show();
     }
 
-    function prevImage() {
-        index = (index - 1 + images.length) % images.length;
-        showImage(index);
+    function next() {
+        index = (index + 1) % imgs.length;
+        show();
     }
 
-    /* 自动切换，每 4 秒一次 */
-    setInterval(nextImage, 4000);
+    setInterval(next, 5000); // 自动轮播
 </script>
+
+<div class="container">
+    <h2>公司介绍</h2>
+    <p>
+        安徽融思企业管理咨询有限公司是一家专注于管理咨询、商业策划、社会经济调查、
+        企业培训与信息服务的专业机构。团队由产业研究、项目策划、写作咨询与数据分析领域的成员组成，
+        以严谨的研究方法和专业的项目能力，为企业、机构及个人提供系统化解决方案。
+    </p>
+</div>
+
+<div class="container">
+    <h2>核心业务</h2>
+
+    <div class="services">
+        <div class="service-item">
+            <h3>商业咨询服务</h3>
+            <p>企业管理诊断、战略规划、流程优化、组织设计、经营分析等服务。</p>
+        </div>
+
+        <div class="service-item">
+            <h3>写作与策划</h3>
+            <p>商业计划书、可研报告、论文指导、方案策划、宣传文案等定制内容。</p>
+        </div>
+
+        <div class="service-item">
+            <h3>社会经济调查</h3>
+            <p>市场调研、问卷设计、深度访谈、数据统计与分析、专项研究项目执行。</p>
+        </div>
+
+        <div class="service-item">
+            <h3>项目申报</h3>
+            <p>针对企业与机构开展项目梳理、材料撰写、申报辅导及合规咨询。</p>
+        </div>
+
+        <div class="service-item">
+            <h3>管理培训</h3>
+            <p>为企业提供管理体系培训、团队能力提升、项目管理与行业专题课程。</p>
+        </div>
+
+        <div class="service-item">
+            <h3>信息服务</h3>
+            <p>提供定制化数据查询、行业信息更新、报告撰写与分析解读。</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>联系我们</h2>
+
+    <div class="contact-box">
+        <p>如需咨询或项目合作，可通过以下方式联系我们：</p>
+        <p><strong>微信：</strong>OAHCEDU</p>
+    </div>
+</div>
+
+<footer>© 2025 安徽融思企业管理咨询有限公司 · 版权所有</footer>
 
 </body>
 </html>
