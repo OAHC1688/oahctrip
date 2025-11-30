@@ -1,147 +1,102 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>安徽融思企业管理咨询有限公司 | oahctrip</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>安徽融思企业管理咨询有限公司 | oahctrip</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-    body {
-        margin: 0;
-        font-family: "Helvetica Neue", Arial, "Noto Sans CJK SC", sans-serif;
-        background: #ffffff;
-        color: #111;
-        line-height: 1.7;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    /* 顶部栏 */
-    .navbar {
-        width: 100%;
-        background: #0b4a72;
-        padding: 16px 0;
-        text-align: center;
-        color: #fff;
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: 1px;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: "Helvetica Neue", Arial, "Noto Sans CJK SC", sans-serif;
+            background: #ffffff;
+            color: #111;
+            line-height: 1.7;
+        }
 
-    /* 全局容器 */
-    .container {
-        max-width: 1100px;
-        margin: 40px auto 60px;
-        padding: 0 20px;
-    }
+        .navbar {
+            background-color: #0b4a72;
+            height: 60px;
+        }
 
-    /* 渐变标题 */
-    .title {
-        font-size: 28px;
-        font-weight: 700;
-        background: linear-gradient(90deg, #0b4a72, #3c85c9);
-        -webkit-background-clip: text;
-        color: transparent;
-        margin-bottom: 20px;
-    }
+        .container-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
 
-    /* 卡片 */
-    .card {
-        border: 1px solid #e5e5e5;
-        padding: 22px;
-        border-radius: 10px;
-        transition: 0.25s;
-        background: #fff;
-    }
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 18px;
+            font-weight: 700;
+            border-left: 5px solid #0b4a72;
+            padding-left: 12px;
+        }
 
-    .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-        border-color: #0b4a72;
-    }
-
-    /* 卡片标题 */
-    .card h3 {
-        font-size: 18px;
-        color: #0b4a72;
-        margin-bottom: 12px;
-    }
-
-    /* 栅格布局 */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 22px;
-        margin-top: 20px;
-    }
-
-    /* 联系方式 */
-    .info {
-        margin-top: 40px;
-    }
-
-    .info p {
-        margin: 6px 0;
-    }
-
-    footer {
-        text-align: center;
-        padding: 25px 0;
-        color: #666;
-        font-size: 13px;
-        margin-top: 60px;
-    }
-</style>
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            font-size: 13px;
+            color: #666;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="navbar">
-    安徽融思企业管理咨询有限公司
-</div>
+<!-- 顶部导航栏（删除公司名字） -->
+<nav class="navbar navbar-expand-lg navbar-dark px-3"></nav>
 
-<div class="container">
+<div class="container-section">
 
-    <!-- 公司介绍 -->
-    <h2 class="title">公司介绍</h2>
+    <!-- 第一段标题改成公司名称 -->
+    <h2 class="section-title">安徽融思企业管理咨询有限公司</h2>
+
     <p>
-        安徽融思企业管理咨询有限公司是一家专注于管理咨询、商业策划、社会经济调查、
-        企业培训与数据服务的专业机构。团队成员具备产业研究、写作策划、数据分析等专业背景，
-        致力于为企业、机构及个人提供系统化解决方案。
+        安徽融思企业管理咨询有限公司是一家专注于管理咨询、商业策划、社会经济调查、企业培训与数据服务的专业机构。
+        团队成员具备产业研究、写作策划、数据分析等专业背景，致力于为企业、机构及个人提供系统化解决方案。
     </p>
 
-    <!-- 核心业务 -->
-    <h2 class="title">核心业务</h2>
+    <h2 class="section-title">核心业务</h2>
 
-    <div class="grid">
-
-        <div class="card">
-            <h3>商业咨询服务</h3>
-            <p>提供管理诊断、战略规划、流程优化、组织架构设计与经营分析等咨询服务。</p>
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="p-3 border rounded">
+                <h5>商业咨询服务</h5>
+                <p>管理诊断、战略规划、流程优化、组织设计、经营分析等。</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>写作与策划</h3>
-            <p>涵盖商业计划书、项目报告、研究报告、方案策划与宣传内容定制等。</p>
+        <div class="col-md-3">
+            <div class="p-3 border rounded">
+                <h5>写作与策划</h5>
+                <p>商业计划书、项目报告、论文指导、方案策划、宣传内容定制等。</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>社会经济调查</h3>
-            <p>开展市场调研、问卷设计、深度访谈、数据分析与专题研究。</p>
+        <div class="col-md-3">
+            <div class="p-3 border rounded">
+                <h5>社会经济调查</h5>
+                <p>市场调研、问卷设计、深度访谈、数据分析与专题研究。</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>项目申报</h3>
-            <p>企业与机构项目梳理、材料撰写、申报辅导与合规咨询。</p>
+        <div class="col-md-3">
+            <div class="p-3 border rounded">
+                <h5>项目申报</h5>
+                <p>企业与机构项目梳理、材料撰写、申报辅导及合规咨询。</p>
+            </div>
         </div>
-
     </div>
 
-    <!-- 联系方式 -->
-    <div class="info">
-        <h2 class="title">联系方式</h2>
-        <p>公司名称：安徽融思企业管理咨询有限公司</p>
-        <p>品牌名称：oahctrip</p>
-        <p>微信：OAHCEDU</p>
-    </div>
+    <h2 class="section-title">联系方式</h2>
+
+    <p>公司名称：安徽融思企业管理咨询有限公司</p>
+    <p>品牌名称：oahctrip</p>
+    <p>微信：OAHCEDU</p>
 
 </div>
 
@@ -149,5 +104,6 @@
     © 2024 安徽融思企业管理咨询有限公司 · oahctrip
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
