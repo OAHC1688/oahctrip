@@ -4,1032 +4,231 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>安徽融思企业管理咨询有限公司</title>
-  <meta name="description" content="安徽融思企业管理咨询有限公司，主营咨询、写作、调研、人力资源管理、软硬件研发等综合服务。" />
+  <meta name="description" content="安徽融思企业管理咨询有限公司，提供咨询规划、专业写作、调研分析、人力资源管理及软件系统研发等服务。" />
   <style>
     :root{
-      --primary:#2b6ef3;
-      --primary-deep:#1f4fc4;
-      --text:#1f2937;
-      --text-light:#5b6475;
-      --line:#e8edf5;
-      --bg:#f7f9fc;
-      --white:#ffffff;
-      --card:#fbfcfe;
-      --shadow:0 12px 36px rgba(31, 64, 122, 0.08);
-      --radius:20px;
-      --radius-sm:14px;
-      --max:1200px;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:"PingFang SC","Microsoft YaHei","Segoe UI",Arial,sans-serif;
-      color:var(--text);
-      background:linear-gradient(180deg,#ffffff 0%,#f8fbff 50%,#f7f9fc 100%);
-      line-height:1.7;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
-
-    .container{
-      width:min(var(--max),calc(100% - 40px));
-      margin:0 auto;
-    }
-
-    .section{
-      padding:88px 0;
-    }
-
-    .section-head{
-      max-width:760px;
-      margin-bottom:42px;
-    }
-
-    .eyebrow{
-      display:inline-block;
-      padding:8px 14px;
-      border-radius:999px;
-      background:#eef4ff;
-      color:var(--primary);
-      font-size:13px;
-      font-weight:600;
-      letter-spacing:.08em;
-      margin-bottom:18px;
-    }
-
-    .section-head h2{
-      font-size:38px;
-      line-height:1.25;
-      margin-bottom:14px;
-      letter-spacing:-0.02em;
-    }
-
-    .section-head p{
-      font-size:16px;
-      color:var(--text-light);
-    }
-
-    /* header */
-    .header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(255,255,255,.84);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(232,237,245,.9);
-    }
-
-    .nav{
-      height:78px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .brand-mark{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      background:linear-gradient(135deg,#4fa4ff,#2b6ef3);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-size:20px;
-      font-weight:700;
-      box-shadow:0 10px 24px rgba(43,110,243,.22);
-      flex-shrink:0;
-    }
-
-    .brand-text{
-      min-width:0;
-    }
-
-    .brand-text .en{
-      font-size:12px;
-      color:#6b7485;
-      line-height:1.2;
-    }
-
-    .brand-text .cn{
-      font-size:17px;
-      font-weight:700;
-      color:var(--text);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .nav-links{
-      display:flex;
-      align-items:center;
-      gap:28px;
-    }
-
-    .nav-links a{
-      font-size:15px;
-      color:#4a5568;
-      transition:.25s;
-    }
-
-    .nav-links a:hover{
-      color:var(--primary);
-    }
-
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      border:none;
-      cursor:pointer;
-      transition:.25s ease;
-      font-size:15px;
-      font-weight:600;
-      border-radius:999px;
-      padding:13px 22px;
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg,var(--primary),var(--primary-deep));
-      color:#fff;
-      box-shadow:0 12px 24px rgba(43,110,243,.22);
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-1px);
-    }
-
-    .btn-light{
-      background:#fff;
-      color:var(--text);
-      border:1px solid var(--line);
-    }
-
-    .btn-light:hover{
-      background:#f7f9fc;
-    }
-
-    .menu-toggle{
-      display:none;
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#fff;
-      align-items:center;
-      justify-content:center;
-      font-size:20px;
-      cursor:pointer;
-    }
-
-    .mobile-panel{
-      display:none;
-      padding:0 0 18px;
-    }
-
-    .mobile-links{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      padding-top:8px;
-    }
-
-    .mobile-links a{
-      padding:12px 14px;
-      border-radius:12px;
-      background:#f8fbff;
-      color:#4a5568;
-      border:1px solid #edf2f8;
-    }
-
-    /* hero */
-    .hero{
-      position:relative;
-      overflow:hidden;
-      padding:72px 0 60px;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      left:-120px;
-      top:-80px;
-      width:340px;
-      height:340px;
-      background:radial-gradient(circle,rgba(43,110,243,.11),transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      right:-120px;
-      top:0;
-      width:420px;
-      height:420px;
-      background:radial-gradient(circle,rgba(116,169,255,.14),transparent 70%);
-      pointer-events:none;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:34px;
-      align-items:center;
-      position:relative;
-      z-index:1;
-    }
-
-    .hero-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 16px;
-      background:#eff5ff;
-      border:1px solid #d9e7ff;
-      color:var(--primary);
-      border-radius:999px;
-      font-size:14px;
-      font-weight:600;
-      margin-bottom:22px;
-    }
-
-    .hero h1{
-      font-size:56px;
-      line-height:1.16;
-      letter-spacing:-0.03em;
-      margin-bottom:18px;
-    }
-
-    .hero h1 .grad{
-      background:linear-gradient(135deg,#1f4fc4,#2b6ef3,#4ca0ff);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero p{
-      font-size:17px;
-      color:var(--text-light);
-      max-width:720px;
-      margin-bottom:28px;
-    }
-
-    .hero-btns{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-bottom:34px;
-    }
-
-    .hero-stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-
-    .stat{
-      background:rgba(255,255,255,.78);
-      border:1px solid #edf2f8;
-      box-shadow:var(--shadow);
-      border-radius:22px;
-      padding:24px 20px;
-    }
-
-    .stat strong{
-      display:block;
-      font-size:32px;
-      line-height:1.1;
-      margin-bottom:8px;
-      color:var(--text);
-    }
-
-    .stat span{
-      color:var(--text-light);
-      font-size:14px;
-    }
-
-    .hero-card{
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(232,237,245,.95);
-      border-radius:30px;
-      box-shadow:0 26px 60px rgba(31,64,122,.10);
-      padding:24px;
-      backdrop-filter:blur(14px);
-    }
-
-    .hero-card-inner{
-      background:#fff;
-      border:1px solid #edf2f8;
-      border-radius:24px;
-      padding:26px;
-    }
-
-    .hero-card-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:18px;
-      margin-bottom:22px;
-    }
-
-    .hero-card-top h3{
-      font-size:26px;
-      line-height:1.3;
-      margin-top:4px;
-    }
-
-    .hero-card-top p{
-      margin:0;
-      font-size:14px;
-      color:#6b7485;
-    }
-
-    .hero-icon{
-      width:54px;
-      height:54px;
-      border-radius:18px;
-      background:linear-gradient(135deg,#58a6ff,#2b6ef3);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-size:24px;
-      box-shadow:0 12px 24px rgba(43,110,243,.22);
-      flex-shrink:0;
-    }
-
-    .mini-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:14px;
-      margin-bottom:18px;
-    }
-
-    .mini-card{
-      background:#f8fbff;
-      border:1px solid #edf2f8;
-      border-radius:18px;
-      padding:18px;
-    }
-
-    .mini-card h4{
-      font-size:15px;
-      margin-bottom:6px;
-    }
-
-    .mini-card p{
-      font-size:13px;
-      line-height:1.7;
-      color:#6b7485;
-      margin:0;
-    }
-
-    .hero-note{
-      background:linear-gradient(135deg,#eef5ff,#f8fbff);
-      border:1px solid #deebff;
-      border-radius:18px;
-      padding:18px 18px;
-    }
-
-    .hero-note strong{
-      display:block;
-      margin-bottom:6px;
-      color:#295fd4;
-      font-size:14px;
-    }
-
-    .hero-note p{
-      margin:0;
-      font-size:14px;
-      color:#5d6780;
-    }
-
-    /* services */
-    .services-wrap{
-      display:grid;
-      grid-template-columns:.92fr 1.08fr;
-      gap:24px;
-      align-items:start;
-    }
-
-    .service-tabs{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-bottom:22px;
-    }
-
-    .tab{
-      padding:10px 16px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:#556072;
-      font-size:14px;
-      cursor:pointer;
-      transition:.25s;
-    }
-
-    .tab.active{
-      background:linear-gradient(135deg,#58a6ff,#2b6ef3);
-      color:#fff;
-      border-color:transparent;
-      box-shadow:0 12px 22px rgba(43,110,243,.18);
-    }
-
-    .service-list{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .service-item{
-      width:100%;
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:22px;
-      padding:18px 20px;
-      cursor:pointer;
-      transition:.25s;
-      text-align:left;
-      box-shadow:0 8px 20px rgba(31,64,122,.04);
-    }
-
-    .service-item:hover{
-      transform:translateY(-2px);
-    }
-
-    .service-item.active{
-      background:linear-gradient(135deg,#eff5ff,#f8fbff);
-      border-color:#d6e6ff;
-      box-shadow:0 16px 30px rgba(43,110,243,.08);
-    }
-
-    .service-item-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .service-item-left{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-
-    .service-ico{
-      width:48px;
-      height:48px;
-      border-radius:16px;
-      background:#eef4ff;
-      color:var(--primary);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:22px;
-      flex-shrink:0;
-    }
-
-    .service-item.active .service-ico{
-      background:linear-gradient(135deg,#58a6ff,#2b6ef3);
-      color:#fff;
-    }
-
-    .service-item h3{
-      font-size:18px;
-      margin-bottom:2px;
-    }
-
-    .service-item span{
-      font-size:13px;
-      color:#738095;
-    }
-
-    .service-detail{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:34px;
-      box-shadow:var(--shadow);
-      min-height:100%;
-    }
-
-    .service-detail-tag{
-      display:inline-block;
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:13px;
-      color:var(--primary);
-      background:#eef4ff;
-      border:1px solid #deebff;
-      margin-bottom:18px;
-    }
-
-    .service-detail h3{
-      font-size:34px;
-      line-height:1.25;
-      margin-bottom:18px;
-    }
-
-    .service-detail p{
-      color:var(--text-light);
-      margin-bottom:24px;
-      font-size:16px;
-    }
-
-    .bullet-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin-bottom:24px;
-    }
-
-    .bullet{
-      background:#f8fbff;
-      border:1px solid #edf2f8;
-      border-radius:18px;
-      padding:16px;
-      font-size:14px;
-      font-weight:600;
-      color:#4a5972;
-      text-align:center;
-    }
-
-    .detail-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:14px;
-    }
-
-    .detail-box{
-      background:#f9fbfd;
-      border:1px solid #edf2f8;
-      border-radius:18px;
-      padding:18px;
-    }
-
-    .detail-box strong{
-      display:block;
-      margin-bottom:8px;
-      font-size:15px;
-      color:#2b3444;
-    }
-
-    .detail-box p{
-      font-size:14px;
-      margin:0;
-      color:#657186;
-    }
-
-    /* cards */
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:20px;
-    }
-
-    .card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:28px 22px;
-      box-shadow:0 12px 30px rgba(31,64,122,.05);
-      transition:.25s;
-    }
-
-    .card:hover{
-      transform:translateY(-4px);
-    }
-
-    .card-icon{
-      width:54px;
-      height:54px;
-      border-radius:18px;
-      background:linear-gradient(135deg,#eef5ff,#f7faff);
-      color:var(--primary);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      margin-bottom:18px;
-    }
-
-    .card h3{
-      font-size:20px;
-      margin-bottom:10px;
-    }
-
-    .card p{
-      color:var(--text-light);
-      font-size:14px;
-    }
-
-    /* process */
-    .process-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:20px;
-    }
-
-    .process-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:26px 22px;
-      box-shadow:0 10px 24px rgba(31,64,122,.05);
-    }
-
-    .step{
-      display:inline-block;
-      font-size:13px;
-      font-weight:700;
-      color:var(--primary);
-      background:#eef4ff;
-      border-radius:999px;
-      padding:8px 12px;
-      margin-bottom:16px;
-    }
-
-    .process-card h3{
-      font-size:21px;
-      margin-bottom:10px;
-    }
-
-    .process-card p{
-      font-size:14px;
-      color:var(--text-light);
-    }
-
-    /* faq */
-    .faq-wrap{
-      display:grid;
-      grid-template-columns:.9fr 1.1fr;
-      gap:28px;
-      align-items:start;
-    }
-
-    .faq-list{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .faq-item{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      overflow:hidden;
-      box-shadow:0 10px 24px rgba(31,64,122,.04);
-    }
-
-    .faq-question{
-      width:100%;
-      padding:20px 22px;
-      background:#fff;
-      border:none;
-      text-align:left;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      font-size:16px;
-      font-weight:600;
-      color:var(--text);
-      cursor:pointer;
-    }
-
-    .faq-arrow{
-      font-size:18px;
-      color:#92a0b4;
-      transition:.25s;
-      flex-shrink:0;
-    }
-
-    .faq-item.active .faq-arrow{
-      transform:rotate(180deg);
-      color:var(--primary);
-    }
-
-    .faq-answer{
-      max-height:0;
-      overflow:hidden;
-      transition:max-height .3s ease;
-      padding:0 22px;
-    }
-
-    .faq-item.active .faq-answer{
-      max-height:240px;
-      padding:0 22px 22px;
-    }
-
-    .faq-answer p{
-      color:var(--text-light);
-      font-size:14px;
-    }
-
-    /* contact */
-    .contact-wrap{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:24px;
-    }
-
-    .contact-main{
-      background:linear-gradient(135deg,#eef5ff,#ffffff 55%,#f5f8ff);
-      border:1px solid #deebff;
-      border-radius:30px;
-      padding:34px;
-      box-shadow:0 14px 34px rgba(43,110,243,.08);
-    }
-
-    .contact-main h2{
-      font-size:38px;
-      line-height:1.25;
-      margin-bottom:16px;
-    }
-
-    .contact-main p{
-      color:var(--text-light);
-      font-size:16px;
-      max-width:720px;
-    }
-
-    .contact-cards{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
-    }
-
-    .contact-card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:22px;
-      box-shadow:0 10px 24px rgba(31,64,122,.05);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      cursor:pointer;
-      transition:.25s;
-    }
-
-    .contact-card:hover{
-      transform:translateY(-3px);
-      background:#fbfdff;
-    }
-
-    .contact-card-left{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      min-width:0;
-    }
-
-    .contact-card-icon{
-      width:56px;
-      height:56px;
-      border-radius:18px;
-      background:#eef4ff;
-      color:var(--primary);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      flex-shrink:0;
-    }
-
-    .contact-card .label{
-      font-size:14px;
-      color:#7a8799;
-      margin-bottom:4px;
-    }
-
-    .contact-card .value{
-      font-size:26px;
-      font-weight:700;
-      color:var(--text);
-      word-break:break-all;
-    }
-
-    .contact-copy{
-      font-size:14px;
-      color:#95a0b0;
-      white-space:nowrap;
-    }
-
-    /* footer */
-    .footer{
-      border-top:1px solid var(--line);
-      background:#fff;
-      margin-top:30px;
-    }
-
-    .footer-inner{
-      min-height:84px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      color:#758194;
-      font-size:14px;
-    }
-
-    /* reveal */
-    .reveal{
-      opacity:0;
-      transform:translateY(22px);
-      transition:opacity .65s ease,transform .65s ease;
-    }
-
-    .reveal.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    /* responsive */
-    @media (max-width: 1100px){
-      .hero-grid,
-      .services-wrap,
-      .faq-wrap,
-      .contact-wrap{
-        grid-template-columns:1fr;
-      }
-
-      .cards{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .process-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .hero h1{
-        font-size:48px;
-      }
-    }
-
-    @media (max-width: 860px){
-      .nav-links,
-      .nav-actions .btn{
-        display:none;
-      }
-
-      .menu-toggle{
-        display:flex;
-      }
-
-      .mobile-panel.open{
-        display:block;
-      }
-
-      .hero{
-        padding-top:48px;
-      }
-
-      .hero h1{
-        font-size:38px;
-      }
-
-      .hero p{
-        font-size:16px;
-      }
-
-      .hero-stats,
-      .bullet-grid,
-      .detail-grid,
-      .cards,
-      .process-grid{
-        grid-template-columns:1fr;
-      }
-
-      .section{
-        padding:72px 0;
-      }
-
-      .section-head h2,
-      .contact-main h2{
-        font-size:30px;
-      }
-
-      .service-detail h3{
-        font-size:28px;
-      }
-
-      .contact-card .value{
-        font-size:22px;
-      }
-
-      .footer-inner{
-        flex-direction:column;
-        justify-content:center;
-        text-align:center;
-        padding:18px 0;
-      }
-    }
-
-    @media (max-width: 520px){
-      .container{
-        width:min(var(--max),calc(100% - 28px));
-      }
-
-      .hero h1{
-        font-size:32px;
-      }
-
-      .hero-card,
-      .service-detail,
-      .contact-main{
-        padding:22px;
-      }
-
-      .hero-card-inner{
-        padding:20px;
-      }
-
-      .mini-grid{
-        grid-template-columns:1fr;
-      }
-
-      .contact-card{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .contact-copy{
-        margin-left:72px;
-      }
-    }
+      --primary:#2563eb;
+      --primary-2:#38bdf8;
+      --primary-soft:#eff6ff;
+      --text:#0f172a;
+      --text-2:#475569;
+      --line:#e2e8f0;
+      --bg:#f8fbff;
+      --card:#ffffff;
+      --shadow:0 16px 50px rgba(15,23,42,.08);
+      --shadow-soft:0 8px 24px rgba(15,23,42,.05);
+      --radius:24px;
+      --max:1240px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#ffffff 0%,#f8fbff 45%,#f6f9fe 100%);line-height:1.7;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+    .section{padding:92px 0}
+    .section-head{max-width:760px;margin-bottom:40px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:13px;font-weight:700;letter-spacing:.08em;border:1px solid #dbeafe;margin-bottom:18px}
+    .section-head h2{font-size:40px;line-height:1.22;letter-spacing:-.03em;margin-bottom:14px}
+    .section-head p{font-size:16px;color:var(--text-2)}
+
+    .header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(226,232,240,.8)}
+    .nav{height:80px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:14px;min-width:0}
+    .brand-mark{width:46px;height:46px;border-radius:16px;color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--primary),var(--primary-2));box-shadow:0 12px 28px rgba(37,99,235,.28)}
+    .brand-text small{display:block;font-size:12px;color:#64748b;line-height:1.2}
+    .brand-text strong{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .nav-links{display:flex;gap:28px;align-items:center}
+    .nav-links a{font-size:15px;color:#475569;position:relative}
+    .nav-links a:after{content:"";position:absolute;left:0;bottom:-10px;width:0;height:2px;background:var(--primary);transition:.25s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-links a:hover:after{width:100%}
+    .nav-actions{display:flex;gap:12px;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:999px;padding:13px 22px;cursor:pointer;font-weight:700;font-size:15px;transition:.25s ease}
+    .btn-primary{background:linear-gradient(135deg,var(--primary),#1d4ed8);color:#fff;box-shadow:0 14px 28px rgba(37,99,235,.22)}
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-light{background:#fff;border:1px solid var(--line);color:var(--text);box-shadow:var(--shadow-soft)}
+    .btn-light:hover{background:#f8fafc}
+    .menu-toggle{display:none;width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:20px;align-items:center;justify-content:center;cursor:pointer}
+    .mobile-panel{display:none;padding-bottom:16px}
+    .mobile-links{display:flex;flex-direction:column;gap:10px}
+    .mobile-links a{padding:12px 14px;border-radius:14px;background:#f8fbff;border:1px solid #e8eef7;color:#475569}
+
+    .hero{position:relative;overflow:hidden;padding:72px 0 48px}
+    .hero:before,.hero:after{content:"";position:absolute;border-radius:999px;filter:blur(40px);pointer-events:none}
+    .hero:before{width:380px;height:380px;background:rgba(56,189,248,.14);left:-120px;top:-80px}
+    .hero:after{width:420px;height:420px;background:rgba(37,99,235,.10);right:-120px;top:40px}
+    .hero-grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:26px;align-items:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:#fff;border:1px solid #dbeafe;color:var(--primary);font-weight:700;font-size:14px;box-shadow:var(--shadow-soft);margin-bottom:24px}
+    .hero h1{font-size:56px;line-height:1.08;letter-spacing:-.04em;margin-bottom:18px;max-width:780px}
+    .hero h1 .grad{background:linear-gradient(135deg,#1d4ed8,#0ea5e9);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{font-size:17px;color:var(--text-2);max-width:720px;margin-bottom:30px}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+    .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .stat{background:rgba(255,255,255,.85);border:1px solid #e7eef7;border-radius:22px;padding:22px 18px;box-shadow:var(--shadow-soft)}
+    .stat strong{display:block;font-size:32px;line-height:1.1;margin-bottom:8px}
+    .stat span{font-size:14px;color:#64748b}
+    .hero-card{background:rgba(255,255,255,.82);border:1px solid rgba(226,232,240,.9);border-radius:30px;padding:24px;box-shadow:0 24px 60px rgba(15,23,42,.08);backdrop-filter:blur(18px)}
+    .hero-card-inner{background:#fff;border:1px solid #eef2f7;border-radius:24px;padding:24px}
+    .hero-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:20px}
+    .hero-top small{color:#64748b}
+    .hero-top h3{font-size:28px;line-height:1.25;margin-top:4px}
+    .hero-icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;background:linear-gradient(135deg,var(--primary),var(--primary-2));box-shadow:0 14px 28px rgba(37,99,235,.2)}
+    .hero-mini{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px}
+    .hero-mini-card{padding:16px;border:1px solid #edf2f7;background:#f8fbff;border-radius:18px;transition:.25s}
+    .hero-mini-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+    .hero-mini-card h4{font-size:15px;margin-bottom:6px}
+    .hero-mini-card p{margin:0;font-size:13px;color:#64748b}
+    .hero-panel{padding:18px;border-radius:18px;background:linear-gradient(135deg,#eef5ff,#f9fbff);border:1px solid #dbeafe}
+    .hero-panel strong{display:block;margin-bottom:8px;color:#1d4ed8}
+    .hero-panel p{margin:0;font-size:14px;color:#5b6475}
+
+    .ticker-wrap{margin-top:20px;overflow:hidden;border:1px solid #e8eef7;background:#fff;border-radius:999px;box-shadow:var(--shadow-soft)}
+    .ticker{display:flex;gap:30px;white-space:nowrap;padding:12px 18px;animation:ticker 24s linear infinite}
+    .ticker span{font-size:14px;color:#475569}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .showcase{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .show-box{background:#fff;border:1px solid #e8eef7;border-radius:22px;padding:20px;box-shadow:var(--shadow-soft)}
+    .show-box h4{font-size:17px;margin-bottom:8px}
+    .show-box p{font-size:14px;color:#64748b;margin-bottom:14px}
+    .progress{height:10px;background:#eef2f7;border-radius:999px;overflow:hidden}
+    .progress i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--primary),var(--primary-2));transition:1s ease}
+
+    .services-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}
+    .filter-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+    .filter-btn{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#475569;cursor:pointer;transition:.25s;font-size:14px}
+    .filter-btn.active{background:linear-gradient(135deg,var(--primary),#1d4ed8);color:#fff;border-color:transparent;box-shadow:0 12px 24px rgba(37,99,235,.18)}
+    .service-list{display:flex;flex-direction:column;gap:14px}
+    .service-item{background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px 20px;cursor:pointer;transition:.25s;box-shadow:var(--shadow-soft)}
+    .service-item:hover{transform:translateY(-3px)}
+    .service-item.active{background:linear-gradient(135deg,#eff6ff,#f8fbff);border-color:#bfdbfe}
+    .service-item-top{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .service-item-left{display:flex;gap:14px;align-items:center}
+    .service-icon{width:50px;height:50px;border-radius:16px;background:#eff6ff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex-shrink:0}
+    .service-item.active .service-icon{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff}
+    .service-item h3{font-size:18px;margin-bottom:2px}
+    .service-item span{font-size:13px;color:#64748b}
+    .service-detail{background:#fff;border:1px solid var(--line);border-radius:30px;padding:32px;box-shadow:var(--shadow)}
+    .detail-tag{display:inline-flex;padding:8px 14px;border-radius:999px;background:#eff6ff;color:var(--primary);font-size:13px;font-weight:700;border:1px solid #dbeafe;margin-bottom:18px}
+    .service-detail h3{font-size:36px;line-height:1.2;margin-bottom:16px}
+    .service-detail p{font-size:16px;color:#475569;margin-bottom:22px}
+    .bullet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+    .bullet{padding:15px;border-radius:18px;background:#f8fbff;border:1px solid #e8eef7;font-size:14px;font-weight:700;text-align:center;color:#475569}
+    .detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .detail-box{background:#fbfdff;border:1px solid #edf2f7;border-radius:18px;padding:18px}
+    .detail-box strong{display:block;margin-bottom:8px;font-size:15px}
+    .detail-box p{margin:0;font-size:14px;color:#64748b}
+    .capability-panel{margin-top:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .capability-box{padding:18px;border-radius:20px;background:linear-gradient(135deg,#ffffff,#f8fbff);border:1px solid #e8eef7}
+    .capability-box h4{font-size:15px;margin-bottom:10px}
+    .caps{display:flex;flex-wrap:wrap;gap:8px}
+    .caps span{padding:7px 10px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:700}
+
+    .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .cap-card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:24px;box-shadow:var(--shadow-soft);transition:.28s;position:relative;overflow:hidden}
+    .cap-card:before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-2));transform:scaleX(0);transform-origin:left;transition:.3s}
+    .cap-card:hover{transform:translateY(-5px)}
+    .cap-card:hover:before{transform:scaleX(1)}
+    .cap-card h3{font-size:21px;margin:14px 0 10px}
+    .cap-card p{font-size:14px;color:#64748b}
+    .cap-icon{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,#eff6ff,#f8fbff);display:flex;align-items:center;justify-content:center;font-size:24px;color:#2563eb}
+
+    .case-wrap{display:grid;grid-template-columns:.78fr 1.22fr;gap:24px;align-items:start}
+    .case-tabs{display:flex;flex-direction:column;gap:14px}
+    .case-tab{padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:22px;cursor:pointer;transition:.25s;box-shadow:var(--shadow-soft)}
+    .case-tab.active{background:linear-gradient(135deg,#eff6ff,#f8fbff);border-color:#bfdbfe}
+    .case-tab strong{display:block;font-size:17px;margin-bottom:6px}
+    .case-tab span{font-size:13px;color:#64748b}
+    .case-detail{background:#fff;border:1px solid var(--line);border-radius:30px;padding:30px;box-shadow:var(--shadow)}
+    .case-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:14px}
+    .case-head h3{font-size:30px;line-height:1.2}
+    .case-head small{display:inline-block;padding:8px 12px;background:#eff6ff;border:1px solid #dbeafe;border-radius:999px;color:var(--primary);font-weight:700}
+    .case-detail p{font-size:15px;color:#475569;margin-bottom:20px}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+    .metric{padding:18px;border-radius:20px;background:#f8fbff;border:1px solid #e8eef7}
+    .metric strong{display:block;font-size:28px;line-height:1.1;margin-bottom:8px}
+    .metric span{font-size:13px;color:#64748b}
+    .timeline{display:grid;gap:12px}
+    .timeline-item{display:grid;grid-template-columns:80px 1fr;gap:14px;padding:14px 0;border-top:1px dashed #e2e8f0}
+    .timeline-item:first-child{border-top:none;padding-top:0}
+    .timeline-item strong{color:#2563eb}
+    .timeline-item p{margin:0;font-size:14px;color:#64748b}
+
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .process-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow-soft);position:relative;overflow:hidden}
+    .process-card:after{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:linear-gradient(90deg,var(--primary),var(--primary-2));opacity:.9}
+    .step{display:inline-flex;padding:8px 12px;border-radius:999px;background:#eff6ff;border:1px solid #dbeafe;color:#2563eb;font-size:13px;font-weight:800;margin-bottom:16px}
+    .process-card h3{font-size:20px;margin-bottom:10px}
+    .process-card p{font-size:14px;color:#64748b}
+
+    .faq-wrap{display:grid;grid-template-columns:.88fr 1.12fr;gap:24px;align-items:start}
+    .faq-list{display:flex;flex-direction:column;gap:14px}
+    .faq-item{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-soft)}
+    .faq-q{width:100%;border:none;background:#fff;padding:20px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;text-align:left;cursor:pointer;font-weight:700;font-size:16px}
+    .faq-arrow{transition:.25s;color:#94a3b8}
+    .faq-item.active .faq-arrow{transform:rotate(180deg);color:#2563eb}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 22px}
+    .faq-item.active .faq-a{max-height:220px;padding:0 22px 22px}
+    .faq-a p{font-size:14px;color:#64748b}
+
+    .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .contact-main{background:linear-gradient(135deg,#eef5ff,#ffffff 58%,#f6fbff);border:1px solid #dbeafe;border-radius:30px;padding:32px;box-shadow:var(--shadow-soft)}
+    .contact-main h2{font-size:38px;line-height:1.2;margin-bottom:16px}
+    .contact-main p{font-size:16px;color:#475569}
+    .contact-actions{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .contact-cards{display:flex;flex-direction:column;gap:16px}
+    .contact-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow-soft);display:flex;justify-content:space-between;gap:16px;align-items:center;cursor:pointer;transition:.25s}
+    .contact-card:hover{transform:translateY(-3px);background:#fbfdff}
+    .contact-left{display:flex;align-items:center;gap:16px}
+    .contact-icon{width:56px;height:56px;border-radius:18px;background:#eff6ff;color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800}
+    .contact-label{font-size:14px;color:#64748b;margin-bottom:4px}
+    .contact-value{font-size:26px;font-weight:800}
+    .contact-copy{font-size:14px;color:#94a3b8;white-space:nowrap}
+
+    .float-tools{position:fixed;right:24px;bottom:24px;z-index:1001;display:flex;flex-direction:column;gap:12px}
+    .float-btn{width:54px;height:54px;border-radius:18px;border:1px solid #dbeafe;background:#fff;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;transition:.25s;color:#2563eb}
+    .float-btn:hover{transform:translateY(-4px)}
+
+    .footer{border-top:1px solid var(--line);background:#fff;margin-top:24px}
+    .footer-inner{min-height:86px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:14px}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+
+    @media (max-width:1100px){.hero-grid,.services-grid,.case-wrap,.faq-wrap,.contact-wrap{grid-template-columns:1fr}.cap-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:48px}}
+    @media (max-width:860px){.nav-links,.nav-actions .btn{display:none}.menu-toggle{display:flex}.mobile-panel.open{display:block}.hero h1{font-size:38px}.hero-stats,.showcase,.bullet-grid,.detail-grid,.metrics,.cap-grid,.process-grid{grid-template-columns:1fr}.hero-mini{grid-template-columns:1fr}.section{padding:74px 0}.section-head h2,.contact-main h2{font-size:30px}.service-detail h3,.case-head h3{font-size:28px}.contact-value{font-size:22px}.footer-inner{flex-direction:column;justify-content:center;text-align:center;padding:18px 0}}
+    @media (max-width:520px){.container{width:min(var(--max),calc(100% - 28px))}.hero h1{font-size:32px}.hero-card,.service-detail,.case-detail,.contact-main{padding:22px}.contact-card{flex-direction:column;align-items:flex-start}.contact-copy{margin-left:72px}.float-tools{right:16px;bottom:16px}}
   </style>
 </head>
 <body>
-
   <header class="header">
     <div class="container nav">
       <a href="#home" class="brand">
         <div class="brand-mark">融</div>
         <div class="brand-text">
-          <div class="en">Anhui Rongsi</div>
-          <div class="cn">安徽融思企业管理咨询有限公司</div>
+          <small>Anhui Rongsi</small>
+          <strong>安徽融思企业管理咨询有限公司</strong>
         </div>
       </a>
-
       <nav class="nav-links">
         <a href="#home">首页</a>
-        <a href="#services">业务板块</a>
-        <a href="#advantages">服务优势</a>
+        <a href="#services">业务领域</a>
+        <a href="#capability">服务能力</a>
+        <a href="#cases">服务场景</a>
         <a href="#process">合作流程</a>
-        <a href="#faq">常见问题</a>
         <a href="#contact">联系我们</a>
       </nav>
-
       <div class="nav-actions">
-        <a href="#contact" class="btn btn-primary">立即咨询</a>
+        <a class="btn btn-primary" href="#contact">立即咨询</a>
         <button class="menu-toggle" id="menuToggle">☰</button>
       </div>
     </div>
-
     <div class="container mobile-panel" id="mobilePanel">
       <div class="mobile-links">
         <a href="#home">首页</a>
-        <a href="#services">业务板块</a>
-        <a href="#advantages">服务优势</a>
+        <a href="#services">业务领域</a>
+        <a href="#capability">服务能力</a>
+        <a href="#cases">服务场景</a>
         <a href="#process">合作流程</a>
-        <a href="#faq">常见问题</a>
         <a href="#contact">联系我们</a>
       </div>
     </div>
@@ -1039,71 +238,57 @@
     <section class="hero" id="home">
       <div class="container hero-grid">
         <div class="reveal">
-          <div class="hero-badge">企业咨询 · 研究支持 · 管理优化 · 技术研发</div>
-          <h1>
-            为企业提供更清爽、<br />
-            更专业、也更容易建立信任感的
-            <span class="grad">综合服务支持</span>
-          </h1>
-          <p>
-            安徽融思企业管理咨询有限公司聚焦咨询、写作、调研、人力资源管理与软硬件研发，致力于将专业分析、内容表达、组织管理与技术建设整合为一体，帮助客户提升项目推进效率与成果呈现质量。
-          </p>
-
+          <div class="hero-badge">咨询规划 · 专业写作 · 调研分析 · 人力资源 · 软件研发</div>
+          <h1>企业咨询与<br><span class="grad">研究支持服务</span></h1>
+          <p>安徽融思企业管理咨询有限公司提供咨询规划、专业写作、调研分析、人力资源管理及软件系统研发等服务。</p>
           <div class="hero-btns">
-            <a href="#contact" class="btn btn-primary">立即咨询</a>
-            <a href="#services" class="btn btn-light">查看业务板块</a>
+            <a class="btn btn-primary" href="#contact">联系合作</a>
+            <a class="btn btn-light" href="#services">查看业务</a>
           </div>
-
           <div class="hero-stats">
-            <div class="stat">
-              <strong>5+</strong>
-              <span>核心业务方向</span>
-            </div>
-            <div class="stat">
-              <strong>多维</strong>
-              <span>管理与技术融合</span>
-            </div>
-            <div class="stat">
-              <strong>可扩展</strong>
-              <span>适合正式官网上线</span>
+            <div class="stat"><strong data-count="5">0</strong><span>核心业务板块</span></div>
+            <div class="stat"><strong data-count="8">0</strong><span>典型服务节点</span></div>
+            <div class="stat"><strong data-count="24">0</strong><span>快速响应时效</span></div>
+          </div>
+          <div class="ticker-wrap">
+            <div class="ticker">
+              <span>管理咨询</span><span>项目文本</span><span>行业调研</span><span>数据分析</span><span>人力资源</span><span>官网建设</span><span>系统开发</span><span>软硬件集成</span>
+              <span>管理咨询</span><span>项目文本</span><span>行业调研</span><span>数据分析</span><span>人力资源</span><span>官网建设</span><span>系统开发</span><span>软硬件集成</span>
             </div>
           </div>
         </div>
-
         <div class="hero-card reveal">
           <div class="hero-card-inner">
-            <div class="hero-card-top">
+            <div class="hero-top">
               <div>
-                <p>企业服务概览</p>
-                <h3>业务矩阵一体化展示</h3>
+                <small>企业服务概览</small>
+                <h3>综合服务展示</h3>
               </div>
               <div class="hero-icon">◆</div>
             </div>
-
-            <div class="mini-grid">
-              <div class="mini-card">
-                <h4>咨询服务</h4>
-                <p>问题梳理、方案形成、管理优化与发展路径设计。</p>
-              </div>
-              <div class="mini-card">
-                <h4>写作支持</h4>
-                <p>专业材料、研究报告、项目文本与表达优化。</p>
-              </div>
-              <div class="mini-card">
-                <h4>调研分析</h4>
-                <p>问卷设计、访谈支持、数据整理与结论提炼。</p>
-              </div>
-              <div class="mini-card">
-                <h4>技术研发</h4>
-                <p>官网建设、系统搭建、软件开发与方案支持。</p>
-              </div>
+            <div class="hero-mini">
+              <div class="hero-mini-card"><h4>咨询服务</h4><p>经营分析、方案梳理、路径规划与管理优化支持。</p></div>
+              <div class="hero-mini-card"><h4>专业写作</h4><p>报告整理、材料撰写、文本优化与正式表达支持。</p></div>
+              <div class="hero-mini-card"><h4>调研分析</h4><p>问卷设计、访谈提纲、数据整理与研究结论提炼。</p></div>
+              <div class="hero-mini-card"><h4>技术研发</h4><p>官网建设、系统开发、功能搭建与应用支持。</p></div>
             </div>
-
-            <div class="hero-note">
-              <strong>适配用途</strong>
-              <p>企业宣传官网、品牌展示首页、业务介绍页面，后续也可以继续扩展案例展示、在线留言与多页面系统。</p>
+            <div class="hero-panel">
+              <strong>服务方向</strong>
+              <p>围绕企业管理、项目研究、组织优化与技术实现等场景，提供系统化支持。</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="container showcase reveal">
+        <div class="show-box">
+          <h4>项目组织能力</h4>
+          <p>围绕需求沟通、问题梳理、方案推进与成果交付形成相对完整的服务链条。</p>
+          <div class="progress"><i data-width="92%"></i></div>
+        </div>
+        <div class="show-box">
+          <h4>专业表达能力</h4>
+          <p>兼顾内容质量、结构逻辑与正式场景中的呈现效果，适配多种企业使用需求。</p>
+          <div class="progress"><i data-width="95%"></i></div>
         </div>
       </div>
     </section>
@@ -1111,176 +296,113 @@
     <section class="section" id="services">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">业务板块</div>
-          <h2>核心业务覆盖企业发展关键环节</h2>
-          <p>公司围绕咨询规划、专业写作、调研分析、人力资源管理与软硬件研发等方向构建服务体系，面向不同类型客户提供更清晰、更高效、也更具针对性的专业支持。</p>
+          <div class="eyebrow">业务领域</div>
+          <h2>多元业务协同，覆盖企业关键需求</h2>
+          <p>公司围绕咨询规划、专业写作、调研分析、人力资源管理与软硬件研发等方向构建服务体系，面向不同类型客户提供专业支持。</p>
         </div>
-
-        <div class="services-wrap">
+        <div class="services-grid">
           <div class="reveal">
-            <div class="service-tabs" id="serviceTabs"></div>
+            <div class="filter-row" id="serviceFilters"></div>
             <div class="service-list" id="serviceList"></div>
           </div>
-
           <div class="service-detail reveal" id="serviceDetail"></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="advantages" style="background:#f8fbff;">
+    <section class="section" id="capability" style="background:#f8fbff;">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">服务优势</div>
-          <h2>整体轻盈克制，但专业感与可信度更强</h2>
-          <p>从业务覆盖、研究支持到管理优化与技术实施，我们更强调“内容有用、表达清楚、成果可落地”。</p>
+          <div class="eyebrow">服务能力</div>
+          <h2>综合能力覆盖多元业务场景</h2>
+          <p>公司在结构化策划、研究分析、专业表达、组织管理与技术实现等方面形成较为完整的服务能力，能够围绕不同项目需求提供系统化支持。</p>
         </div>
-
-        <div class="cards">
-          <div class="card reveal">
-            <div class="card-icon">✦</div>
-            <h3>业务覆盖更完整</h3>
-            <p>从咨询规划、内容写作到调研分析、人力资源管理与技术研发，形成跨模块支持能力。</p>
-          </div>
-          <div class="card reveal">
-            <div class="card-icon">✓</div>
-            <h3>表达与执行并重</h3>
-            <p>不仅重视方案内容本身，也强调文本呈现、沟通效率与实际落地效果。</p>
-          </div>
-          <div class="card reveal">
-            <div class="card-icon">▣</div>
-            <h3>研究与数据驱动</h3>
-            <p>适合需要调研支撑、数据分析与结构化表达的项目场景，减少凭经验判断的风险。</p>
-          </div>
-          <div class="card reveal">
-            <div class="card-icon">↗</div>
-            <h3>适配企业成长阶段</h3>
-            <p>无论是品牌展示、管理优化还是项目建设，都能根据不同阶段需求提供更匹配的服务。</p>
-          </div>
+        <div class="cap-grid">
+          <div class="cap-card reveal"><div class="cap-icon">策</div><h3>结构化策划能力</h3><p>围绕企业目标、项目阶段与现实问题进行框架搭建、模块拆解与方案组织。</p></div>
+          <div class="cap-card reveal"><div class="cap-icon">研</div><h3>研究分析能力</h3><p>适用于问卷设计、访谈提纲、行业资料整理、数据分析与研究结论表达。</p></div>
+          <div class="cap-card reveal"><div class="cap-icon">写</div><h3>专业表达能力</h3><p>在汇报材料、项目文本、研究报告与正式展示内容方面保持较高表达质量。</p></div>
+          <div class="cap-card reveal"><div class="cap-icon">管</div><h3>组织管理能力</h3><p>聚焦招聘、岗位、制度、绩效与人力资源协同，优化组织运行效率。</p></div>
+          <div class="cap-card reveal"><div class="cap-icon">技</div><h3>技术实现能力</h3><p>支持官网、系统与轻量化应用开发，也可推进软硬件方案设计与集成实现。</p></div>
+          <div class="cap-card reveal"><div class="cap-icon">融</div><h3>综合整合能力</h3><p>将咨询、研究、管理与技术纳入统一服务逻辑，适配多模块协同需求。</p></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="process">
+    <section class="section" id="cases">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">服务场景</div>
+          <h2>典型服务场景</h2>
+          <p>围绕企业官网建设、项目材料支持与调研分析等典型合作方向，展示公司在不同业务场景中的服务重点与组织方式。</p>
+        </div>
+        <div class="case-wrap">
+          <div class="case-tabs reveal" id="caseTabs"></div>
+          <div class="case-detail reveal" id="caseDetail"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process" style="background:#f8fbff;">
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">合作流程</div>
-          <h2>从沟通到交付，页面逻辑与业务逻辑保持一致</h2>
-          <p>通过更清晰的流程展示，让访问者快速理解合作方式，也更容易形成对服务节奏与专业性的初步判断。</p>
+          <h2>合作流程</h2>
+          <p>围绕需求沟通、问题拆解、方案实施与成果交付等环节，形成相对清晰的合作流程与服务节奏。</p>
         </div>
-
         <div class="process-grid">
-          <div class="process-card reveal">
-            <div class="step">01</div>
-            <h3>需求沟通</h3>
-            <p>了解企业现状、项目背景与核心诉求，明确服务边界与交付方向。</p>
-          </div>
-          <div class="process-card reveal">
-            <div class="step">02</div>
-            <h3>问题梳理</h3>
-            <p>对已有材料、业务结构与需求要点进行梳理，形成更清晰的任务框架。</p>
-          </div>
-          <div class="process-card reveal">
-            <div class="step">03</div>
-            <h3>方案推进</h3>
-            <p>根据项目类型安排研究、写作、管理支持或技术开发，保持节奏与质量。</p>
-          </div>
-          <div class="process-card reveal">
-            <div class="step">04</div>
-            <h3>成果交付</h3>
-            <p>交付可应用、可展示、可持续优化的成果内容，并预留后续扩展空间。</p>
-          </div>
+          <div class="process-card reveal"><div class="step">01</div><h3>需求沟通</h3><p>快速了解客户目标、场景、时间要求与关键问题，形成初步合作判断。</p></div>
+          <div class="process-card reveal"><div class="step">02</div><h3>问题拆解</h3><p>围绕任务内容提炼重点、明确结构，避免后续推进过程中出现方向偏差。</p></div>
+          <div class="process-card reveal"><div class="step">03</div><h3>方案实施</h3><p>按项目类型推进写作、调研、管理优化或技术开发，并保持沟通反馈。</p></div>
+          <div class="process-card reveal"><div class="step">04</div><h3>成果交付</h3><p>输出可展示、可应用、可进一步扩展的成果内容，提升合作完成度与延展性。</p></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="faq" style="background:#f8fbff;">
+    <section class="section" id="faq">
       <div class="container faq-wrap">
         <div class="section-head reveal" style="margin-bottom:0;">
           <div class="eyebrow">常见问题</div>
-          <h2>信息不只是展示，更要让用户容易理解</h2>
-          <p>FAQ 折叠区能够帮助访问者更快速地建立对业务边界、服务方式与网站能力的判断，这在企业官网里很实用。</p>
+          <h2>常见问题</h2>
+          <p>围绕合作方式、服务内容与展示需求设置常见问题，便于访问者快速了解公司业务范围与服务特点。</p>
         </div>
-
         <div class="faq-list reveal" id="faqList">
-          <div class="faq-item active">
-            <button class="faq-question">
-              <span>公司主要适合哪些合作场景？</span>
-              <span class="faq-arrow">⌄</span>
-            </button>
-            <div class="faq-answer">
-              <p>适合企业咨询、项目材料撰写、调研分析、人力资源管理优化、官网建设、系统开发以及软硬件研发支持等场景。</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>是否可以根据企业需求定制服务内容？</span>
-              <span class="faq-arrow">⌄</span>
-            </button>
-            <div class="faq-answer">
-              <p>可以。不同企业在规模、行业、阶段与目标上差异较大，因此服务内容通常会根据实际需求进行定制化组合。</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>官网后续是否还能继续扩展？</span>
-              <span class="faq-arrow">⌄</span>
-            </button>
-            <div class="faq-answer">
-              <p>可以继续扩展，例如增加案例页、新闻动态页、在线留言表单、后台管理或多页面结构，当前代码本身就适合作为正式官网的基础版本。</p>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>是否支持网站部署上线？</span>
-              <span class="faq-arrow">⌄</span>
-            </button>
-            <div class="faq-answer">
-              <p>支持前端页面整理与部署适配。您既然已经购买好域名并完成解析，这套静态代码可以直接对接展示。</p>
-            </div>
-          </div>
+          <div class="faq-item active"><button class="faq-q"><span>公司主要适合哪些合作场景？</span><span class="faq-arrow">⌄</span></button><div class="faq-a"><p>适合企业咨询、项目材料撰写、行业调研分析、人力资源管理优化、官网建设、系统开发以及软硬件研发支持等综合场景。</p></div></div>
+          <div class="faq-item"><button class="faq-q"><span>是否可以根据企业需求灵活组合服务内容？</span><span class="faq-arrow">⌄</span></button><div class="faq-a"><p>可以。不同企业所处行业、规模与发展阶段不同，服务内容可以围绕需求重点进行模块化组合。</p></div></div>
+          <div class="faq-item"><button class="faq-q"><span>公司是否支持多种合作与展示需求？</span><span class="faq-arrow">⌄</span></button><div class="faq-a"><p>支持根据实际需求配置不同展示模块与页面结构，以满足企业宣传、业务展示与沟通联系等多种使用场景。</p></div></div>
+          <div class="faq-item"><button class="faq-q"><span>页面中的交互效果是否会影响加载？</span><span class="faq-arrow">⌄</span></button><div class="faq-a"><p>当前采用轻量化前端交互方式，页面主要仍以静态展示为主，兼顾视觉体验与加载效率，适合直接上线使用。</p></div></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section" id="contact" style="background:#f8fbff;">
       <div class="container contact-wrap">
         <div class="contact-main reveal">
           <div class="eyebrow">联系我们</div>
           <h2>欢迎与我们建立合作联系</h2>
-          <p>
-            安徽融思企业管理咨询有限公司坚持以客户需求为导向，围绕企业管理、研究支持与技术服务提供系统化解决方案。若您希望进一步了解业务范围、合作方式或项目支持内容，欢迎通过电话或微信与我们联系。
-          </p>
+          <p>安徽融思企业管理咨询有限公司坚持以客户需求为导向，围绕企业管理、研究支持与技术服务提供系统化解决方案。若您希望进一步了解业务范围、合作方式或项目支持内容，欢迎随时联系。</p>
+          <div class="contact-actions">
+            <a href="tel:17721029910" class="btn btn-primary">拨打电话</a>
+            <a href="#home" class="btn btn-light">返回顶部</a>
+          </div>
         </div>
-
         <div class="contact-cards">
           <div class="contact-card reveal" data-copy="17721029910">
-            <div class="contact-card-left">
-              <div class="contact-card-icon">☎</div>
-              <div>
-                <div class="label">联系电话</div>
-                <div class="value">17721029910</div>
-              </div>
-            </div>
+            <div class="contact-left"><div class="contact-icon">☎</div><div><div class="contact-label">联系电话</div><div class="contact-value">17721029910</div></div></div>
             <div class="contact-copy">点击复制</div>
           </div>
-
           <div class="contact-card reveal" data-copy="OAHCEDU">
-            <div class="contact-card-left">
-              <div class="contact-card-icon">微</div>
-              <div>
-                <div class="label">微信</div>
-                <div class="value">OAHCEDU</div>
-              </div>
-            </div>
+            <div class="contact-left"><div class="contact-icon">微</div><div><div class="contact-label">微信</div><div class="contact-value">OAHCEDU</div></div></div>
             <div class="contact-copy">点击复制</div>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <div class="float-tools">
+    <button class="float-btn" id="toTop" title="返回顶部">↑</button>
+    <button class="float-btn" id="quickCopy" title="复制微信">微</button>
+  </div>
 
   <footer class="footer">
     <div class="container footer-inner">
@@ -1291,206 +413,63 @@
 
   <script>
     const categories = ["全部","咨询规划","研究支持","组织管理","技术研发"];
-
     const services = [
-      {
-        title:"企业管理咨询",
-        category:"咨询规划",
-        icon:"咨",
-        summary:"围绕经营诊断、战略梳理、项目规划与管理机制优化，协助企业明确问题、理顺路径并形成更具执行性的方案。",
-        bullets:["经营分析","方案设计","路径规划"],
-        scene:"适用于企业阶段性优化、业务梳理、发展规划与管理机制调整等场景。",
-        feature:"强调问题识别、结构表达与执行衔接，避免停留在空泛表述层面。"
-      },
-      {
-        title:"专业写作支持",
-        category:"研究支持",
-        icon:"写",
-        summary:"面向研究报告、项目材料、汇报文本、申报内容与专业文案，提供结构梳理、表达优化与内容支持。",
-        bullets:["报告整理","文本优化","内容策划"],
-        scene:"适用于项目汇报、材料准备、研究写作与正式文本呈现等需要专业表达的场景。",
-        feature:"兼顾逻辑、语言、结构与可读性，让内容更适合正式使用与对外展示。"
-      },
-      {
-        title:"调研与数据分析",
-        category:"研究支持",
-        icon:"研",
-        summary:"结合企业与项目需求开展问卷设计、访谈提纲、数据整理、统计分析与结论提炼，增强决策依据。",
-        bullets:["问卷设计","访谈支持","数据分析"],
-        scene:"适用于需要前期调查、过程分析、用户反馈整理与数据支撑的项目场景。",
-        feature:"将调研设计、数据整理与结论表达结合起来，减少信息碎片化问题。"
-      },
-      {
-        title:"人力资源管理",
-        category:"组织管理",
-        icon:"人",
-        summary:"聚焦招聘配置、岗位分析、绩效协同、制度设计与人才发展，帮助企业提升组织运行效率与稳定性。",
-        bullets:["招聘管理","制度设计","组织优化"],
-        scene:"适用于企业招聘优化、组织调整、岗位体系完善与基础管理机制建设。",
-        feature:"兼顾制度框架与实际执行，强调组织管理与业务发展之间的匹配性。"
-      },
-      {
-        title:"软件系统开发",
-        category:"技术研发",
-        icon:"软",
-        summary:"根据业务场景进行网站、管理系统、数据平台与轻量化应用开发，注重实用性、稳定性与后续扩展。",
-        bullets:["官网建设","系统搭建","功能开发"],
-        scene:"适用于企业官网、后台系统、业务平台与轻量化数字化工具建设。",
-        feature:"强调实用优先、结构清晰与后期维护便利，更适合中小企业稳定使用。"
-      },
-      {
-        title:"硬件与集成方案",
-        category:"技术研发",
-        icon:"硬",
-        summary:"围绕控制系统、硬件联动与方案集成提供支持，将技术研发与实际应用场景更紧密地结合起来。",
-        bullets:["方案设计","设备集成","场景落地"],
-        scene:"适用于需要软硬件协同、控制逻辑设计与设备集成应用的相关项目。",
-        feature:"注重方案可实施性与场景适配性，尽量缩短从设计到应用的距离。"
-      }
+      {title:"企业管理咨询",category:"咨询规划",icon:"咨",summary:"围绕经营诊断、战略梳理、项目规划与管理机制优化，协助企业明确问题、理顺路径并形成更具执行性的方案。",bullets:["经营分析","方案设计","路径规划"],scene:"适用于企业阶段性优化、业务梳理、发展规划与管理机制调整等场景。",feature:"强调问题识别、结构表达与执行衔接，避免停留在空泛表述层面。",caps:["问题诊断","框架搭建","策略建议","执行路径"]},
+      {title:"专业写作支持",category:"研究支持",icon:"写",summary:"面向研究报告、项目材料、汇报文本、申报内容与专业文案，提供结构梳理、表达优化与内容支持。",bullets:["报告整理","文本优化","内容策划"],scene:"适用于项目汇报、材料准备、研究写作与正式文本呈现等需要专业表达的场景。",feature:"兼顾逻辑、语言、结构与可读性，让内容更适合正式使用与对外展示。",caps:["逻辑表达","材料整合","结构优化","正式呈现"]},
+      {title:"调研与数据分析",category:"研究支持",icon:"研",summary:"结合企业与项目需求开展问卷设计、访谈提纲、数据整理、统计分析与结论提炼，增强决策依据。",bullets:["问卷设计","访谈支持","数据分析"],scene:"适用于需要前期调查、过程分析、用户反馈整理与数据支撑的项目场景。",feature:"将调研设计、数据整理与结论表达结合起来，减少信息碎片化问题。",caps:["调查设计","访谈提纲","数据整理","结论提炼"]},
+      {title:"人力资源管理",category:"组织管理",icon:"人",summary:"聚焦招聘配置、岗位分析、绩效协同、制度设计与人才发展，帮助企业提升组织运行效率与稳定性。",bullets:["招聘管理","制度设计","组织优化"],scene:"适用于企业招聘优化、组织调整、岗位体系完善与基础管理机制建设。",feature:"兼顾制度框架与实际执行，强调组织管理与业务发展之间的匹配性。",caps:["招聘优化","岗位设计","绩效协同","制度梳理"]},
+      {title:"软件系统开发",category:"技术研发",icon:"软",summary:"根据业务场景进行网站、管理系统、数据平台与轻量化应用开发，注重实用性、稳定性与后续扩展。",bullets:["官网建设","系统搭建","功能开发"],scene:"适用于企业官网、后台系统、业务平台与轻量化数字化工具建设。",feature:"强调实用优先、结构清晰与后期维护便利，更适合中小企业稳定使用。",caps:["官网定制","系统开发","功能规划","部署上线"]},
+      {title:"硬件与集成方案",category:"技术研发",icon:"硬",summary:"围绕控制系统、硬件联动与方案集成提供支持，将技术研发与实际应用场景更紧密地结合起来。",bullets:["方案设计","设备集成","场景落地"],scene:"适用于需要软硬件协同、控制逻辑设计与设备集成应用的相关项目。",feature:"注重方案可实施性与场景适配性，尽量缩短从设计到应用的距离。",caps:["系统集成","方案设计","联动控制","落地适配"]}
+    ];
+    const cases = [
+      {title:"企业官网改版与形象升级",tag:"品牌展示",summary:"围绕企业品牌形象、服务逻辑与客户触达需求，对官网进行重构，强化信息层次、交互体验与专业可信度。",metrics:[["01","结构优化维度"],["3+","视觉层次模块"],["24h","快速调整响应"]],timeline:[["需求阶段","梳理旧站问题、明确展示重点与页面转化路径。"],["设计阶段","重组导航逻辑、首屏内容与业务展示结构。"],["实施阶段","完成静态页面搭建、交互补充与上线替换。"]]},
+      {title:"项目材料与研究文本支持",tag:"内容表达",summary:"针对项目汇报、方案文本、研究报告或正式材料场景，提供结构梳理、表达提升与逻辑重整服务，增强正式呈现质量。",metrics:[["多场景","适配正式用途"],["更清晰","逻辑组织效果"],["可延展","后续修改便利"]],timeline:[["前期沟通","明确使用场景、对象与表达重点。"],["中期处理","优化结构逻辑、内容层级与语言表达。"],["成果输出","形成适合正式场景使用的稳定文本版本。"]]},
+      {title:"调研分析与数据支撑型项目",tag:"研究分析",summary:"围绕调研需求进行问卷、访谈、数据整理与结论提炼，帮助客户形成更具说服力的研究支撑材料。",metrics:[["问卷/访谈","工具设计支持"],["数据化","分析呈现路径"],["更聚焦","结论输出质量"]],timeline:[["设计阶段","确定调研目的、对象与工具形式。"],["分析阶段","整理信息、归类数据并形成分析框架。"],["提炼阶段","输出更便于决策或汇报使用的结论内容。"]]}
     ];
 
-    let activeCategory = "全部";
-    let activeTitle = services[0].title;
+    let activeCategory = '全部';
+    let activeService = services[0].title;
+    let activeCase = cases[0].title;
+    const serviceFilters = document.getElementById('serviceFilters');
+    const serviceList = document.getElementById('serviceList');
+    const serviceDetail = document.getElementById('serviceDetail');
+    const caseTabs = document.getElementById('caseTabs');
+    const caseDetail = document.getElementById('caseDetail');
 
-    const tabsEl = document.getElementById("serviceTabs");
-    const listEl = document.getElementById("serviceList");
-    const detailEl = document.getElementById("serviceDetail");
-
-    function getFilteredServices(){
-      if(activeCategory === "全部") return services;
-      return services.filter(item => item.category === activeCategory);
+    function filteredServices(){ return activeCategory === '全部' ? services : services.filter(s => s.category === activeCategory); }
+    function renderFilters(){
+      serviceFilters.innerHTML = categories.map(c => `<button class="filter-btn ${c===activeCategory?'active':''}" data-cat="${c}">${c}</button>`).join('');
+      serviceFilters.querySelectorAll('.filter-btn').forEach(btn => btn.onclick = () => { activeCategory = btn.dataset.cat; const list = filteredServices(); if(!list.find(i => i.title === activeService)) activeService = list[0].title; renderServices(); });
     }
-
-    function ensureActiveService(){
-      const filtered = getFilteredServices();
-      const exists = filtered.some(item => item.title === activeTitle);
-      if(!exists && filtered.length){
-        activeTitle = filtered[0].title;
-      }
-    }
-
-    function renderTabs(){
-      tabsEl.innerHTML = categories.map(cat => `
-        <button class="tab ${cat === activeCategory ? "active" : ""}" data-cat="${cat}">
-          ${cat}
-        </button>
-      `).join("");
-
-      tabsEl.querySelectorAll(".tab").forEach(btn => {
-        btn.addEventListener("click", () => {
-          activeCategory = btn.dataset.cat;
-          ensureActiveService();
-          renderServices();
-        });
-      });
-    }
-
     function renderServices(){
-      ensureActiveService();
-      const filtered = getFilteredServices();
-
-      listEl.innerHTML = filtered.map(item => `
-        <button class="service-item ${item.title === activeTitle ? "active" : ""}" data-title="${item.title}">
-          <div class="service-item-top">
-            <div class="service-item-left">
-              <div class="service-ico">${item.icon}</div>
-              <div>
-                <h3>${item.title}</h3>
-                <span>${item.category}</span>
-              </div>
-            </div>
-            <div style="font-size:18px;color:#9aa5b5;">→</div>
-          </div>
-        </button>
-      `).join("");
-
-      listEl.querySelectorAll(".service-item").forEach(btn => {
-        btn.addEventListener("click", () => {
-          activeTitle = btn.dataset.title;
-          renderServices();
-        });
-      });
-
-      const current = filtered.find(item => item.title === activeTitle) || filtered[0];
-      detailEl.innerHTML = `
-        <div class="service-detail-tag">当前查看：${current.category}</div>
-        <h3>${current.title}</h3>
-        <p>${current.summary}</p>
-        <div class="bullet-grid">
-          ${current.bullets.map(b => `<div class="bullet">${b}</div>`).join("")}
-        </div>
-        <div class="detail-grid">
-          <div class="detail-box">
-            <strong>适合场景</strong>
-            <p>${current.scene}</p>
-          </div>
-          <div class="detail-box">
-            <strong>服务特点</strong>
-            <p>${current.feature}</p>
-          </div>
-        </div>
-      `;
-
-      renderTabs();
+      const list = filteredServices();
+      const current = list.find(i => i.title === activeService) || list[0];
+      serviceList.innerHTML = list.map(item => `<button class="service-item ${current.title===item.title?'active':''}" data-title="${item.title}"><div class="service-item-top"><div class="service-item-left"><div class="service-icon">${item.icon}</div><div><h3>${item.title}</h3><span>${item.category}</span></div></div><div style="font-size:18px;color:#94a3b8">→</div></div></button>`).join('');
+      serviceList.querySelectorAll('.service-item').forEach(btn => btn.onclick = () => { activeService = btn.dataset.title; renderServices(); });
+      serviceDetail.innerHTML = `<div class="detail-tag">当前查看：${current.category}</div><h3>${current.title}</h3><p>${current.summary}</p><div class="bullet-grid">${current.bullets.map(b=>`<div class="bullet">${b}</div>`).join('')}</div><div class="detail-grid"><div class="detail-box"><strong>适合场景</strong><p>${current.scene}</p></div><div class="detail-box"><strong>服务特点</strong><p>${current.feature}</p></div></div><div class="capability-panel"><div class="capability-box"><h4>关键能力标签</h4><div class="caps">${current.caps.map(c=>`<span>${c}</span>`).join('')}</div></div><div class="capability-box"><h4>服务说明</h4><p style="margin:0;font-size:14px;color:#64748b;">围绕不同项目场景组织服务内容，形成相对清晰的支持路径与成果输出方式。</p></div></div>`;
+      renderFilters();
     }
+    function renderCases(){
+      caseTabs.innerHTML = cases.map(item => `<div class="case-tab ${item.title===activeCase?'active':''}" data-title="${item.title}"><strong>${item.title}</strong><span>${item.tag}</span></div>`).join('');
+      caseTabs.querySelectorAll('.case-tab').forEach(tab => tab.onclick = () => { activeCase = tab.dataset.title; renderCases(); });
+      const current = cases.find(c => c.title === activeCase) || cases[0];
+      caseDetail.innerHTML = `<div class="case-head"><div><small>${current.tag}</small><h3>${current.title}</h3></div></div><p>${current.summary}</p><div class="metrics">${current.metrics.map(m => `<div class="metric"><strong>${m[0]}</strong><span>${m[1]}</span></div>`).join('')}</div><div class="timeline">${current.timeline.map(t => `<div class="timeline-item"><strong>${t[0]}</strong><p>${t[1]}</p></div>`).join('')}</div>`;
+    }
+    renderServices(); renderCases();
 
-    renderServices();
-
-    // faq
-    document.querySelectorAll(".faq-item").forEach(item => {
-      const btn = item.querySelector(".faq-question");
-      btn.addEventListener("click", () => {
-        const active = item.classList.contains("active");
-        document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
-        if(!active){
-          item.classList.add("active");
-        }
-      });
-    });
-
-    // copy
-    document.querySelectorAll(".contact-card").forEach(card => {
-      card.addEventListener("click", async () => {
-        const text = card.dataset.copy;
-        const hint = card.querySelector(".contact-copy");
-        try{
-          await navigator.clipboard.writeText(text);
-          const old = hint.textContent;
-          hint.textContent = "已复制";
-          setTimeout(() => hint.textContent = old, 1600);
-        }catch(e){
-          const old = hint.textContent;
-          hint.textContent = "复制失败";
-          setTimeout(() => hint.textContent = old, 1600);
-        }
-      });
-    });
-
-    // mobile menu
-    const menuToggle = document.getElementById("menuToggle");
-    const mobilePanel = document.getElementById("mobilePanel");
-    menuToggle.addEventListener("click", () => {
-      mobilePanel.classList.toggle("open");
-      menuToggle.textContent = mobilePanel.classList.contains("open") ? "✕" : "☰";
-    });
-
-    document.querySelectorAll(".mobile-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        mobilePanel.classList.remove("open");
-        menuToggle.textContent = "☰";
-      });
-    });
-
-    // reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    document.querySelectorAll('.faq-item').forEach(item => { item.querySelector('.faq-q').onclick = () => { const isActive = item.classList.contains('active'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active')); if(!isActive) item.classList.add('active'); }; });
+    document.querySelectorAll('.contact-card').forEach(card => { card.onclick = async () => { const text = card.dataset.copy; const hint = card.querySelector('.contact-copy'); const old = hint.textContent; try{ await navigator.clipboard.writeText(text); hint.textContent = '已复制'; } catch(e){ hint.textContent = '复制失败'; } setTimeout(() => hint.textContent = old, 1500); }; });
+    document.getElementById('quickCopy').onclick = async () => { try{ await navigator.clipboard.writeText('OAHCEDU'); alert('微信号已复制：OAHCEDU'); } catch(e){ alert('复制失败，请手动复制：OAHCEDU'); } };
+    document.getElementById('toTop').onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+    const menuToggle = document.getElementById('menuToggle'); const mobilePanel = document.getElementById('mobilePanel');
+    menuToggle.onclick = () => { mobilePanel.classList.toggle('open'); menuToggle.textContent = mobilePanel.classList.contains('open') ? '✕' : '☰'; };
+    document.querySelectorAll('.mobile-links a').forEach(a => a.onclick = () => { mobilePanel.classList.remove('open'); menuToggle.textContent = '☰'; });
+    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); }); },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const progressObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting){ const inner = entry.target.querySelector('i'); if(inner) inner.style.width = inner.dataset.width; } }); },{threshold:.5});
+    document.querySelectorAll('.show-box').forEach(box => progressObserver.observe(box));
+    const countObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting){ const el = entry.target; const target = Number(el.dataset.count); let n = 0; const timer = setInterval(() => { n += 1; el.textContent = n + (target===24 ? '' : '+'); if(n >= target) clearInterval(timer); }, 60); countObserver.unobserve(el); } }) }, {threshold:.7});
+    document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
   </script>
 </body>
 </html>
