@@ -1,642 +1,1496 @@
-import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  BarChart3,
-  Blocks,
-  Briefcase,
-  Building2,
-  ChevronDown,
-  ClipboardList,
-  Code2,
-  Database,
-  FileText,
-  Menu,
-  MessageCircleMore,
-  Phone,
-  Search,
-  ShieldCheck,
-  Sparkles,
-  Users,
-  X,
-} from "lucide-react";
-
-const navItems = [
-  { label: "首页", href: "#home" },
-  { label: "业务板块", href: "#services" },
-  { label: "服务优势", href: "#advantages" },
-  { label: "合作流程", href: "#process" },
-  { label: "常见问题", href: "#faq" },
-  { label: "联系我们", href: "#contact" },
-];
-
-const serviceCategories = ["全部", "咨询规划", "研究支持", "组织管理", "技术研发"];
-
-const services = [
-  {
-    title: "企业管理咨询",
-    category: "咨询规划",
-    icon: Briefcase,
-    summary:
-      "围绕经营诊断、战略梳理、项目规划与管理机制优化，协助企业明确问题、理顺路径并形成更可执行的方案。",
-    bullets: ["经营分析", "方案设计", "路径规划"],
-  },
-  {
-    title: "专业写作支持",
-    category: "研究支持",
-    icon: FileText,
-    summary:
-      "面向研究报告、项目材料、汇报文本、申报内容与专业文案，提供结构梳理、表达优化与内容支持。",
-    bullets: ["报告整理", "文本优化", "内容策划"],
-  },
-  {
-    title: "调研与数据分析",
-    category: "研究支持",
-    icon: Search,
-    summary:
-      "结合企业与项目需求开展问卷设计、访谈提纲、数据整理、统计分析与结论提炼，增强决策依据。",
-    bullets: ["问卷设计", "访谈支持", "数据分析"],
-  },
-  {
-    title: "人力资源管理",
-    category: "组织管理",
-    icon: Users,
-    summary:
-      "聚焦招聘配置、岗位分析、绩效协同、制度设计与人才发展，帮助企业提升组织运行效率与稳定性。",
-    bullets: ["招聘管理", "制度设计", "组织优化"],
-  },
-  {
-    title: "软件系统开发",
-    category: "技术研发",
-    icon: Code2,
-    summary:
-      "根据业务场景进行网站、管理系统、数据平台与轻量化应用开发，注重实用性、稳定性与后续扩展。",
-    bullets: ["官网建设", "系统搭建", "功能开发"],
-  },
-  {
-    title: "硬件与集成方案",
-    category: "技术研发",
-    icon: Blocks,
-    summary:
-      "围绕控制系统、硬件联动与方案集成提供支持，将技术研发与实际应用场景更紧密地结合起来。",
-    bullets: ["方案设计", "设备集成", "场景落地"],
-  },
-];
-
-const advantages = [
-  {
-    icon: Sparkles,
-    title: "业务覆盖更完整",
-    text: "从咨询规划、内容写作到调研分析、人力资源管理与技术研发，形成跨模块支持能力。",
-  },
-  {
-    icon: ShieldCheck,
-    title: "表达与执行并重",
-    text: "不仅重视方案内容本身，也强调文本呈现、沟通效率与实际落地效果。",
-  },
-  {
-    icon: Database,
-    title: "研究与数据驱动",
-    text: "适合需要调研支撑、数据分析与结构化表达的项目场景，减少凭经验拍板的风险。",
-  },
-  {
-    icon: BarChart3,
-    title: "适配企业成长阶段",
-    text: "无论是品牌展示、管理优化还是项目建设，都能根据不同阶段需求提供更匹配的服务。",
-  },
-];
-
-const processSteps = [
-  {
-    step: "01",
-    title: "需求沟通",
-    text: "了解企业现状、项目背景与核心诉求，明确服务边界与交付方向。",
-  },
-  {
-    step: "02",
-    title: "问题梳理",
-    text: "对已有材料、业务结构与需求要点进行梳理，形成更清晰的任务框架。",
-  },
-  {
-    step: "03",
-    title: "方案推进",
-    text: "根据项目类型安排研究、写作、管理支持或技术开发，保持节奏与质量。",
-  },
-  {
-    step: "04",
-    title: "成果交付",
-    text: "交付可应用、可展示、可持续优化的成果内容，并预留后续扩展空间。",
-  },
-];
-
-const faqs = [
-  {
-    q: "公司主要适合哪些合作场景？",
-    a: "适合企业咨询、项目材料撰写、调研分析、人力资源管理优化、官网建设、系统开发以及软硬件研发支持等场景。",
-  },
-  {
-    q: "是否可以根据企业需求定制服务内容？",
-    a: "可以。不同企业在规模、行业、阶段与目标上差异较大，因此服务内容通常会根据实际需求进行定制化组合。",
-  },
-  {
-    q: "官网后续是否还能继续扩展？",
-    a: "可以继续扩展，例如增加案例页、新闻动态页、在线留言表单、后台管理或多页面结构，当前代码本身就适合作为正式官网的基础版本。",
-  },
-  {
-    q: "是否支持网站部署上线？",
-    a: "支持现成前端代码整理与部署适配。您既然已经购买好域名与服务器，这套代码可以继续对接并上线展示。",
-  },
-];
-
-function Header({ mobileOpen, setMobileOpen }) {
-  return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
-        <a href="#home" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-600 text-white shadow-lg shadow-sky-200">
-            <Building2 className="h-5 w-5" />
-          </div>
-          <div>
-            <div className="text-sm text-slate-500">Anhui Rongsi</div>
-            <div className="text-base font-semibold tracking-wide text-slate-900">安徽融思企业管理咨询有限公司</div>
-          </div>
-        </a>
-
-        <nav className="hidden items-center gap-7 lg:flex">
-          {navItems.map((item) => (
-            <a key={item.label} href={item.href} className="text-sm text-slate-600 transition hover:text-slate-900">
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden lg:block">
-          <a
-            href="#contact"
-            className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition hover:-translate-y-0.5"
-          >
-            立即咨询
-          </a>
-        </div>
-
-        <button
-          className="rounded-xl border border-slate-200 p-2 text-slate-700 lg:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-slate-200 bg-white lg:hidden"
-          >
-            <div className="mx-auto max-w-7xl px-6 py-4 md:px-10">
-              <div className="flex flex-col gap-4">
-                {navItems.map((item) => (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="text-sm text-slate-700"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
-  );
-}
-
-export default function RongsiCompanySite() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("全部");
-  const [activeService, setActiveService] = useState(services[0]);
-  const [openFaq, setOpenFaq] = useState(0);
-  const [copied, setCopied] = useState("");
-
-  const filteredServices = useMemo(() => {
-    const list = activeCategory === "全部" ? services : services.filter((item) => item.category === activeCategory);
-    return list;
-  }, [activeCategory]);
-
-  const displayedService = filteredServices.find((item) => item.title === activeService.title) || filteredServices[0];
-
-  const handleCopy = async (value, key) => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopied(key);
-      setTimeout(() => setCopied(""), 1800);
-    } catch (e) {
-      setCopied("");
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>安徽融思企业管理咨询有限公司</title>
+  <meta name="description" content="安徽融思企业管理咨询有限公司，主营咨询、写作、调研、人力资源管理、软硬件研发等综合服务。" />
+  <style>
+    :root{
+      --primary:#2b6ef3;
+      --primary-deep:#1f4fc4;
+      --text:#1f2937;
+      --text-light:#5b6475;
+      --line:#e8edf5;
+      --bg:#f7f9fc;
+      --white:#ffffff;
+      --card:#fbfcfe;
+      --shadow:0 12px 36px rgba(31, 64, 122, 0.08);
+      --radius:20px;
+      --radius-sm:14px;
+      --max:1200px;
     }
-  };
 
-  return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <Header mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
 
-      <main>
-        <section
-          id="home"
-          className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_26%),radial-gradient(circle_at_85%_20%,rgba(99,102,241,0.10),transparent_24%),linear-gradient(to_bottom,#ffffff,#f8fbff,#f7f9fc)]"
-        >
-          <div className="absolute inset-0 opacity-80">
-            <div className="absolute left-1/2 top-0 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-sky-100 blur-3xl" />
-            <div className="absolute bottom-0 right-0 h-[24rem] w-[24rem] rounded-full bg-indigo-100 blur-3xl" />
-          </div>
+    html{
+      scroll-behavior:smooth;
+    }
 
-          <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-16 md:px-10 md:pb-28 md:pt-24">
-            <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2 text-sm text-sky-700 shadow-sm"
-                >
-                  <Sparkles className="h-4 w-4" />
-                  企业咨询 · 研究支持 · 管理优化 · 技术研发
-                </motion.div>
+    body{
+      font-family:"PingFang SC","Microsoft YaHei","Segoe UI",Arial,sans-serif;
+      color:var(--text);
+      background:linear-gradient(180deg,#ffffff 0%,#f8fbff 50%,#f7f9fc 100%);
+      line-height:1.7;
+    }
 
-                <motion.h1
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.08 }}
-                  className="mt-6 max-w-4xl text-4xl font-semibold leading-tight tracking-tight text-slate-900 md:text-6xl"
-                >
-                  为企业提供更清爽、
-                  <span className="block bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 bg-clip-text text-transparent">
-                    更专业、也更容易建立信任感的服务展示网站
-                  </span>
-                </motion.h1>
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
 
-                <motion.p
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.16 }}
-                  className="mt-6 max-w-3xl text-lg leading-8 text-slate-600"
-                >
-                  安徽融思企业管理咨询有限公司聚焦咨询、写作、调研、人力资源管理与软硬件研发，致力于将专业分析、内容表达、组织管理与技术建设整合为一体。现在这版整体改成了偏白、偏轻盈的视觉体系，保留高级感，但不会压抑，更适合正式企业官网展示。
-                </motion.p>
+    img{
+      max-width:100%;
+      display:block;
+    }
 
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.24 }}
-                  className="mt-9 flex flex-col gap-4 sm:flex-row"
-                >
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-                  >
-                    立即咨询
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                  <a
-                    href="#services"
-                    className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
-                  >
-                    查看业务板块
-                  </a>
-                </motion.div>
+    .container{
+      width:min(var(--max),calc(100% - 40px));
+      margin:0 auto;
+    }
 
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, delay: 0.32 }}
-                  className="mt-12 grid gap-4 sm:grid-cols-3"
-                >
-                  {[
-                    ["5+", "核心业务方向"],
-                    ["多维", "管理与技术融合"],
-                    ["可扩展", "适合正式官网上线"],
-                  ].map(([value, label]) => (
-                    <div key={label} className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-                      <div className="text-3xl font-semibold text-slate-900">{value}</div>
-                      <div className="mt-2 text-sm text-slate-500">{label}</div>
-                    </div>
-                  ))}
-                </motion.div>
-              </div>
+    .section{
+      padding:88px 0;
+    }
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.75, delay: 0.18 }}
-                className="relative"
-              >
-                <div className="rounded-[32px] border border-white/80 bg-white/80 p-6 shadow-2xl shadow-sky-100 backdrop-blur-2xl">
-                  <div className="rounded-[28px] border border-slate-100 bg-white p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-sm text-slate-500">企业服务概览</div>
-                        <div className="mt-2 text-2xl font-semibold text-slate-900">业务矩阵一体化展示</div>
-                      </div>
-                      <div className="rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 p-3 text-white shadow-lg shadow-sky-200">
-                        <Building2 className="h-5 w-5" />
-                      </div>
-                    </div>
+    .section-head{
+      max-width:760px;
+      margin-bottom:42px;
+    }
 
-                    <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                      {[
-                        ["咨询服务", "问题梳理与方案形成"],
-                        ["写作支持", "专业内容与表达优化"],
-                        ["调研分析", "数据整理与结论提炼"],
-                        ["技术研发", "官网系统与开发支持"],
-                      ].map(([a, b]) => (
-                        <div key={a} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                          <div className="text-sm font-medium text-slate-900">{a}</div>
-                          <div className="mt-2 text-sm leading-6 text-slate-600">{b}</div>
-                        </div>
-                      ))}
-                    </div>
+    .eyebrow{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:#eef4ff;
+      color:var(--primary);
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.08em;
+      margin-bottom:18px;
+    }
 
-                    <div className="mt-6 rounded-2xl bg-gradient-to-r from-sky-50 to-indigo-50 p-5 ring-1 ring-slate-100">
-                      <div className="text-sm text-sky-700">适配用途</div>
-                      <div className="mt-2 text-base leading-7 text-slate-700">
-                        企业宣传官网、品牌展示首页、业务介绍页面，后续也可以继续扩展案例展示、在线留言与多页面系统。
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
+    .section-head h2{
+      font-size:38px;
+      line-height:1.25;
+      margin-bottom:14px;
+      letter-spacing:-0.02em;
+    }
 
-        <section id="services" className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">
-          <div className="mb-10 max-w-3xl">
-            <div className="text-sm font-medium uppercase tracking-[0.22em] text-sky-600">业务板块</div>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-              保留互动性，但整体变得更白、更清爽
-            </h2>
-            <p className="mt-5 text-base leading-8 text-slate-600">
-              这里仍然保留筛选与切换交互。用户进入页面后，可以按业务类别查看，再点击左侧卡片切换右侧详情。只是视觉上不再偏深色，而是回到更适合企业官网的简洁商务路线。
-            </p>
-          </div>
+    .section-head p{
+      font-size:16px;
+      color:var(--text-light);
+    }
 
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <div className="mb-5 flex flex-wrap gap-3">
-                {serviceCategories.map((item) => (
-                  <button
-                    key={item}
-                    onClick={() => setActiveCategory(item)}
-                    className={`rounded-full px-4 py-2.5 text-sm transition ${
-                      activeCategory === item
-                        ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-200"
-                        : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                    }`}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
+    /* header */
+    .header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.84);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(232,237,245,.9);
+    }
 
-              <div className="space-y-4">
-                {filteredServices.map((item) => {
-                  const Icon = item.icon;
-                  const active = displayedService.title === item.title;
-                  return (
-                    <button
-                      key={item.title}
-                      onClick={() => setActiveService(item)}
-                      className={`w-full rounded-[26px] border p-5 text-left transition ${
-                        active
-                          ? "border-sky-200 bg-gradient-to-br from-sky-50 to-indigo-50 shadow-xl shadow-sky-100"
-                          : "border-slate-200 bg-white hover:-translate-y-0.5 hover:bg-slate-50"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-4">
-                          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${active ? "bg-sky-100 text-sky-700" : "bg-slate-100 text-slate-700"}`}>
-                            <Icon className="h-5 w-5" />
-                          </div>
-                          <div>
-                            <div className="text-lg font-semibold text-slate-900">{item.title}</div>
-                            <div className="mt-1 text-sm text-slate-500">{item.category}</div>
-                          </div>
-                        </div>
-                        <ArrowRight className={`h-5 w-5 ${active ? "text-sky-600" : "text-slate-400"}`} />
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+    .nav{
+      height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={displayedService.title}
-                initial={{ opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -12 }}
-                transition={{ duration: 0.32 }}
-                className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm"
-              >
-                <div className="inline-flex rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm text-sky-700">
-                  当前查看：{displayedService.category}
-                </div>
-                <h3 className="mt-5 text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl">{displayedService.title}</h3>
-                <p className="mt-5 text-base leading-8 text-slate-600">{displayedService.summary}</p>
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
 
-                <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                  {displayedService.bullets.map((item) => (
-                    <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-700">
-                      {item}
-                    </div>
-                  ))}
-                </div>
+    .brand-mark{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#4fa4ff,#2b6ef3);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:20px;
+      font-weight:700;
+      box-shadow:0 10px 24px rgba(43,110,243,.22);
+      flex-shrink:0;
+    }
 
-                <div className="mt-8 grid gap-4 md:grid-cols-2">
-                  <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-5">
-                    <div className="text-sm text-slate-500">适合场景</div>
-                    <div className="mt-3 text-base leading-7 text-slate-700">
-                      企业阶段性优化、项目推进、品牌展示、制度梳理、研究支撑与技术建设等综合场景。
-                    </div>
-                  </div>
-                  <div className="rounded-[24px] border border-slate-200 bg-slate-50 p-5">
-                    <div className="text-sm text-slate-500">服务特点</div>
-                    <div className="mt-3 text-base leading-7 text-slate-700">
-                      强调问题识别、内容表达与执行衔接，不做空泛陈述，尽量形成可使用的成果。
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </section>
+    .brand-text{
+      min-width:0;
+    }
 
-        <section id="advantages" className="bg-slate-50 py-20 md:py-24">
-          <div className="mx-auto max-w-7xl px-6 md:px-10">
-            <div className="mb-10 max-w-3xl">
-              <div className="text-sm font-medium uppercase tracking-[0.22em] text-sky-600">服务优势</div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-                整体更偏白，更适合清爽型企业官网
-              </h2>
-            </div>
+    .brand-text .en{
+      font-size:12px;
+      color:#6b7485;
+      line-height:1.2;
+    }
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {advantages.map((item, idx) => {
-                const Icon = item.icon;
-                return (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.42, delay: idx * 0.06 }}
-                    className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm"
-                  >
-                    <div className="flex h-13 w-13 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-50 to-indigo-50 text-sky-700">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="mt-5 text-xl font-semibold text-slate-900">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">{item.text}</p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+    .brand-text .cn{
+      font-size:17px;
+      font-weight:700;
+      color:var(--text);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
 
-        <section id="process" className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">
-          <div className="mb-10 max-w-3xl">
-            <div className="text-sm font-medium uppercase tracking-[0.22em] text-sky-600">合作流程</div>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-              从沟通到交付，页面逻辑与业务逻辑保持一致
-            </h2>
-          </div>
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:28px;
+    }
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {processSteps.map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.06 }}
-                className="relative rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm"
-              >
-                <div className="text-sm font-medium text-sky-600">{item.step}</div>
-                <div className="mt-3 text-xl font-semibold text-slate-900">{item.title}</div>
-                <div className="mt-3 text-sm leading-7 text-slate-600">{item.text}</div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+    .nav-links a{
+      font-size:15px;
+      color:#4a5568;
+      transition:.25s;
+    }
 
-        <section id="faq" className="bg-slate-50 py-20 md:py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 md:px-10 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <div className="text-sm font-medium uppercase tracking-[0.22em] text-sky-600">常见问题</div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-                白色商务风里，FAQ 也会更显干净利落
-              </h2>
-              <p className="mt-5 text-base leading-8 text-slate-600">
-                很多公司官网之所以显得单薄，不是信息少，而是没有把信息组织成用户容易阅读的结构。FAQ 折叠区保留下来，阅读体验会更好。
-              </p>
-            </div>
+    .nav-links a:hover{
+      color:var(--primary);
+    }
 
-            <div className="space-y-4">
-              {faqs.map((item, idx) => {
-                const open = openFaq === idx;
-                return (
-                  <div key={item.q} className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm">
-                    <button
-                      onClick={() => setOpenFaq(open ? -1 : idx)}
-                      className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
-                    >
-                      <span className="text-base font-medium text-slate-900">{item.q}</span>
-                      <ChevronDown className={`h-5 w-5 shrink-0 text-slate-400 transition ${open ? "rotate-180" : ""}`} />
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {open && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25 }}
-                        >
-                          <div className="px-6 pb-6 text-sm leading-7 text-slate-600">{item.a}</div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
 
-        <section id="contact" className="mx-auto max-w-7xl px-6 py-20 md:px-10 md:py-24">
-          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="rounded-[34px] border border-sky-100 bg-gradient-to-br from-sky-50 via-white to-indigo-50 p-8 shadow-sm md:p-10">
-              <div className="text-sm font-medium uppercase tracking-[0.22em] text-sky-700">联系我们</div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-                现在整体已经改成偏白、清爽、正式的企业官网风格
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600">
-                当前代码已经具备正式官网首页的主体结构，后续如果您要接入备案信息、案例页面、在线表单、后台管理或多语言页面，都可以在此基础上继续扩展，不需要推倒重来。
-              </p>
-            </div>
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border:none;
+      cursor:pointer;
+      transition:.25s ease;
+      font-size:15px;
+      font-weight:600;
+      border-radius:999px;
+      padding:13px 22px;
+    }
 
-            <div className="space-y-5">
-              <button
-                onClick={() => handleCopy("17721029910", "phone")}
-                className="group w-full rounded-[28px] border border-slate-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:bg-slate-50"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-50 text-sky-700">
-                      <Phone className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-slate-500">联系电话</div>
-                      <div className="mt-1 text-2xl font-semibold text-slate-900">17721029910</div>
-                    </div>
-                  </div>
-                  <div className="text-sm text-slate-400">{copied === "phone" ? "已复制" : "点击复制"}</div>
-                </div>
-              </button>
+    .btn-primary{
+      background:linear-gradient(135deg,var(--primary),var(--primary-deep));
+      color:#fff;
+      box-shadow:0 12px 24px rgba(43,110,243,.22);
+    }
 
-              <button
-                onClick={() => handleCopy("OAHCEDU", "wechat")}
-                className="group w-full rounded-[28px] border border-slate-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:bg-slate-50"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-700">
-                      <MessageCircleMore className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div className="text-sm text-slate-500">微信</div>
-                      <div className="mt-1 text-2xl font-semibold text-slate-900">OAHCEDU</div>
-                    </div>
-                  </div>
-                  <div className="text-sm text-slate-400">{copied === "wechat" ? "已复制" : "点击复制"}</div>
-                </div>
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
+    .btn-primary:hover{
+      transform:translateY(-1px);
+    }
 
-      <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-8 text-sm text-slate-500 md:flex-row md:items-center md:justify-between md:px-10">
-          <div>© 安徽融思企业管理咨询有限公司</div>
-          <div>咨询 · 写作 · 调研 · 人力资源管理 · 软硬件研发</div>
+    .btn-light{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    .btn-light:hover{
+      background:#f7f9fc;
+    }
+
+    .menu-toggle{
+      display:none;
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      align-items:center;
+      justify-content:center;
+      font-size:20px;
+      cursor:pointer;
+    }
+
+    .mobile-panel{
+      display:none;
+      padding:0 0 18px;
+    }
+
+    .mobile-links{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding-top:8px;
+    }
+
+    .mobile-links a{
+      padding:12px 14px;
+      border-radius:12px;
+      background:#f8fbff;
+      color:#4a5568;
+      border:1px solid #edf2f8;
+    }
+
+    /* hero */
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:72px 0 60px;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      left:-120px;
+      top:-80px;
+      width:340px;
+      height:340px;
+      background:radial-gradient(circle,rgba(43,110,243,.11),transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-120px;
+      top:0;
+      width:420px;
+      height:420px;
+      background:radial-gradient(circle,rgba(116,169,255,.14),transparent 70%);
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:34px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 16px;
+      background:#eff5ff;
+      border:1px solid #d9e7ff;
+      color:var(--primary);
+      border-radius:999px;
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:22px;
+    }
+
+    .hero h1{
+      font-size:56px;
+      line-height:1.16;
+      letter-spacing:-0.03em;
+      margin-bottom:18px;
+    }
+
+    .hero h1 .grad{
+      background:linear-gradient(135deg,#1f4fc4,#2b6ef3,#4ca0ff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .hero p{
+      font-size:17px;
+      color:var(--text-light);
+      max-width:720px;
+      margin-bottom:28px;
+    }
+
+    .hero-btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:34px;
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .stat{
+      background:rgba(255,255,255,.78);
+      border:1px solid #edf2f8;
+      box-shadow:var(--shadow);
+      border-radius:22px;
+      padding:24px 20px;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:32px;
+      line-height:1.1;
+      margin-bottom:8px;
+      color:var(--text);
+    }
+
+    .stat span{
+      color:var(--text-light);
+      font-size:14px;
+    }
+
+    .hero-card{
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(232,237,245,.95);
+      border-radius:30px;
+      box-shadow:0 26px 60px rgba(31,64,122,.10);
+      padding:24px;
+      backdrop-filter:blur(14px);
+    }
+
+    .hero-card-inner{
+      background:#fff;
+      border:1px solid #edf2f8;
+      border-radius:24px;
+      padding:26px;
+    }
+
+    .hero-card-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .hero-card-top h3{
+      font-size:26px;
+      line-height:1.3;
+      margin-top:4px;
+    }
+
+    .hero-card-top p{
+      margin:0;
+      font-size:14px;
+      color:#6b7485;
+    }
+
+    .hero-icon{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#58a6ff,#2b6ef3);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:24px;
+      box-shadow:0 12px 24px rgba(43,110,243,.22);
+      flex-shrink:0;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-bottom:18px;
+    }
+
+    .mini-card{
+      background:#f8fbff;
+      border:1px solid #edf2f8;
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .mini-card h4{
+      font-size:15px;
+      margin-bottom:6px;
+    }
+
+    .mini-card p{
+      font-size:13px;
+      line-height:1.7;
+      color:#6b7485;
+      margin:0;
+    }
+
+    .hero-note{
+      background:linear-gradient(135deg,#eef5ff,#f8fbff);
+      border:1px solid #deebff;
+      border-radius:18px;
+      padding:18px 18px;
+    }
+
+    .hero-note strong{
+      display:block;
+      margin-bottom:6px;
+      color:#295fd4;
+      font-size:14px;
+    }
+
+    .hero-note p{
+      margin:0;
+      font-size:14px;
+      color:#5d6780;
+    }
+
+    /* services */
+    .services-wrap{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .service-tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .tab{
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:#556072;
+      font-size:14px;
+      cursor:pointer;
+      transition:.25s;
+    }
+
+    .tab.active{
+      background:linear-gradient(135deg,#58a6ff,#2b6ef3);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 12px 22px rgba(43,110,243,.18);
+    }
+
+    .service-list{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .service-item{
+      width:100%;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:22px;
+      padding:18px 20px;
+      cursor:pointer;
+      transition:.25s;
+      text-align:left;
+      box-shadow:0 8px 20px rgba(31,64,122,.04);
+    }
+
+    .service-item:hover{
+      transform:translateY(-2px);
+    }
+
+    .service-item.active{
+      background:linear-gradient(135deg,#eff5ff,#f8fbff);
+      border-color:#d6e6ff;
+      box-shadow:0 16px 30px rgba(43,110,243,.08);
+    }
+
+    .service-item-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .service-item-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .service-ico{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:#eef4ff;
+      color:var(--primary);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      flex-shrink:0;
+    }
+
+    .service-item.active .service-ico{
+      background:linear-gradient(135deg,#58a6ff,#2b6ef3);
+      color:#fff;
+    }
+
+    .service-item h3{
+      font-size:18px;
+      margin-bottom:2px;
+    }
+
+    .service-item span{
+      font-size:13px;
+      color:#738095;
+    }
+
+    .service-detail{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:34px;
+      box-shadow:var(--shadow);
+      min-height:100%;
+    }
+
+    .service-detail-tag{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--primary);
+      background:#eef4ff;
+      border:1px solid #deebff;
+      margin-bottom:18px;
+    }
+
+    .service-detail h3{
+      font-size:34px;
+      line-height:1.25;
+      margin-bottom:18px;
+    }
+
+    .service-detail p{
+      color:var(--text-light);
+      margin-bottom:24px;
+      font-size:16px;
+    }
+
+    .bullet-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-bottom:24px;
+    }
+
+    .bullet{
+      background:#f8fbff;
+      border:1px solid #edf2f8;
+      border-radius:18px;
+      padding:16px;
+      font-size:14px;
+      font-weight:600;
+      color:#4a5972;
+      text-align:center;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .detail-box{
+      background:#f9fbfd;
+      border:1px solid #edf2f8;
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .detail-box strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:15px;
+      color:#2b3444;
+    }
+
+    .detail-box p{
+      font-size:14px;
+      margin:0;
+      color:#657186;
+    }
+
+    /* cards */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:28px 22px;
+      box-shadow:0 12px 30px rgba(31,64,122,.05);
+      transition:.25s;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+    }
+
+    .card-icon{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#eef5ff,#f7faff);
+      color:var(--primary);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      margin-bottom:18px;
+    }
+
+    .card h3{
+      font-size:20px;
+      margin-bottom:10px;
+    }
+
+    .card p{
+      color:var(--text-light);
+      font-size:14px;
+    }
+
+    /* process */
+    .process-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .process-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:26px 22px;
+      box-shadow:0 10px 24px rgba(31,64,122,.05);
+    }
+
+    .step{
+      display:inline-block;
+      font-size:13px;
+      font-weight:700;
+      color:var(--primary);
+      background:#eef4ff;
+      border-radius:999px;
+      padding:8px 12px;
+      margin-bottom:16px;
+    }
+
+    .process-card h3{
+      font-size:21px;
+      margin-bottom:10px;
+    }
+
+    .process-card p{
+      font-size:14px;
+      color:var(--text-light);
+    }
+
+    /* faq */
+    .faq-wrap{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    .faq-list{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .faq-item{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 10px 24px rgba(31,64,122,.04);
+    }
+
+    .faq-question{
+      width:100%;
+      padding:20px 22px;
+      background:#fff;
+      border:none;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      font-size:16px;
+      font-weight:600;
+      color:var(--text);
+      cursor:pointer;
+    }
+
+    .faq-arrow{
+      font-size:18px;
+      color:#92a0b4;
+      transition:.25s;
+      flex-shrink:0;
+    }
+
+    .faq-item.active .faq-arrow{
+      transform:rotate(180deg);
+      color:var(--primary);
+    }
+
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease;
+      padding:0 22px;
+    }
+
+    .faq-item.active .faq-answer{
+      max-height:240px;
+      padding:0 22px 22px;
+    }
+
+    .faq-answer p{
+      color:var(--text-light);
+      font-size:14px;
+    }
+
+    /* contact */
+    .contact-wrap{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+    }
+
+    .contact-main{
+      background:linear-gradient(135deg,#eef5ff,#ffffff 55%,#f5f8ff);
+      border:1px solid #deebff;
+      border-radius:30px;
+      padding:34px;
+      box-shadow:0 14px 34px rgba(43,110,243,.08);
+    }
+
+    .contact-main h2{
+      font-size:38px;
+      line-height:1.25;
+      margin-bottom:16px;
+    }
+
+    .contact-main p{
+      color:var(--text-light);
+      font-size:16px;
+      max-width:720px;
+    }
+
+    .contact-cards{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+
+    .contact-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:22px;
+      box-shadow:0 10px 24px rgba(31,64,122,.05);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      cursor:pointer;
+      transition:.25s;
+    }
+
+    .contact-card:hover{
+      transform:translateY(-3px);
+      background:#fbfdff;
+    }
+
+    .contact-card-left{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-width:0;
+    }
+
+    .contact-card-icon{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      background:#eef4ff;
+      color:var(--primary);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      flex-shrink:0;
+    }
+
+    .contact-card .label{
+      font-size:14px;
+      color:#7a8799;
+      margin-bottom:4px;
+    }
+
+    .contact-card .value{
+      font-size:26px;
+      font-weight:700;
+      color:var(--text);
+      word-break:break-all;
+    }
+
+    .contact-copy{
+      font-size:14px;
+      color:#95a0b0;
+      white-space:nowrap;
+    }
+
+    /* footer */
+    .footer{
+      border-top:1px solid var(--line);
+      background:#fff;
+      margin-top:30px;
+    }
+
+    .footer-inner{
+      min-height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      color:#758194;
+      font-size:14px;
+    }
+
+    /* reveal */
+    .reveal{
+      opacity:0;
+      transform:translateY(22px);
+      transition:opacity .65s ease,transform .65s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* responsive */
+    @media (max-width: 1100px){
+      .hero-grid,
+      .services-wrap,
+      .faq-wrap,
+      .contact-wrap{
+        grid-template-columns:1fr;
+      }
+
+      .cards{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .process-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .hero h1{
+        font-size:48px;
+      }
+    }
+
+    @media (max-width: 860px){
+      .nav-links,
+      .nav-actions .btn{
+        display:none;
+      }
+
+      .menu-toggle{
+        display:flex;
+      }
+
+      .mobile-panel.open{
+        display:block;
+      }
+
+      .hero{
+        padding-top:48px;
+      }
+
+      .hero h1{
+        font-size:38px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .hero-stats,
+      .bullet-grid,
+      .detail-grid,
+      .cards,
+      .process-grid{
+        grid-template-columns:1fr;
+      }
+
+      .section{
+        padding:72px 0;
+      }
+
+      .section-head h2,
+      .contact-main h2{
+        font-size:30px;
+      }
+
+      .service-detail h3{
+        font-size:28px;
+      }
+
+      .contact-card .value{
+        font-size:22px;
+      }
+
+      .footer-inner{
+        flex-direction:column;
+        justify-content:center;
+        text-align:center;
+        padding:18px 0;
+      }
+    }
+
+    @media (max-width: 520px){
+      .container{
+        width:min(var(--max),calc(100% - 28px));
+      }
+
+      .hero h1{
+        font-size:32px;
+      }
+
+      .hero-card,
+      .service-detail,
+      .contact-main{
+        padding:22px;
+      }
+
+      .hero-card-inner{
+        padding:20px;
+      }
+
+      .mini-grid{
+        grid-template-columns:1fr;
+      }
+
+      .contact-card{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .contact-copy{
+        margin-left:72px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <div class="brand-mark">融</div>
+        <div class="brand-text">
+          <div class="en">Anhui Rongsi</div>
+          <div class="cn">安徽融思企业管理咨询有限公司</div>
         </div>
-      </footer>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#home">首页</a>
+        <a href="#services">业务板块</a>
+        <a href="#advantages">服务优势</a>
+        <a href="#process">合作流程</a>
+        <a href="#faq">常见问题</a>
+        <a href="#contact">联系我们</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary">立即咨询</a>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </div>
     </div>
-  );
-}
+
+    <div class="container mobile-panel" id="mobilePanel">
+      <div class="mobile-links">
+        <a href="#home">首页</a>
+        <a href="#services">业务板块</a>
+        <a href="#advantages">服务优势</a>
+        <a href="#process">合作流程</a>
+        <a href="#faq">常见问题</a>
+        <a href="#contact">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="hero-badge">企业咨询 · 研究支持 · 管理优化 · 技术研发</div>
+          <h1>
+            为企业提供更清爽、<br />
+            更专业、也更容易建立信任感的
+            <span class="grad">综合服务支持</span>
+          </h1>
+          <p>
+            安徽融思企业管理咨询有限公司聚焦咨询、写作、调研、人力资源管理与软硬件研发，致力于将专业分析、内容表达、组织管理与技术建设整合为一体，帮助客户提升项目推进效率与成果呈现质量。
+          </p>
+
+          <div class="hero-btns">
+            <a href="#contact" class="btn btn-primary">立即咨询</a>
+            <a href="#services" class="btn btn-light">查看业务板块</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>5+</strong>
+              <span>核心业务方向</span>
+            </div>
+            <div class="stat">
+              <strong>多维</strong>
+              <span>管理与技术融合</span>
+            </div>
+            <div class="stat">
+              <strong>可扩展</strong>
+              <span>适合正式官网上线</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="hero-card-inner">
+            <div class="hero-card-top">
+              <div>
+                <p>企业服务概览</p>
+                <h3>业务矩阵一体化展示</h3>
+              </div>
+              <div class="hero-icon">◆</div>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-card">
+                <h4>咨询服务</h4>
+                <p>问题梳理、方案形成、管理优化与发展路径设计。</p>
+              </div>
+              <div class="mini-card">
+                <h4>写作支持</h4>
+                <p>专业材料、研究报告、项目文本与表达优化。</p>
+              </div>
+              <div class="mini-card">
+                <h4>调研分析</h4>
+                <p>问卷设计、访谈支持、数据整理与结论提炼。</p>
+              </div>
+              <div class="mini-card">
+                <h4>技术研发</h4>
+                <p>官网建设、系统搭建、软件开发与方案支持。</p>
+              </div>
+            </div>
+
+            <div class="hero-note">
+              <strong>适配用途</strong>
+              <p>企业宣传官网、品牌展示首页、业务介绍页面，后续也可以继续扩展案例展示、在线留言与多页面系统。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">业务板块</div>
+          <h2>保留互动性，同时保持清爽正式的商务风格</h2>
+          <p>用户进入页面后，可按业务类别筛选，再点击左侧卡片查看右侧详情。这种信息组织方式比单纯堆内容更清晰，也更符合企业官网的浏览逻辑。</p>
+        </div>
+
+        <div class="services-wrap">
+          <div class="reveal">
+            <div class="service-tabs" id="serviceTabs"></div>
+            <div class="service-list" id="serviceList"></div>
+          </div>
+
+          <div class="service-detail reveal" id="serviceDetail"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="advantages" style="background:#f8fbff;">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">服务优势</div>
+          <h2>整体轻盈克制，但专业感与可信度更强</h2>
+          <p>从业务覆盖、研究支持到管理优化与技术实施，我们更强调“内容有用、表达清楚、成果可落地”。</p>
+        </div>
+
+        <div class="cards">
+          <div class="card reveal">
+            <div class="card-icon">✦</div>
+            <h3>业务覆盖更完整</h3>
+            <p>从咨询规划、内容写作到调研分析、人力资源管理与技术研发，形成跨模块支持能力。</p>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon">✓</div>
+            <h3>表达与执行并重</h3>
+            <p>不仅重视方案内容本身，也强调文本呈现、沟通效率与实际落地效果。</p>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon">▣</div>
+            <h3>研究与数据驱动</h3>
+            <p>适合需要调研支撑、数据分析与结构化表达的项目场景，减少凭经验判断的风险。</p>
+          </div>
+          <div class="card reveal">
+            <div class="card-icon">↗</div>
+            <h3>适配企业成长阶段</h3>
+            <p>无论是品牌展示、管理优化还是项目建设，都能根据不同阶段需求提供更匹配的服务。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">合作流程</div>
+          <h2>从沟通到交付，页面逻辑与业务逻辑保持一致</h2>
+          <p>通过更清晰的流程展示，让访问者快速理解合作方式，也更容易形成对服务节奏与专业性的初步判断。</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-card reveal">
+            <div class="step">01</div>
+            <h3>需求沟通</h3>
+            <p>了解企业现状、项目背景与核心诉求，明确服务边界与交付方向。</p>
+          </div>
+          <div class="process-card reveal">
+            <div class="step">02</div>
+            <h3>问题梳理</h3>
+            <p>对已有材料、业务结构与需求要点进行梳理，形成更清晰的任务框架。</p>
+          </div>
+          <div class="process-card reveal">
+            <div class="step">03</div>
+            <h3>方案推进</h3>
+            <p>根据项目类型安排研究、写作、管理支持或技术开发，保持节奏与质量。</p>
+          </div>
+          <div class="process-card reveal">
+            <div class="step">04</div>
+            <h3>成果交付</h3>
+            <p>交付可应用、可展示、可持续优化的成果内容，并预留后续扩展空间。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" style="background:#f8fbff;">
+      <div class="container faq-wrap">
+        <div class="section-head reveal" style="margin-bottom:0;">
+          <div class="eyebrow">常见问题</div>
+          <h2>信息不只是展示，更要让用户容易理解</h2>
+          <p>FAQ 折叠区能够帮助访问者更快速地建立对业务边界、服务方式与网站能力的判断，这在企业官网里很实用。</p>
+        </div>
+
+        <div class="faq-list reveal" id="faqList">
+          <div class="faq-item active">
+            <button class="faq-question">
+              <span>公司主要适合哪些合作场景？</span>
+              <span class="faq-arrow">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>适合企业咨询、项目材料撰写、调研分析、人力资源管理优化、官网建设、系统开发以及软硬件研发支持等场景。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>是否可以根据企业需求定制服务内容？</span>
+              <span class="faq-arrow">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>可以。不同企业在规模、行业、阶段与目标上差异较大，因此服务内容通常会根据实际需求进行定制化组合。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>官网后续是否还能继续扩展？</span>
+              <span class="faq-arrow">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>可以继续扩展，例如增加案例页、新闻动态页、在线留言表单、后台管理或多页面结构，当前代码本身就适合作为正式官网的基础版本。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>是否支持网站部署上线？</span>
+              <span class="faq-arrow">⌄</span>
+            </button>
+            <div class="faq-answer">
+              <p>支持前端页面整理与部署适配。您既然已经购买好域名并完成解析，这套静态代码可以直接对接展示。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-wrap">
+        <div class="contact-main reveal">
+          <div class="eyebrow">联系我们</div>
+          <h2>这版已经适合直接替换原网页并正式展示</h2>
+          <p>
+            当前代码采用纯静态结构，适合 GitHub Pages 直接运行。后续如果您要继续增加“公司简介”“案例展示”“二维码展示”或“更多页面”，也都可以在这份基础上继续拓展，不需要推倒重来。
+          </p>
+        </div>
+
+        <div class="contact-cards">
+          <div class="contact-card reveal" data-copy="17721029910">
+            <div class="contact-card-left">
+              <div class="contact-card-icon">☎</div>
+              <div>
+                <div class="label">联系电话</div>
+                <div class="value">17721029910</div>
+              </div>
+            </div>
+            <div class="contact-copy">点击复制</div>
+          </div>
+
+          <div class="contact-card reveal" data-copy="OAHCEDU">
+            <div class="contact-card-left">
+              <div class="contact-card-icon">微</div>
+              <div>
+                <div class="label">微信</div>
+                <div class="value">OAHCEDU</div>
+              </div>
+            </div>
+            <div class="contact-copy">点击复制</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 安徽融思企业管理咨询有限公司</div>
+      <div>咨询 · 写作 · 调研 · 人力资源管理 · 软硬件研发</div>
+    </div>
+  </footer>
+
+  <script>
+    const categories = ["全部","咨询规划","研究支持","组织管理","技术研发"];
+
+    const services = [
+      {
+        title:"企业管理咨询",
+        category:"咨询规划",
+        icon:"咨",
+        summary:"围绕经营诊断、战略梳理、项目规划与管理机制优化，协助企业明确问题、理顺路径并形成更具执行性的方案。",
+        bullets:["经营分析","方案设计","路径规划"],
+        scene:"适用于企业阶段性优化、业务梳理、发展规划与管理机制调整等场景。",
+        feature:"强调问题识别、结构表达与执行衔接，避免停留在空泛表述层面。"
+      },
+      {
+        title:"专业写作支持",
+        category:"研究支持",
+        icon:"写",
+        summary:"面向研究报告、项目材料、汇报文本、申报内容与专业文案，提供结构梳理、表达优化与内容支持。",
+        bullets:["报告整理","文本优化","内容策划"],
+        scene:"适用于项目汇报、材料准备、研究写作与正式文本呈现等需要专业表达的场景。",
+        feature:"兼顾逻辑、语言、结构与可读性，让内容更适合正式使用与对外展示。"
+      },
+      {
+        title:"调研与数据分析",
+        category:"研究支持",
+        icon:"研",
+        summary:"结合企业与项目需求开展问卷设计、访谈提纲、数据整理、统计分析与结论提炼，增强决策依据。",
+        bullets:["问卷设计","访谈支持","数据分析"],
+        scene:"适用于需要前期调查、过程分析、用户反馈整理与数据支撑的项目场景。",
+        feature:"将调研设计、数据整理与结论表达结合起来，减少信息碎片化问题。"
+      },
+      {
+        title:"人力资源管理",
+        category:"组织管理",
+        icon:"人",
+        summary:"聚焦招聘配置、岗位分析、绩效协同、制度设计与人才发展，帮助企业提升组织运行效率与稳定性。",
+        bullets:["招聘管理","制度设计","组织优化"],
+        scene:"适用于企业招聘优化、组织调整、岗位体系完善与基础管理机制建设。",
+        feature:"兼顾制度框架与实际执行，强调组织管理与业务发展之间的匹配性。"
+      },
+      {
+        title:"软件系统开发",
+        category:"技术研发",
+        icon:"软",
+        summary:"根据业务场景进行网站、管理系统、数据平台与轻量化应用开发，注重实用性、稳定性与后续扩展。",
+        bullets:["官网建设","系统搭建","功能开发"],
+        scene:"适用于企业官网、后台系统、业务平台与轻量化数字化工具建设。",
+        feature:"强调实用优先、结构清晰与后期维护便利，更适合中小企业稳定使用。"
+      },
+      {
+        title:"硬件与集成方案",
+        category:"技术研发",
+        icon:"硬",
+        summary:"围绕控制系统、硬件联动与方案集成提供支持，将技术研发与实际应用场景更紧密地结合起来。",
+        bullets:["方案设计","设备集成","场景落地"],
+        scene:"适用于需要软硬件协同、控制逻辑设计与设备集成应用的相关项目。",
+        feature:"注重方案可实施性与场景适配性，尽量缩短从设计到应用的距离。"
+      }
+    ];
+
+    let activeCategory = "全部";
+    let activeTitle = services[0].title;
+
+    const tabsEl = document.getElementById("serviceTabs");
+    const listEl = document.getElementById("serviceList");
+    const detailEl = document.getElementById("serviceDetail");
+
+    function getFilteredServices(){
+      if(activeCategory === "全部") return services;
+      return services.filter(item => item.category === activeCategory);
+    }
+
+    function ensureActiveService(){
+      const filtered = getFilteredServices();
+      const exists = filtered.some(item => item.title === activeTitle);
+      if(!exists && filtered.length){
+        activeTitle = filtered[0].title;
+      }
+    }
+
+    function renderTabs(){
+      tabsEl.innerHTML = categories.map(cat => `
+        <button class="tab ${cat === activeCategory ? "active" : ""}" data-cat="${cat}">
+          ${cat}
+        </button>
+      `).join("");
+
+      tabsEl.querySelectorAll(".tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeCategory = btn.dataset.cat;
+          ensureActiveService();
+          renderServices();
+        });
+      });
+    }
+
+    function renderServices(){
+      ensureActiveService();
+      const filtered = getFilteredServices();
+
+      listEl.innerHTML = filtered.map(item => `
+        <button class="service-item ${item.title === activeTitle ? "active" : ""}" data-title="${item.title}">
+          <div class="service-item-top">
+            <div class="service-item-left">
+              <div class="service-ico">${item.icon}</div>
+              <div>
+                <h3>${item.title}</h3>
+                <span>${item.category}</span>
+              </div>
+            </div>
+            <div style="font-size:18px;color:#9aa5b5;">→</div>
+          </div>
+        </button>
+      `).join("");
+
+      listEl.querySelectorAll(".service-item").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeTitle = btn.dataset.title;
+          renderServices();
+        });
+      });
+
+      const current = filtered.find(item => item.title === activeTitle) || filtered[0];
+      detailEl.innerHTML = `
+        <div class="service-detail-tag">当前查看：${current.category}</div>
+        <h3>${current.title}</h3>
+        <p>${current.summary}</p>
+        <div class="bullet-grid">
+          ${current.bullets.map(b => `<div class="bullet">${b}</div>`).join("")}
+        </div>
+        <div class="detail-grid">
+          <div class="detail-box">
+            <strong>适合场景</strong>
+            <p>${current.scene}</p>
+          </div>
+          <div class="detail-box">
+            <strong>服务特点</strong>
+            <p>${current.feature}</p>
+          </div>
+        </div>
+      `;
+
+      renderTabs();
+    }
+
+    renderServices();
+
+    // faq
+    document.querySelectorAll(".faq-item").forEach(item => {
+      const btn = item.querySelector(".faq-question");
+      btn.addEventListener("click", () => {
+        const active = item.classList.contains("active");
+        document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+        if(!active){
+          item.classList.add("active");
+        }
+      });
+    });
+
+    // copy
+    document.querySelectorAll(".contact-card").forEach(card => {
+      card.addEventListener("click", async () => {
+        const text = card.dataset.copy;
+        const hint = card.querySelector(".contact-copy");
+        try{
+          await navigator.clipboard.writeText(text);
+          const old = hint.textContent;
+          hint.textContent = "已复制";
+          setTimeout(() => hint.textContent = old, 1600);
+        }catch(e){
+          const old = hint.textContent;
+          hint.textContent = "复制失败";
+          setTimeout(() => hint.textContent = old, 1600);
+        }
+      });
+    });
+
+    // mobile menu
+    const menuToggle = document.getElementById("menuToggle");
+    const mobilePanel = document.getElementById("mobilePanel");
+    menuToggle.addEventListener("click", () => {
+      mobilePanel.classList.toggle("open");
+      menuToggle.textContent = mobilePanel.classList.contains("open") ? "✕" : "☰";
+    });
+
+    document.querySelectorAll(".mobile-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobilePanel.classList.remove("open");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
