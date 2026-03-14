@@ -6,17 +6,17 @@
   <title>安徽融思企业管理咨询有限公司</title>
   <style>
     :root{
-      --bg:#090909;
-      --bg-soft:#111111;
-      --card:#141414;
+      --bg:#070707;
+      --bg2:#0d0d0d;
+      --card:rgba(255,255,255,.04);
+      --card-hover:rgba(255,255,255,.06);
       --line:rgba(255,255,255,.10);
       --line-strong:rgba(255,255,255,.18);
       --text:#f5f5f5;
       --muted:rgba(255,255,255,.68);
-      --muted-2:rgba(255,255,255,.42);
-      --white:#ffffff;
-      --radius:22px;
+      --muted2:rgba(255,255,255,.42);
       --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:28px;
     }
 
     *{
@@ -31,10 +31,10 @@
 
     body{
       font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",Arial,sans-serif;
-      background:var(--bg);
       color:var(--text);
-      line-height:1.8;
+      background:linear-gradient(180deg,#060606 0%,#0a0a0a 100%);
       overflow-x:hidden;
+      line-height:1.75;
     }
 
     a{
@@ -42,8 +42,12 @@
       text-decoration:none;
     }
 
+    button{
+      font-family:inherit;
+    }
+
     .container{
-      width:min(1180px,92%);
+      width:min(1200px,92%);
       margin:0 auto;
       position:relative;
       z-index:2;
@@ -54,13 +58,13 @@
       position:fixed;
       inset:0;
       z-index:0;
-      overflow:hidden;
       pointer-events:none;
+      overflow:hidden;
       background:
-        radial-gradient(circle at 15% 20%, rgba(255,255,255,.08), transparent 20%),
-        radial-gradient(circle at 80% 18%, rgba(255,255,255,.05), transparent 18%),
-        radial-gradient(circle at 60% 82%, rgba(255,255,255,.04), transparent 20%),
-        linear-gradient(180deg,#080808 0%,#0a0a0a 100%);
+        radial-gradient(circle at 15% 18%, rgba(255,255,255,.08), transparent 20%),
+        radial-gradient(circle at 82% 20%, rgba(255,255,255,.05), transparent 18%),
+        radial-gradient(circle at 55% 82%, rgba(255,255,255,.04), transparent 22%),
+        linear-gradient(180deg,#060606 0%,#0b0b0b 100%);
     }
 
     .grid-lines{
@@ -69,14 +73,14 @@
       background-image:
         linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size:48px 48px;
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 90%);
+      background-size:46px 46px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.7), transparent 95%);
     }
 
     .orb{
       position:absolute;
       border-radius:50%;
-      filter:blur(70px);
+      filter:blur(75px);
       opacity:.35;
       animation:float 10s ease-in-out infinite alternate;
     }
@@ -84,42 +88,50 @@
     .orb.one{
       width:320px;
       height:320px;
-      background:rgba(255,255,255,.12);
       left:-80px;
-      top:60px;
+      top:50px;
+      background:rgba(255,255,255,.10);
     }
 
     .orb.two{
-      width:260px;
-      height:260px;
-      background:rgba(255,255,255,.08);
-      right:-60px;
+      width:280px;
+      height:280px;
+      right:-50px;
       top:180px;
+      background:rgba(255,255,255,.07);
       animation-delay:1.6s;
     }
 
     .orb.three{
       width:300px;
       height:300px;
-      background:rgba(255,255,255,.06);
-      left:35%;
-      bottom:-120px;
+      left:38%;
+      bottom:-130px;
+      background:rgba(255,255,255,.05);
       animation-delay:.8s;
     }
 
     @keyframes float{
-      from{ transform:translateY(0) translateX(0) scale(1); }
-      to{ transform:translateY(-22px) translateX(16px) scale(1.06); }
+      from{transform:translateY(0) translateX(0) scale(1);}
+      to{transform:translateY(-20px) translateX(14px) scale(1.06);}
     }
 
     /* 顶部导航 */
     header{
       position:sticky;
       top:0;
-      z-index:20;
-      backdrop-filter:blur(14px);
-      background:rgba(9,9,9,.55);
+      z-index:30;
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      background:rgba(7,7,7,.44);
       border-bottom:1px solid rgba(255,255,255,.06);
+      transition:.35s ease;
+    }
+
+    header.scrolled{
+      background:rgba(7,7,7,.70);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      box-shadow:0 10px 28px rgba(0,0,0,.22);
     }
 
     .nav{
@@ -139,14 +151,14 @@
     .brand .cn{
       font-size:18px;
       letter-spacing:1px;
-      color:var(--white);
+      color:#fff;
     }
 
     .brand .en{
       font-size:11px;
       letter-spacing:3px;
       text-transform:uppercase;
-      color:var(--muted-2);
+      color:var(--muted2);
     }
 
     .menu{
@@ -157,98 +169,127 @@
     }
 
     .menu a{
+      position:relative;
       font-size:14px;
       color:var(--muted);
       padding:10px 16px;
       border:1px solid transparent;
       border-radius:999px;
-      transition:.28s ease;
+      transition:.3s ease;
+      overflow:hidden;
+    }
+
+    .menu a::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:6px;
+      width:0;
+      height:1px;
+      background:rgba(255,255,255,.75);
+      transform:translateX(-50%);
+      transition:.3s ease;
+    }
+
+    .menu a:hover::after{
+      width:44%;
     }
 
     .menu a:hover{
-      color:var(--white);
+      color:#fff;
       border-color:rgba(255,255,255,.10);
       background:rgba(255,255,255,.04);
       transform:translateY(-1px);
     }
 
-    /* hero */
+    /* 首页 */
     .hero{
-      padding:110px 0 70px;
+      padding:110px 0 72px;
       position:relative;
     }
 
     .hero-box{
-      min-height:520px;
       display:grid;
-      grid-template-columns:1.15fr .85fr;
+      grid-template-columns:1.2fr .88fr;
       gap:28px;
       align-items:stretch;
     }
 
     .hero-main,
     .hero-side,
-    .card,
+    .service-card,
+    .about-box,
+    .about-note,
     .contact-card{
       position:relative;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
       border:1px solid var(--line);
       border-radius:32px;
-      box-shadow:var(--shadow);
       overflow:hidden;
+      box-shadow:var(--shadow);
     }
 
     .hero-main::before,
     .hero-side::before,
-    .card::before,
+    .service-card::before,
+    .about-box::before,
+    .about-note::before,
     .contact-card::before{
       content:"";
       position:absolute;
       inset:-1px;
-      background:linear-gradient(135deg, rgba(255,255,255,.10), transparent 28%, transparent 70%, rgba(255,255,255,.06));
-      pointer-events:none;
       border-radius:inherit;
+      pointer-events:none;
+      background:linear-gradient(135deg, rgba(255,255,255,.10), transparent 28%, transparent 72%, rgba(255,255,255,.06));
     }
 
     .hero-main{
-      padding:64px 54px;
+      padding:62px 54px;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
+      justify-content:center;
+      min-height:520px;
     }
 
     .hero-tag{
       display:inline-flex;
       width:max-content;
+      padding:10px 16px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.04);
       color:var(--muted);
-      border-radius:999px;
-      padding:10px 16px;
       font-size:12px;
       letter-spacing:2px;
       transition:.3s ease;
     }
 
     .hero-tag:hover{
-      background:rgba(255,255,255,.08);
       color:#fff;
+      background:rgba(255,255,255,.08);
     }
 
     .hero h1{
       margin-top:28px;
-      font-size:60px;
-      line-height:1.25;
+      font-size:46px;
+      line-height:1.18;
       font-weight:300;
       letter-spacing:2px;
-      max-width:760px;
+      white-space:nowrap;
+      transition:all .35s ease;
+      text-shadow:0 0 0 rgba(255,255,255,0);
+    }
+
+    .hero-main:hover h1{
+      text-shadow:0 0 18px rgba(255,255,255,.16);
+      transform:translateY(-1px);
     }
 
     .hero p{
       margin-top:24px;
-      color:var(--muted);
-      font-size:16px;
       max-width:720px;
+      font-size:16px;
+      color:var(--muted);
     }
 
     .hero-actions{
@@ -278,7 +319,7 @@
 
     .btn-primary:hover{
       transform:translateY(-2px) scale(1.02);
-      box-shadow:0 10px 30px rgba(255,255,255,.10);
+      box-shadow:0 10px 26px rgba(255,255,255,.12);
     }
 
     .btn-ghost{
@@ -296,35 +337,36 @@
       padding:26px;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
-      gap:16px;
+      justify-content:center;
+      min-height:520px;
     }
 
     .mini-title{
       font-size:12px;
       letter-spacing:3px;
       text-transform:uppercase;
-      color:var(--muted-2);
+      color:var(--muted2);
+      margin-bottom:18px;
     }
 
     .side-list{
       display:grid;
       gap:14px;
-      margin-top:18px;
     }
 
     .side-item{
+      padding:18px 18px;
+      border-radius:22px;
       border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.03);
-      border-radius:22px;
-      padding:18px 18px;
-      transition:.28s ease;
+      transition:.3s ease;
     }
 
     .side-item:hover{
       transform:translateY(-4px);
       background:rgba(255,255,255,.06);
       border-color:rgba(255,255,255,.14);
+      box-shadow:0 16px 36px rgba(0,0,0,.22);
     }
 
     .side-item strong{
@@ -339,7 +381,6 @@
       font-size:13px;
     }
 
-    /* 通用 section */
     section.block{
       padding:26px 0 0;
     }
@@ -359,51 +400,51 @@
     }
 
     .section-head p{
-      color:var(--muted-2);
+      color:var(--muted2);
       font-size:13px;
       letter-spacing:2px;
       text-transform:uppercase;
     }
 
-    /* 业务 */
-    .grid-4{
+    /* 主营业务 */
+    .service-grid{
       display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:20px;
     }
 
-    .card{
+    .service-card{
       padding:28px 24px;
-      min-height:250px;
-      transition:.3s ease;
-      transform:translateY(0);
+      min-height:248px;
+      transition:.32s ease;
     }
 
-    .card:hover{
+    .service-card:hover{
       transform:translateY(-8px);
       border-color:rgba(255,255,255,.16);
       background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      box-shadow:0 18px 40px rgba(0,0,0,.24);
     }
 
     .num{
       font-size:12px;
-      color:var(--muted-2);
+      color:var(--muted2);
       letter-spacing:2px;
-      margin-bottom:18px;
+      margin-bottom:16px;
     }
 
-    .card h3{
+    .service-card h3{
       font-size:24px;
       font-weight:300;
       margin-bottom:14px;
     }
 
-    .card p{
+    .service-card p{
       font-size:14px;
       color:var(--muted);
     }
 
-    /* 简介 */
+    /* 公司简介 */
     .about-wrap{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -412,35 +453,32 @@
 
     .about-box,
     .about-note{
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius:28px;
       padding:30px;
-      transition:.28s ease;
+      transition:.3s ease;
     }
 
     .about-box:hover,
     .about-note:hover{
       transform:translateY(-4px);
       border-color:rgba(255,255,255,.16);
+      box-shadow:0 18px 40px rgba(0,0,0,.22);
     }
 
     .about-box p,
     .about-note p{
-      color:var(--muted);
       font-size:15px;
+      color:var(--muted);
     }
 
     .about-note ul{
       list-style:none;
-      margin-top:6px;
     }
 
     .about-note li{
-      color:var(--muted);
       padding:12px 0;
-      border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
       font-size:14px;
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
 
     .about-note li:last-child{
@@ -449,7 +487,7 @@
 
     /* 联系方式 */
     .contact{
-      padding:26px 0 90px;
+      padding:26px 0 92px;
     }
 
     .contact-card{
@@ -458,8 +496,8 @@
 
     .contact-grid{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:18px;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
       align-items:center;
     }
 
@@ -471,7 +509,7 @@
 
     .contact-left p{
       color:var(--muted);
-      max-width:760px;
+      max-width:720px;
     }
 
     .contact-right{
@@ -480,47 +518,78 @@
     }
 
     .contact-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 20px;
+      border-radius:22px;
       border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.03);
-      border-radius:22px;
-      padding:18px 20px;
-      transition:.28s ease;
+      transition:.3s ease;
     }
 
     .contact-item:hover{
       transform:translateY(-3px);
       background:rgba(255,255,255,.06);
       border-color:rgba(255,255,255,.16);
+      box-shadow:0 16px 36px rgba(0,0,0,.20);
     }
 
-    .contact-item small{
-      display:block;
-      color:var(--muted-2);
-      margin-bottom:6px;
+    .contact-meta{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+
+    .contact-meta small{
+      color:var(--muted2);
       font-size:12px;
       letter-spacing:2px;
-      text-transform:uppercase;
     }
 
-    .contact-item strong{
+    .contact-meta strong{
       font-size:18px;
       font-weight:400;
       word-break:break-all;
     }
 
+    .copy-btn{
+      flex-shrink:0;
+      border:none;
+      background:#fff;
+      color:#000;
+      border-radius:999px;
+      padding:10px 16px;
+      font-size:13px;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .copy-btn:hover{
+      transform:translateY(-1px) scale(1.02);
+      box-shadow:0 8px 18px rgba(255,255,255,.10);
+    }
+
+    .copy-btn.copied{
+      background:rgba(255,255,255,.14);
+      color:#fff;
+    }
+
     footer{
       border-top:1px solid rgba(255,255,255,.08);
       padding:24px 0 36px;
-      color:var(--muted-2);
-      font-size:13px;
       text-align:center;
+      color:var(--muted2);
+      font-size:13px;
     }
 
-    /* 滚动出现 */
+    /* 渐显动画 */
     .reveal{
       opacity:0;
-      transform:translateY(30px);
-      transition:opacity .8s ease, transform .8s ease;
+      transform:translateY(34px);
+      transition:opacity .9s ease, transform .9s ease;
     }
 
     .reveal.show{
@@ -529,19 +598,30 @@
     }
 
     /* 响应式 */
+    @media (max-width: 1180px){
+      .hero h1{
+        font-size:42px;
+      }
+    }
+
     @media (max-width: 1080px){
       .hero-box,
-      .contact-grid,
-      .about-wrap{
+      .about-wrap,
+      .contact-grid{
         grid-template-columns:1fr;
       }
 
-      .grid-4{
+      .service-grid{
         grid-template-columns:repeat(2,1fr);
       }
 
+      .hero-main,
+      .hero-side{
+        min-height:auto;
+      }
+
       .hero h1{
-        font-size:48px;
+        white-space:normal;
       }
     }
 
@@ -557,38 +637,53 @@
       }
 
       .menu a{
-        margin:0;
         padding:8px 12px;
       }
 
       .hero{
-        padding:70px 0 40px;
+        padding:72px 0 40px;
       }
 
       .hero-main{
         padding:34px 24px;
       }
 
-      .hero-side{
-        padding:18px;
+      .hero-side,
+      .contact-card,
+      .about-box,
+      .about-note,
+      .service-card{
+        padding:22px 18px;
       }
 
       .hero h1{
-        font-size:34px;
-        letter-spacing:1px;
+        font-size:33px;
+        line-height:1.3;
+        white-space:normal;
       }
 
-      .hero p{
+      .hero p,
+      .about-box p,
+      .about-note p{
         font-size:14px;
-      }
-
-      .grid-4{
-        grid-template-columns:1fr;
       }
 
       .section-head h2,
       .contact-left h2{
         font-size:28px;
+      }
+
+      .service-grid{
+        grid-template-columns:1fr;
+      }
+
+      .contact-item{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .copy-btn{
+        width:100%;
       }
     }
   </style>
@@ -607,6 +702,7 @@
         <div class="cn">安徽融思企业管理咨询有限公司</div>
         <div class="en">RONGSI ENTERPRISE MANAGEMENT CONSULTING</div>
       </div>
+
       <nav class="menu">
         <a href="#home">首页</a>
         <a href="#services">主营业务</a>
@@ -621,40 +717,36 @@
       <div class="container">
         <div class="hero-box reveal">
           <div class="hero-main">
-            <div>
-              <span class="hero-tag">ANHUI RONGSI CONSULTING</span>
-              <h1>与君初相识，犹如故人归</h1>
-              <p>
-                安徽融思企业管理咨询有限公司专注于专业写作、企业咨询、人力资源管理及软硬件研发，
-                以务实、规范、稳定的服务方式，为企业提供更清晰的表达支持与更可靠的解决方案。
-              </p>
-              <div class="hero-actions">
-                <a href="#services" class="btn btn-primary">查看业务</a>
-                <a href="#contact" class="btn btn-ghost">联系洽谈</a>
-              </div>
+            <span class="hero-tag">ANHUI RONGSI CONSULTING</span>
+            <h1>与君初相识，犹如故人归</h1>
+            <p>
+              安徽融思企业管理咨询有限公司专注于专业写作、企业咨询、人力资源管理及软硬件研发，
+              以务实、规范、稳定的服务方式，为企业提供更清晰的表达支持与更可靠的解决方案。
+            </p>
+            <div class="hero-actions">
+              <a href="#services" class="btn btn-primary">查看业务</a>
+              <a href="#contact" class="btn btn-ghost">联系洽谈</a>
             </div>
           </div>
 
           <aside class="hero-side">
-            <div>
-              <div class="mini-title">Core Services</div>
-              <div class="side-list">
-                <div class="side-item">
-                  <strong>专业写作</strong>
-                  <span>研究材料、项目文案、报告整理</span>
-                </div>
-                <div class="side-item">
-                  <strong>企业咨询</strong>
-                  <span>方案策划、项目支持、管理咨询</span>
-                </div>
-                <div class="side-item">
-                  <strong>人力资源管理</strong>
-                  <span>招聘、绩效、制度与人才支持</span>
-                </div>
-                <div class="side-item">
-                  <strong>软硬件研发</strong>
-                  <span>网站、小程序、系统与技术开发</span>
-                </div>
+            <div class="mini-title">Core Services</div>
+            <div class="side-list">
+              <div class="side-item">
+                <strong>专业写作</strong>
+                <span>研究材料、项目文案、报告整理</span>
+              </div>
+              <div class="side-item">
+                <strong>企业咨询</strong>
+                <span>方案策划、项目支持、管理咨询</span>
+              </div>
+              <div class="side-item">
+                <strong>人力资源管理</strong>
+                <span>招聘、绩效、制度与人才支持</span>
+              </div>
+              <div class="side-item">
+                <strong>软硬件研发</strong>
+                <span>网站、小程序、系统与技术开发</span>
               </div>
             </div>
           </aside>
@@ -669,8 +761,8 @@
           <p>Focused Services</p>
         </div>
 
-        <div class="grid-4">
-          <div class="card reveal">
+        <div class="service-grid">
+          <div class="service-card reveal">
             <div class="num">01</div>
             <h3>专业写作</h3>
             <p>
@@ -679,7 +771,7 @@
             </p>
           </div>
 
-          <div class="card reveal">
+          <div class="service-card reveal">
             <div class="num">02</div>
             <h3>企业咨询</h3>
             <p>
@@ -688,7 +780,7 @@
             </p>
           </div>
 
-          <div class="card reveal">
+          <div class="service-card reveal">
             <div class="num">03</div>
             <h3>人力资源管理</h3>
             <p>
@@ -697,7 +789,7 @@
             </p>
           </div>
 
-          <div class="card reveal">
+          <div class="service-card reveal">
             <div class="num">04</div>
             <h3>软硬件研发</h3>
             <p>
@@ -720,15 +812,15 @@
           <div class="about-box reveal">
             <p>
               安徽融思企业管理咨询有限公司是一家面向企业与机构提供综合服务支持的专业机构。
-              公司业务覆盖写作、咨询、人力资源管理及技术研发等方向，强调专业性、规范性与服务效率。
+              公司业务覆盖写作、咨询、人力资源管理及技术研发等方向，注重专业性、规范性与服务效率。
             </p>
           </div>
 
           <div class="about-note reveal">
             <ul>
-              <li>以客户实际需求为基础，重视方案的适配性与可执行性。</li>
-              <li>注重服务过程中的沟通效率、成果质量与长期合作体验。</li>
-              <li>在内容支持与技术支持之间形成协同，提升整体服务能力。</li>
+              <li>以客户需求为基础，强调方案适配与实际执行。</li>
+              <li>重视服务过程中的沟通效率与成果质量。</li>
+              <li>兼顾内容支持与技术支持，提升整体服务能力。</li>
             </ul>
           </div>
         </div>
@@ -748,16 +840,26 @@
 
             <div class="contact-right">
               <div class="contact-item">
-                <small>Phone</small>
-                <strong>17721029910</strong>
+                <div class="contact-meta">
+                  <small>联系电话</small>
+                  <strong id="phoneText">17721029910</strong>
+                </div>
+                <button class="copy-btn" data-copy="17721029910">复制</button>
               </div>
+
               <div class="contact-item">
-                <small>WeChat</small>
-                <strong>OAHCEDU</strong>
+                <div class="contact-meta">
+                  <small>联系微信</small>
+                  <strong id="wechatText">OAHCEDU</strong>
+                </div>
+                <button class="copy-btn" data-copy="OAHCEDU">复制</button>
               </div>
+
               <div class="contact-item">
-                <small>Company</small>
-                <strong>安徽融思企业管理咨询有限公司</strong>
+                <div class="contact-meta">
+                  <small>公司名称</small>
+                  <strong>安徽融思企业管理咨询有限公司</strong>
+                </div>
               </div>
             </div>
           </div>
@@ -788,6 +890,47 @@
           e.preventDefault();
           target.scrollIntoView({ behavior:'smooth', block:'start' });
         }
+      });
+    });
+
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 20){
+        header.classList.add('scrolled');
+      }else{
+        header.classList.remove('scrolled');
+      }
+    });
+
+    async function copyText(text, btn){
+      try{
+        await navigator.clipboard.writeText(text);
+        const oldText = btn.innerText;
+        btn.innerText = '已复制';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerText = '复制';
+          btn.classList.remove('copied');
+        }, 1500);
+      }catch(e){
+        const input = document.createElement('input');
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        btn.innerText = '已复制';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerText = '复制';
+          btn.classList.remove('copied');
+        }, 1500);
+      }
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', function(){
+        copyText(this.getAttribute('data-copy'), this);
       });
     });
   </script>
